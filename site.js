@@ -1,6 +1,8 @@
 var slideIndex = 1;
-
 showSlides(slideIndex);
+
+var startIndex = 0;
+autoShowSlides();
 
 // Next/previous controls
 function plusSlides(n) {
@@ -30,6 +32,25 @@ function showSlides(n) {
 
     slides[slideIndex - 1].style.display = 'block';
 }
+
+showSlides();
+
+function autoShowSlides() {
+    var i;
+    var slides = document.getElementsByClassName('field-image');
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = 'none';
+    }
+
+    startIndex++;
+    if (startIndex > slides.length) {
+        startIndex = 1;
+    }
+
+    slides[startIndex - 1].style.display = 'block';
+    
+    setTimeout(autoShowSlides, 4000); // Change image every 2 seconds
+} 
 
     const btn = document.getElementById('catalog-btn');
     btn.addEventListener('click', clickHandler);
