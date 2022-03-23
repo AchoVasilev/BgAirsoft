@@ -48,12 +48,12 @@ function autoShowSlides() {
     }
 
     slides[startIndex - 1].style.display = 'block';
-    
-    setTimeout(autoShowSlides, 4000); // Change image every 2 seconds
-} 
 
-    const btn = document.getElementById('catalog-btn');
-    btn.addEventListener('click', clickHandler);
+    setTimeout(autoShowSlides, 4000); // Change image every 2 seconds
+}
+
+const btn = document.getElementById('catalog-btn');
+btn.addEventListener('click', clickHandler);
 
 function clickHandler() {
     let catalog = document.getElementById('nav-catalog');
