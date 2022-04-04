@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/register.css">
+    <title>Airsoft Bulgaria</title>
+</head>
+
+<body>
+    <header>
+        <nav class="nav">
+            <section>
+                <article class="nav-logo">
+                    <a href="#"><img src="./images/logo-head.png" alt="Site Logo"></a>
+                </article>
+                <button class="catalog-btn" id="catalog-btn" href="/catalog">Каталог <i class="fa-solid fa-bars"
+                        id="catalog-btn-icon"></i></button>
+                <article id="nav-catalog" class="nav-catalog" hidden>
+                    <ul class="catalog-menu">
+                        <li>
+                            <img src="./images/gun.jpg" alt="guns logo">
+                            <a href="/guns">
+                                Еърсофт оръжия
+                            </a>
+                            <ul class="sub-menu">
+                                <li><a href="/guns-electric">Електрически оръжия(AEG)</a></li>
+                                <li><a href="/guns-pistols">Пистолети</a></li>
+                                <li><a href="/guns-shotguns">Помпи</a></li>
+                                <li><a href="/guns-springloaded">Пневматични</a></li>
+                                <li><a href="/guns-gas">Газови</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <img src="./images/vest.jpg" alt="equipment logo">
+                            <a href="/tactical-gear">Тактическа екипировка</a>
+                            <ul class="sub-menu">
+                                <li><a href="/gear-vests">Тактически жилетки</a></li>
+                                <li><a href="/gear-communications">Радио/Комуникационна екипировка</a></li>
+                                <li><a href="/gear-head">Защита за глава</a></li>
+                                <li><a href="/gear-pouches">Джобове за пълнители</a></li>
+                                <li><a href="/gear-bags">Чанти и куфари</a></li>
+                                <li><a href="/gear-holsters">Кобури за пистолети</a></li>
+                                <li><a href="/gear-hydration">Системи за хидратиране</a></li>
+                                <li><a href="/gear-gloves">Ръкавици</a></li>
+                                <li><a href="/gear-masks">Маски</a></li>
+                                <li><a href="/gear-backpacks">Раници</a></li>
+                                <li><a href="/gear-slings">Ремъци</a></li>
+                                <li><a href="/gear-knives">Ножове и остриета</a></li>
+                                <li><a href="/gear-kneepads">Наколенки</a></li>
+                                <li><a href="/gear-belts">Колани</a></li>
+                                <li><a href="/gear-others">Други</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <img src="./images/smith.jpg" alt="maintainance logo">
+                            <a href="/maintainance">Поддръжка</a>
+                            <ul class="sub-menu">
+                                <li><a href="/maintainance-grease">Смазка</a></li>
+                                <li><a href="/maintainance-springs">Пружини</a></li>
+                                <li><a href="/maintainance-motors">Моторчета</a></li>
+                                <li><a href="/maintainance-barrels">Цеви</a></li>
+                                <li><a href="/maintainance-triggers">Спусъци</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <img src="./images/attach.jpg" alt="attachments logo">
+                            <a href="/attachments">Добавки</a>
+                            <ul class="sub-menu">
+                                <li><a href="/attachments-lights">Светлини</a></li>
+                                <li><a href="/attachments-lasers">Лазери</a></li>
+                                <li><a href="/attachments-optics">Оптики и бързомери</a></li>
+                                <li><a href="/attachments-grips">Ръкохватки</a></li>
+                                <li><a href="/attachments-magazines">Пълнители</a></li>
+                                <li><a href="/attachments-others">Други</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <img src="./images/accessories.jpg" alt="accessories logo">
+                            <a href="/accessories">Аксесоари</a>
+                            <ul class="sub-menu">
+                                <li><a href="/accessories-bbs">Топчета BBS</a></li>
+                                <li><a href="/accessories-gas">Газ</a></li>
+                                <li><a href="/accessories-batteries">Батерии</a></li>
+                                <li><a href="/accessories-chargers">Зарядни устройства</a></li>
+                                <li><a href="/accessories-grenades">Гранати</a></li>
+                                <li><a href="/accessories-others">Други</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <img src="./images/apparel.png" alt="apparel logo">
+                            <a href="/appearal">Облекло</a>
+                            <ul class="sub-menu">
+                                <li><a href="/appearal-uniforms">Униформи</a></li>
+                                <li><a href="/appearal-boots">Обувки</a></li>
+                                <li><a href="/appearal-clothes">Дрехи</a></li>
+                                <li><a href="/appearal-headwear">За глава</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </article>
+            </section>
+            <ul class="nav-menu">
+                <li>
+                    <a class="nav-menu-item-link" href="">
+                        <i class="fa-regular fa-user fa-2xl"></i>
+                        <span>Вход/Регистрация</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="nav-menu-item-link" href="">
+                        <i class="fa-regular fa-heart fa-2xl"></i>
+                        <span>Любими</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="nav-menu-item-link" href="">
+                        <i class="fa-solid fa-scale-balanced fa-2xl"></i>
+                        <span>Сравни</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="nav-menu-item-link" href="">
+                        <i class="fa-solid fa-map-location fa-2xl"></i>
+                        <span>Терени</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="nav-menu-item-link" href="">
+                        <i class="fa-solid fa-cart-shopping fa-2xl"></i>
+                        <span>0.00 лв.</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="registration">
+            <form action="" class="registration-form">
+                <section class="registration-data">
+                    <article class="registration-wrapper">
+                        <article class="first-name-wrapper">
+                            <label for="first-name">Име <span>*</span></label>
+                           
+                            <input type="text" id="first-name" name="firstName">
+                        </article>
+                        <article class="last-name-wrapper">
+                            <label for="last-name">Фамилия <span>*</span></label>
+                            <input type="text" id="last-name" name="lastName">
+                        </article>
+                    </article>
+                    <article class="field-wrapper">
+                        <label for="address">Адрес <span>*</span></label>
+                        <input type="text" id="address" name="address">
+                    </article>
+                    <article class="registration-wrapper">
+                        <article class="postcode-wrapper">
+                            <label for="postcode">Пощенски код <span>*</span></label>
+                            <input type="text" id="postcode" name="postcode">
+                        </article>
+                        <article class="city-wrapper">
+                            <label for="city">Град <span>*</span></label>
+                            <input type="text" id="city" name="city">
+                        </article>
+                    </article>
+                    <article class="registration-wrapper">
+                        <article class="phone-wrapper">
+                            <label for="phone">Телефонен номер <span>*</span></label>
+                            <input type="text" id="phone" name="phone">
+                        </article>
+                        <article class="email-wrapper">
+                            <label for="email">Електронна поща <span>*</span></label>
+                            <input type="text" id="email" name="email">
+                        </article>
+                    </article>
+                </section>
+                <section class="registration-login-data">
+                    <article class="field-wrapper">
+                        <label for="username">Потребителско име/и-имейл <span>*</span></label>
+                        <input type="text" id="username" name="username">
+                        <p>Потребителското име трябва да е с дължина между 3 и 40 символа(само числа и букви)</p>
+                    </article>
+                    <article class="field-wrapper">
+                        <label for="password">Парола <span>*</span></label>
+                        <input type="password" id="password" name="password">
+                        <p>Паролата трябва да е с минимална дължина от 6 символа</p>
+                    </article>
+                    <article class="field-wrapper">
+                        <label for="repeatPassword">Повтори парола <span>*</span></label>
+                        <input type="password" id="repeat-password" name="repeatPassword">
+                    </article>
+                    <p class="required-fields">Полетата, които имат * (звездичка), са задължителни.</p>
+                    <button type="submit" class="submit-btn">Регистрация</button>
+                </section>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <article class="footer-menu-logo">
+            <img src="./images/logo-head.png" alt="logo">
+        </article>
+        <section class="container">
+            <article class="footer-menu">
+                <h3 class="footer-menu-title">
+                    Контакти
+                </h3>
+                <address class="footer-menu-nav-item">
+                    гр. Плевен, 5800
+                </address>
+                <p class="footer-menu-nav-item">
+                    Телефон за контакти: 0987887778
+                </p>
+                <p class="footer-menu-nav-item">
+                    <a href="mailto:bgairsoft@gmail.com">bgairsoft@gmail.com</a>
+                </p>
+            </article>
+
+            <article class="footer-menu">
+                <h3 class="footer-menu-title">
+                    Нашите партньори
+                </h3>
+                <ul class="footer-menu-nav">
+                    <li class="footer-menu-nav-item">
+                        <a href="#" target="_blank">AirsoftBulgaria</a>
+                    </li>
+                    <li class="footer-menu-nav-item">
+                        <a href="#" target="_blank">AirsoftSofia</a>
+                    </li>
+                    <li class="footer-menu-nav-item">
+                        <a href="#" target="_blank">Бойно поле</a>
+                    </li>
+                    <li class="footer-menu-nav-item">
+                        <a href="#" target="_blank">CRG-Airsoft</a>
+                    </li>
+                    <li class="footer-menu-nav-item">
+                        <a href="#" target="_blank">TheArmoury</a>
+                    </li>
+                </ul>
+            </article>
+
+            <article class="footer-menu">
+                <h3 class="footer-menu-title">
+                    Информация
+                </h3>
+                <ul class="footer-menu-nav">
+                    <li class="footer-menu-nav-item">
+                        <a href="">За нас</a>
+                    </li>
+                    <li class="footer-menu-nav-item">
+                        <a href="">Политика на поверителност</a>
+                    </li>
+                    <li class="footer-menu-nav-item">
+                        <a href="">Блог</a>
+                    </li>
+                    <li class="footer-menu-nav-item">
+                        <a href="">Стани партньор</a>
+                    </li>
+                    <li class="footer-menu-nav-item">
+                        <a href="">Всички игри</a>
+                    </li>
+                    <li class="footer-menu-nav-item">
+                        <a href="">Всички терени</a>
+                    </li>
+                </ul>
+            </article>
+
+            <article class="footer-menu">
+                <article class="footer-menu-social">
+                    <i class="fab fa-facebook-f"></i>
+                    <i class="fab fa-twitter"></i>
+                    <i class="fab fa-google-plus-g"></i>
+                    <i class="fab fa-youtube"></i>
+                    <i class="fab fa-instagram"></i>
+                </article>
+                <p class="footer-copyright">
+                    &copy; 2022-2022 - BG AIRSOFT.
+                </p>
+                <p class="footer-copyright-rights">
+                    Всички права запазени.
+                </p>
+            </article>
+        </section>
+    </footer>
+</body>
+
+<script src="./catalogClick.js"></script>
+
+</html>

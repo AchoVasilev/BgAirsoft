@@ -61,11 +61,22 @@ a {
     align-items: center;
     vertical-align: middle;
     font-weight: 500;
+    position: relative
 }
 
 .nav-menu-item-link:hover {
     color: #FB5104;
     transition: 300ms ease-in-out;
+}
+
+.badge{
+    position: absolute;
+    background-color: black;
+    border-radius: 50%;
+    padding: 3px 7px;
+    bottom: 13px;
+    right: 0px;
+    display: none;
 }
 
 .nav-menu-item-link:hover i {

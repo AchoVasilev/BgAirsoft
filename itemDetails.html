@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/itemDetails.css">
+    <title>Airsoft Bulgaria</title>
+</head>
+
+<body>
+    <header>
+        <nav class="nav">
+            <section>
+                <article class="nav-logo">
+                    <a href="#"><img src="./images/logo-head.png" alt="Site Logo"></a>
+                </article>
+                <button class="catalog-btn" id="catalog-btn" href="/catalog">Каталог <i class="fa-solid fa-bars"
+                        id="catalog-btn-icon"></i></button>
+                <article id="nav-catalog" class="nav-catalog" hidden>
+                    <ul class="catalog-menu">
+                        <li>
+                            <img src="./images/gun.jpg" alt="guns logo">
+                            <a href="/guns">
+                                Еърсофт оръжия
+                            </a>
+                            <ul class="sub-menu">
+                                <li><a href="/guns-electric">Електрически оръжия(AEG)</a></li>
+                                <li><a href="/guns-pistols">Пистолети</a></li>
+                                <li><a href="/guns-shotguns">Помпи</a></li>
+                                <li><a href="/guns-springloaded">Пневматични</a></li>
+                                <li><a href="/guns-gas">Газови</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <img src="./images/vest.jpg" alt="equipment logo">
+                            <a href="/tactical-gear">Тактическа екипировка</a>
+                            <ul class="sub-menu">
+                                <li><a href="/gear-vests">Тактически жилетки</a></li>
+                                <li><a href="/gear-communications">Радио/Комуникационна екипировка</a></li>
+                                <li><a href="/gear-head">Защита за глава</a></li>
+                                <li><a href="/gear-pouches">Джобове за пълнители</a></li>
+                                <li><a href="/gear-bags">Чанти и куфари</a></li>
+                                <li><a href="/gear-holsters">Кобури за пистолети</a></li>
+                                <li><a href="/gear-hydration">Системи за хидратиране</a></li>
+                                <li><a href="/gear-gloves">Ръкавици</a></li>
+                                <li><a href="/gear-masks">Маски</a></li>
+                                <li><a href="/gear-backpacks">Раници</a></li>
+                                <li><a href="/gear-slings">Ремъци</a></li>
+                                <li><a href="/gear-knives">Ножове и остриета</a></li>
+                                <li><a href="/gear-kneepads">Наколенки</a></li>
+                                <li><a href="/gear-belts">Колани</a></li>
+                                <li><a href="/gear-others">Други</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <img src="./images/smith.jpg" alt="maintainance logo">
+                            <a href="/maintainance">Поддръжка</a>
+                            <ul class="sub-menu">
+                                <li><a href="/maintainance-grease">Смазка</a></li>
+                                <li><a href="/maintainance-springs">Пружини</a></li>
+                                <li><a href="/maintainance-motors">Моторчета</a></li>
+                                <li><a href="/maintainance-barrels">Цеви</a></li>
+                                <li><a href="/maintainance-triggers">Спусъци</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <img src="./images/attach.jpg" alt="attachments logo">
+                            <a href="/attachments">Добавки</a>
+                            <ul class="sub-menu">
+                                <li><a href="/attachments-lights">Светлини</a></li>
+                                <li><a href="/attachments-lasers">Лазери</a></li>
+                                <li><a href="/attachments-optics">Оптики и бързомери</a></li>
+                                <li><a href="/attachments-grips">Ръкохватки</a></li>
+                                <li><a href="/attachments-magazines">Пълнители</a></li>
+                                <li><a href="/attachments-others">Други</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <img src="./images/accessories.jpg" alt="accessories logo">
+                            <a href="/accessories">Аксесоари</a>
+                            <ul class="sub-menu">
+                                <li><a href="/accessories-bbs">Топчета BBS</a></li>
+                                <li><a href="/accessories-gas">Газ</a></li>
+                                <li><a href="/accessories-batteries">Батерии</a></li>
+                                <li><a href="/accessories-chargers">Зарядни устройства</a></li>
+                                <li><a href="/accessories-grenades">Гранати</a></li>
+                                <li><a href="/accessories-others">Други</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <img src="./images/apparel.png" alt="apparel logo">
+                            <a href="/appearal">Облекло</a>
+                            <ul class="sub-menu">
+                                <li><a href="/appearal-uniforms">Униформи</a></li>
+                                <li><a href="/appearal-boots">Обувки</a></li>
+                                <li><a href="/appearal-clothes">Дрехи</a></li>
+                                <li><a href="/appearal-headwear">За глава</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </article>
+            </section>
+            <ul class="nav-menu">
+                <li>
+                    <a class="nav-menu-item-link" href="">
+                        <i class="fa-regular fa-user fa-2xl"></i>
+                        <span>Вход/Регистрация</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="nav-menu-item-link" href="">
+                        <i class="fa-regular fa-heart fa-2xl"></i>
+                        <span>Любими</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="nav-menu-item-link" href="">
+                        <i class="fa-solid fa-scale-balanced fa-2xl"></i>
+                        <span>Сравни</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="nav-menu-item-link" href="">
+                        <i class="fa-solid fa-map-location fa-2xl"></i>
+                        <span>Терени</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="nav-menu-item-link" href="">
+                        <i class="fa-solid fa-cart-shopping fa-2xl"></i>
+                        <span>0.00 лв.</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="item">
+            <article class="item-top">
+                <article class="img-wrapper">
+                    <img src="./images/m4.jpg" alt="">
+                </article>
+
+                <article class="item-data">
+                    <section class="item-data-wrapper">
+                        <h1 class="item-title">
+                            Реплика на М4А1
+                        </h1>
+                        <p class="item-subtitle">Предлагано от: <a href="">Каспичан ООД</a></p>
+                        <p class="item-subtitle">Производител: <a href="">Каспичан ООД</a></p>
+                        <p class="item-subtitle">Мощност: <span>1.2 J</span></p>
+                        <p class="item-subtitle">Цвят: <span>Кафяв</span></p>
+                        <p class="item-subtitle">Тегло (гр.): <span>2950</span></p>
+                        <p class="item-subtitle">Вид на пълнителя: <span>Real Cap</span></p>
+                        <p class="item-subtitle">Задвижване: <span>Електрическо</span></p>
+                        <p class="item-subtitle">Блоубек: <span>Да</span></p>
+                        <h2 class="item-price">512.25 лв.</h2>
+                    </section>
+                    <section class="item-data-controls-wrapper">
+                        <button class="add-btn"><i class="fa-solid fa-cart-arrow-down"></i> Добави в количката</button>
+                        <article class="buttons-wrapper">
+                            <button class="action-btn"><i class="fa-solid fa-scale-balanced"></i> Добави в любими</button>
+                            <button class="action-btn"><i class="fa-solid fa-heart"></i> Сравни</button>
+                        </article>
+                    </section>
+                </article>
+            </article>
+
+            <article class="item-description">
+                <p class="description">
+                    <span>Описание:</span> Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestiae officiis deserunt ipsa expedita?
+                    Beatae quidem porro atque laudantium blanditiis aut natus, doloremque iste vero, dolorum sapiente
+                    sunt et, veritatis omnis.
+                    Molestias nulla sint iure quibusdam? Inventore numquam a quaerat et nihil possimus repellendus
+                    aliquid! Accusamus et, libero aliquam error, enim, officia maxime consequuntur autem asperiores ea
+                    vero quibusdam dolore minus!
+                    Quam quos, reiciendis possimus molestiae dignissimos odit officiis nemo expedita id debitis
+                    cupiditate? Eaque, nam eveniet provident iure, rem tenetur deserunt obcaecati repellat saepe
+                    pariatur iste. Dicta sit cupiditate obcaecati.
+                    Facilis dolor fugit quidem magni qui accusamus, suscipit incidunt vero natus vitae, laboriosam
+                    beatae voluptatem. Iure ex quo, sapiente soluta repudiandae hic minus, at numquam sunt, cumque
+                    aperiam error eum?
+                    Consequuntur, numquam, sed animi asperiores illum beatae, aperiam doloribus magnam ad est
+                    voluptatibus eligendi! Quidem laborum, sint repudiandae quos maiores nostrum nesciunt id nemo illum.
+                    Maiores sapiente commodi enim provident.
+                </p>
+                <h5 class="includes-title">В поръчката е включено:</h5>
+                <ul class="item-includes">
+                    <li>1 бр. реплика М4А1</li>
+                    <li>Зарядно устройство</li>
+                    <li>Ръководство</li>
+                    <li>Батерия</li>
+                </ul>
+            </article>
+
+            <article class="item-data">
+                <table>
+                    <tbody>
+                        <tr class="element">
+                            <td class="element-heading"><span>Име</span></td>
+                            <td>
+                                <p>M4A1 asdasdasd</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="element-heading"><span>Дистрибутор</span></td>
+                            <td>
+                                <p>Каспичан ООД</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="element-heading"><span>Производител</span></td>
+                            <td>
+                                <p>UMAREX</p>
+                            </td>
+                        </tr>
+                        <tr class="element">
+                        <td class="element-heading">
+                                <span>Скорост [FPS]</span>
+                            </td>
+                            <td class="">
+                                <p class="">~320 FPS</p>
+                            </td>
+                        </tr>
+                        <tr class="element">
+                            <td class="element-heading"><span>Вид на стрелбата</span></td>
+                            <td class="">
+                                <p class="">Единича, автоматична, откос от 3 проектила</p>
+                            </td>
+                        </tr>
+                        <tr class="element">
+                            <td class="element-heading"><span>Дължина [mm]</span></td>
+                            <td class="">
+                                <p class="">500-650 mm.</p>
+                            </td>
+                        </tr>
+                        <tr class="element">
+                            <td class="element-heading"><span>Дължина на цевта[mm]</span></td>
+                            <td class="">
+                                <p class="">200-250 mm.</p>
+                            </td>
+                        </tr>
+                        <tr class="element">
+                            <td class="element-heading"><span>Тегло [g]</span></td>
+                            <td class="">
+                                <p class="">2960</p>
+                            </td>
+                        </tr>
+                        <tr class="element">
+                            <td class="element-heading"><span>Вид на пълнителя</span></td>
+                            <td class="">
+                                <p class="">Real-Cap</p>
+                            </td>
+                        </tr>
+                        <tr class="element">
+                            <td class="element-heading"><span>Капацитет на пълнителя [pcs]</span></td>
+                            <td class="">
+                                <p class="">30</p>
+                            </td>
+                        </tr>
+                        <tr class="element">
+                            <td class="element-heading"><span>Хоп-Ъп</span>
+                            </td>
+                            <td class="">
+                                <p class="">Да</p>
+                            </td>
+                        </tr>
+                        <tr class="element">
+                            <td class="element-heading"><span>Блоу бек</span>
+                            </td>
+                            <td class="">
+                                <p class="">Да</p>
+                            </td>
+                        </tr>
+                        <tr class="element">
+                            <td class="element-heading"><span>Изработен от:</span></td>
+                            <td class="">
+                                <p class="">полиестер</p>
+                            </td>
+                        </tr>
+                        <tr class="element">
+                            <td class="element-heading"><span>Задвижван от:</span></td>
+                            <td class="">
+                                <p class="">Електричество</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </article>
+        </section>
+    </main>
+
+    <footer>
+        <article class="footer-menu-logo">
+            <img src="./images/logo-head.png" alt="logo">
+        </article>
+        <section class="container">
+            <article class="footer-menu">
+                <h3 class="footer-menu-title">
+                    Контакти
+                </h3>
+                <address class="footer-menu-nav-item">
+                    гр. Плевен, 5800
+                </address>
+                <p class="footer-menu-nav-item">
+                    Телефон за контакти: 0987887778
+                </p>
+                <p class="footer-menu-nav-item">
+                    <a href="mailto:bgairsoft@gmail.com">bgairsoft@gmail.com</a>
+                </p>
+            </article>
+
+            <article class="footer-menu">
+                <h3 class="footer-menu-title">
+                    Нашите партньори
+                </h3>
+                <ul class="footer-menu-nav">
+                    <li class="footer-menu-nav-item">
+                        <a href="#" target="_blank">AirsoftBulgaria</a>
+                    </li>
+                    <li class="footer-menu-nav-item">
+                        <a href="#" target="_blank">AirsoftSofia</a>
+                    </li>
+                    <li class="footer-menu-nav-item">
+                        <a href="#" target="_blank">Бойно поле</a>
+                    </li>
+                    <li class="footer-menu-nav-item">
+                        <a href="#" target="_blank">CRG-Airsoft</a>
+                    </li>
+                    <li class="footer-menu-nav-item">
+                        <a href="#" target="_blank">TheArmoury</a>
+                    </li>
+                </ul>
+            </article>
+
+            <article class="footer-menu">
+                <h3 class="footer-menu-title">
+                    Информация
+                </h3>
+                <ul class="footer-menu-nav">
+                    <li class="footer-menu-nav-item">
+                        <a href="">За нас</a>
+                    </li>
+                    <li class="footer-menu-nav-item">
+                        <a href="">Политика на поверителност</a>
+                    </li>
+                    <li class="footer-menu-nav-item">
+                        <a href="">Блог</a>
+                    </li>
+                    <li class="footer-menu-nav-item">
+                        <a href="">Стани партньор</a>
+                    </li>
+                    <li class="footer-menu-nav-item">
+                        <a href="">Всички игри</a>
+                    </li>
+                    <li class="footer-menu-nav-item">
+                        <a href="">Всички терени</a>
+                    </li>
+                </ul>
+            </article>
+
+            <article class="footer-menu">
+                <article class="footer-menu-social">
+                    <i class="fab fa-facebook-f"></i>
+                    <i class="fab fa-twitter"></i>
+                    <i class="fab fa-google-plus-g"></i>
+                    <i class="fab fa-youtube"></i>
+                    <i class="fab fa-instagram"></i>
+                </article>
+                <p class="footer-copyright">
+                    &copy; 2022-2022 - BG AIRSOFT.
+                </p>
+                <p class="footer-copyright-rights">
+                    Всички права запазени.
+                </p>
+            </article>
+        </section>
+    </footer>
+</body>
+
+<script src="./catalogClick.js"></script>
+
+</html>
