@@ -1,4 +1,5 @@
 using Data;
+using Data.Seeding;
 
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -31,6 +32,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.PrepareDatabase()
+    .GetAwaiter()
+    .GetResult();
 
 app.UseHttpsRedirection();
 
