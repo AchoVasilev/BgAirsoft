@@ -151,13 +151,11 @@
                             <input type="text" id="manufacturer" name="manufacturer">
                         </article>
                     </article>
-                    <article class="field-wrapper">
-                       
-                    </article>
                     <article class="create-wrapper">
                         <article class="create-inline-wrapper">
                             <input type="file" id="image" name="image" accept="image/*">
-                            <label class="image-label" for="image"><i class="fa-solid fa-image fa-2xl"></i> Снимка <span>*</span></label>
+                            <label class="image-label" for="image"><i class="fa-solid fa-image fa-2xl"></i> Снимка
+                                <span>*</span></label>
                         </article>
                         <article class="create-inline-wrapper">
                             <label for="power">Мощност(J) <span>*</span></label>
@@ -207,7 +205,10 @@
                     <article class="create-wrapper">
                         <article class="create-inline-wrapper">
                             <label for="propulsion">Задвижване: <span>*</span></label>
-                            <input type="text" id="propulsion" name="propulsion">
+                            <select id="propulsion" class="custom-select">
+                                <option value="Газ" selected>Газ</option>
+                                <option value="Електричество">Електричество</option>
+                            </select>
                         </article>
                         <article class="create-inline-wrapper">
                             <label for="material">Изработка: <span>*</span></label>
@@ -222,6 +223,19 @@
                         <article class="create-inline-wrapper">
                             <label for="hopup">Хоп-Ъп: <span>*</span></label>
                             <input type="text" id="hopup" name="hopup">
+                        </article>
+                    </article>
+                    <article class="create-wrapper">
+                        <article class="create-inline-wrapper">
+                            <label for="category">Категория: <span>*</span></label>
+                            <select id="category" class="custom-select">
+                                <option value="Газ" selected>Газ</option>
+                                <option value="Електричество">Електричество</option>
+                            </select>
+                        </article>
+                        <article class="create-inline-wrapper">
+                            <label for="price">Цена (лв.): <span>*</span></label>
+                            <input type="text" id="price" name="price">
                         </article>
                     </article>
                 </section>

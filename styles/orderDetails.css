@@ -105,6 +105,10 @@
     height: 30px;
 }
 
+#delivered{
+    text-align: end;
+}
+
 #delivered::before {
     content: "";
     color: rgb(151, 149, 149, 0.651);

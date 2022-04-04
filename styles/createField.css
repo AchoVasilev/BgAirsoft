@@ -6,6 +6,14 @@
 .create {
     padding: 40px 80px;
     display: flex;
+    flex-direction: column;
+}
+
+.create-title{
+    color: #333;
+    text-align: center;
+    flex-basis: 100%;
+    margin-bottom: 1em;
 }
 
 .create-form {
@@ -67,23 +75,10 @@
     width: 100%;
 }
 
-#name,
-#manufacturer,
-#power,
-#color,
-#weight,
-#magazine,
-#propulsion,
-#speed,
-#capacity,
-#firing,
-#length,
-#material,
-#barrel,
-#blowback,
-#hopup,
-#category,
-#price {
+#city,
+#postCode,
+#address,
+#phone {
     padding: 0.7rem 2rem 0.7rem 1rem;
     border-radius: 2px;
     font-size: 16px;
@@ -105,11 +100,6 @@
     font-size: 14px;
     font-style: italic;
     color: rgb(184, 184, 184);
-}
-
-#username,
-#password {
-    margin-bottom: 5px;
 }
 
 .submit-btn {
