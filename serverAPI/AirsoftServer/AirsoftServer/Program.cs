@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 using Models;
 
+using Services.CategoryService;
 using Services.ClientService;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -31,9 +32,11 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddAutoMapper(typeof(Program));
 
 //AddServices
 builder.Services.AddTransient<IClientService, ClientService>();
+builder.Services.AddTransient<ICategoryService, CategoryService>();
 
 var app = builder.Build();
 
