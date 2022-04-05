@@ -8,13 +8,12 @@
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-            : base(options)
+:           base(options)
         { }
 
         public DbSet<Address> Addresses { get; init; }
 
         public DbSet<Cart> Carts { get; init; }
-
         public DbSet<Category> Categories { get; init; }
 
         public DbSet<City> Cities { get; init; }
