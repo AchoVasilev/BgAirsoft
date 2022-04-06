@@ -13,5 +13,7 @@
         [Required]
         [StringLength(DataConstants.DefaultMaxLength, MinimumLength = DataConstants.DefaultMinLength, ErrorMessage = MessageConstants.LengthErrorMsg)]
         public string CityName { get; set; }
+
+        public int ZipCode { get; set; }
     }
 }

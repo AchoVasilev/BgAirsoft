@@ -6,7 +6,9 @@ using Microsoft.EntityFrameworkCore;
 using Models;
 
 using Services.CategoryService;
+using Services.CityService;
 using Services.ClientService;
+using static GlobalConstants.Constants;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,10 +35,12 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(typeof(Program));
+builder.Services.AddCors();
 
 //AddServices
 builder.Services.AddTransient<IClientService, ClientService>();
 builder.Services.AddTransient<ICategoryService, CategoryService>();
+builder.Services.AddTransient<ICityService, CityService>();
 
 var app = builder.Build();
 
@@ -50,6 +54,13 @@ if (app.Environment.IsDevelopment())
 app.PrepareDatabase()
     .GetAwaiter()
     .GetResult();
+
+app.UseCors(builder =>
+{
+    builder.WithOrigins(AppUri);
+    builder.AllowAnyHeader();
+    builder.AllowAnyMethod();
+});
 
 app.UseHttpsRedirection();
 

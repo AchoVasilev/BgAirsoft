@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RegistrationComponent } from './registration/registration.component';
 import { ClientRoutingModule } from './client-routing.module';
 import { ClientService } from '../services/clientService/client.service';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -12,7 +13,8 @@ import { ClientService } from '../services/clientService/client.service';
   ],
   imports: [
     CommonModule,
-    ClientRoutingModule
+    ClientRoutingModule,
+    FormsModule
   ],
   providers: [
     ClientService

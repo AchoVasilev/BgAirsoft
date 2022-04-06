@@ -1,1 +1,56 @@
-<p>registration works!</p>
+<section class="registration">
+    <form action="" class="registration-form" (ngSubmit)="onSubmit()" #registerForm="ngForm">
+        <section class="registration-data">
+            <article class="registration-wrapper">
+                <article class="first-name-wrapper">
+                    <label for="first-name">Име <span>*</span></label>
+                    <input type="text" id="first-name" name="firstName">
+                </article>
+                <article class="last-name-wrapper">
+                    <label for="last-name">Фамилия <span>*</span></label>
+                    <input type="text" id="last-name" name="lastName">
+                </article>
+            </article>
+            <article class="field-wrapper">
+                <label for="streetName">Адрес <span>*</span></label>
+                <input type="text" id="streetName" name="streetName">
+            </article>
+            <article class="registration-wrapper">
+                <article class="city-wrapper">
+                    <label for="city">Град: <span>*</span></label>
+                    <select id="city" class="custom-select" *ngIf="cities">
+                        <option *ngFor="let city of cities" [value]="city.name">{{city.name}}</option>
+                    </select>
+                </article>
+            </article>
+            <article class="registration-wrapper">
+                <article class="phone-wrapper">
+                    <label for="phone">Телефонен номер <span>*</span></label>
+                    <input type="text" id="phone" name="phone">
+                </article>
+                <article class="email-wrapper">
+                    <label for="email">Електронна поща <span>*</span></label>
+                    <input type="text" id="email" name="email">
+                </article>
+            </article>
+        </section>
+        <section class="registration-login-data">
+            <article class="field-wrapper">
+                <label for="username">Потребителско име/и-имейл <span>*</span></label>
+                <input type="text" id="username" name="username">
+                <p>Потребителското име трябва да е с дължина между 3 и 40 символа(само числа и букви)</p>
+            </article>
+            <article class="field-wrapper">
+                <label for="password">Парола <span>*</span></label>
+                <input type="password" id="password" name="password">
+                <p>Паролата трябва да е с минимална дължина от 6 символа</p>
+            </article>
+            <article class="field-wrapper">
+                <label for="repeatPassword">Повтори парола <span>*</span></label>
+                <input type="password" id="repeat-password" name="repeatPassword">
+            </article>
+            <p class="required-fields">Полетата, които имат * (звездичка), са задължителни.</p>
+            <button type="submit" class="submit-btn">Регистрация</button>
+        </section>
+    </form>
+</section>

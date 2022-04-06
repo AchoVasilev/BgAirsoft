@@ -2,6 +2,8 @@
 {
     public static class Constants
     {
+        public const string AppUri = "http://localhost:4200";
+
         public static class DataConstants
         {
             public const int DefaultMinLength = 2;
