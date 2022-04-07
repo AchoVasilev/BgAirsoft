@@ -1,6 +1,5 @@
 ﻿namespace Services.ClientService
 {
-    using System;
     using System.Threading.Tasks;
 
     using Data;
@@ -23,11 +22,11 @@
         public async Task<string> CreateClientAsync(ClientInputModel model)
         {
             var city = await this.data.Cities
-                .FirstOrDefaultAsync(x => x.Name == model.Address.CityName);
+                .FirstOrDefaultAsync(x => x.Name == model.CityName);
 
             if (city is null)
             {
-                return null;
+                return "0";
             }
 
             var client = new Client
@@ -35,10 +34,10 @@
                 FirstName = model.FirstName,
                 LasttName = model.LastName,
                 Email = model.Email,
-                PhoneNumber = model.PhoneNumber,
+                PhoneNumber = model.Phone,
                 Address = new Address
                 {
-                    StreetName = model.Address.StreetName,
+                    StreetName = model.StreetName,
                     CityId = city.Id
                 }
             };

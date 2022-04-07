@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { RegistrationComponent } from './registration/registration.component';
 import { ClientRoutingModule } from './client-routing.module';
 import { ClientService } from '../services/clientService/client.service';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
 
 
 
@@ -13,8 +14,10 @@ import { FormsModule } from '@angular/forms';
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     ClientRoutingModule,
-    FormsModule
+    FormsModule,
+    ToastrModule
   ],
   providers: [
     ClientService

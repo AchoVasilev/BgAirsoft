@@ -34,6 +34,10 @@
             public const string SuccessfulEditMsg = "Промяната беше успешна.";
 
             public const string SuccessfulAddedItemMsg = "Успешно добавяне.";
+
+            public const string InvalidCityMsg = "Избрали сте невалиден град";
+
+            public const string FailedUserLogin = "Невалиден потребител или парола";
         }
     }
 }

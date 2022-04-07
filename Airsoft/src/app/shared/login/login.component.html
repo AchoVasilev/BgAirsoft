@@ -10,7 +10,7 @@
     </article>
 
     <article class="login">
-        <form action="POST" [formGroup]="loginFormGroup">
+        <form [formGroup]="loginFormGroup" (ngSubmit)="onSubmit()">
             <h1 class="login-header">
                 Вход за регистрирани потребители
             </h1>
@@ -47,7 +47,8 @@
             </article>
             <article class="btn-wrapper">
                 <a href="" class="forgotten-password">Забравена парола?</a>
-                <button type="submit" class="login-btn">Влез</button>
+                <button type="submit" [disabled]="loginFormGroup.invalid"
+                [class.disabled]="loginFormGroup.invalid" class="login-btn">Влез</button>
             </article>
         </form>
     </article>

@@ -29,9 +29,9 @@
         public async Task<IActionResult> Register(ClientInputModel model)
         {
             var clientId = await this.clientService.CreateClientAsync(model);
-            if (clientId == null)
+            if (clientId == "0")
             {
-                return BadRequest(new { ErrorMessage = MessageConstants.UnsuccessfulActionMsg });
+                return BadRequest(new { ErrorMessage = MessageConstants.InvalidCityMsg });
             }
 
             var applicationUser = new ApplicationUser
@@ -48,13 +48,13 @@
             };
 
             var result = await this.userManager.CreateAsync(applicationUser, model.Password);
-
+     
             if (result.Succeeded)
             {
                 return Ok(result);
             }
 
-            return BadRequest(new { ErrorMessage = MessageConstants.UnsuccessfulActionMsg });
+            return BadRequest(new { ErrorMessage = MessageConstants.UnsuccessfulActionMsg, result.Errors });
         }
     }
 }

@@ -5,5 +5,14 @@
 a {
     color: #fff;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.error {
+    color: red;
+    font-weight: bold;
+    margin-top: 6px;
+    font-style: italic;
+}
+
+.invalid {
+    border: 1px solid red;
+}

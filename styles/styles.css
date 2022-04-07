@@ -14,10 +14,10 @@ a {
 
 /* Navigation */
 .nav {
+    background-image: url('../images/header_bg.jpg');
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: linear-gradient(to bottom, #4B5320 0%, #3C4411 100%);
     padding: 15px 80px;
     position: fixed;
     width: 100%;
