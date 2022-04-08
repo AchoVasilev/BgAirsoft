@@ -4,9 +4,12 @@
 
     using Models;
 
+    using ViewModels.Address;
     using ViewModels.Categories;
     using ViewModels.City;
+    using ViewModels.Client;
     using ViewModels.Images;
+    using ViewModels.User;
 
     public class MappingProfile : Profile
     {
@@ -18,6 +21,10 @@
             this.CreateMap<Image, ImageViewModel>();
 
             this.CreateMap<City, CityViewModel>();
+
+            this.CreateMap<ApplicationUser, UserClientViewModel>();
+            this.CreateMap<Client, ClientViewModel>();
+            this.CreateMap<Address, AddressViewModel>();
         }
     }
 }

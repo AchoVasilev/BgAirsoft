@@ -20,6 +20,11 @@
             public const int PasswordMinLength = 6;
         }
 
+        public static class NameConstants
+        {
+            public const string CloudinaryFolderName = "BgAirsoft";
+        }
+
         public static class MessageConstants
         {
             public const string RequiredFieldErrorMsg = "Полето е задължително.";
@@ -37,7 +42,8 @@
 
             public const string InvalidCityMsg = "Избрали сте невалиден град";
 
-            public const string FailedUserLogin = "Невалиден потребител или парола";
+            public const string FailedUserLoginMsg = "Невалиден потребител или парола";
+            public const string UsernameExistsMsg = "Потребител с това име вече съществува";
         }
     }
 }

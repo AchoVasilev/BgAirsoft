@@ -43,18 +43,19 @@
                     {
                         new Claim("UserId", user.Id.ToString())
                     }),
-                    Expires = DateTime.UtcNow.AddMinutes(5),
+                    Expires = DateTime.UtcNow.AddDays(1),
                     SigningCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature)
                 };
 
                 var tokenHandler = new JwtSecurityTokenHandler();
                 var securityToken = tokenHandler.CreateToken(tokenDescriptor);
                 var token = tokenHandler.WriteToken(securityToken);
+                var isClient = user.ClientId != null;
 
-                return Ok( new { token });
+                return Ok( new { token, isClient  });
             }
 
-            return BadRequest(new { ErrorMessage = MessageConstants.FailedUserLogin });
+            return BadRequest(new { ErrorMessage = MessageConstants.FailedUserLoginMsg });
         }
     }
 }

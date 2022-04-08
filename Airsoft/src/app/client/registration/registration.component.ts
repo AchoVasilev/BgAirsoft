@@ -6,6 +6,7 @@ import { CityViewModel } from 'src/app/models/city/cityViewModel';
 import { ClientInputModel } from 'src/app/models/clientModels/clientInputModel';
 import { CityService } from 'src/app/services/cityService/city.service';
 import { ClientService } from 'src/app/services/clientService/client.service';
+import { UserService } from 'src/app/services/user/user.service';
 import { passwordMatch } from 'src/app/shared/utils';
 
 @Component({
@@ -40,11 +41,16 @@ export class RegistrationComponent implements OnInit {
     private cityService: CityService,
     private clientService: ClientService,
     private router: Router,
-    private toastr: ToastrService) {
+    private toastr: ToastrService,
+    private userService: UserService
+  ) {
     this.loadCities();
   }
 
   ngOnInit(): void {
+    if (this.userService.isAuthenticated()) {
+      this.router.navigate(['/']);
+    }
   }
 
   loadCities(): void {
@@ -72,8 +78,15 @@ export class RegistrationComponent implements OnInit {
     };
 
     this.clientService.register(body)
-      .subscribe(
-        () => this.router.navigate(['/home'])
-    );
+      .subscribe({
+        next: () => this.router.navigate(['/login']),
+        error: (err) => {
+          if (err.status) {
+            this.toastr.error(err.error.errorMessage)
+          }
+        }
+      }
+
+      );
   }
 }

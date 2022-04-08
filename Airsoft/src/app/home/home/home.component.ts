@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoryViewModel } from 'src/app/models/category/categoryViewModel';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-home',
@@ -52,6 +53,10 @@ export class HomeComponent implements OnInit {
     var slides = document.getElementsByClassName('field-image') as HTMLCollectionOf<HTMLElement>;
     for (i = 0; i < slides.length; i++) {
       slides[i].style.display = 'none';
+    }
+
+    if (this.startIndex == undefined) {
+      this.startIndex = 0;
     }
 
     this.startIndex++;

@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user/user.service';
 import { CategoryViewModel } from '../../models/category/categoryViewModel';
 import { CategoryService } from '../../services/categoryService/category.service';
 
@@ -10,7 +12,15 @@ import { CategoryService } from '../../services/categoryService/category.service
 export class NavbarComponent {
   categories: CategoryViewModel[] | undefined;
 
-  constructor(private categoryService: CategoryService) {
+  get isLoggedIn(): boolean {
+    return this.userService.isAuthenticated();
+  }
+
+  get isClient(): boolean{
+    return this.userService.isClient();
+  }
+
+  constructor(private categoryService: CategoryService, private userService: UserService, private router: Router) {
     this.getCategories();
   }
 
@@ -49,5 +59,10 @@ export class NavbarComponent {
       icon.classList.remove('fa-xmark');
       icon.classList.add('fa-bars');
     }
+  }
+
+  logOut(): void{
+    this.userService.logOut();
+    this.router.navigate(['/'])
   }
 }

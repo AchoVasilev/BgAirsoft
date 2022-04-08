@@ -5,12 +5,14 @@ import { ClientRoutingModule } from './client-routing.module';
 import { ClientService } from '../services/clientService/client.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
+import { ProfileComponent } from './profile/profile.component';
 
 
 
 @NgModule({
   declarations: [
-    RegistrationComponent
+    RegistrationComponent,
+    ProfileComponent
   ],
   imports: [
     CommonModule,

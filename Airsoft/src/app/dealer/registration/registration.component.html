@@ -1,0 +1,68 @@
+<section class="registration">
+    <h1 class="registration-title">Станете партньор</h1>
+    <form action="" class="registration-form">
+        <section class="registration-data">
+            <article class="registration-wrapper">
+                <article class="first-name-wrapper">
+                    <label for="first-name">Име на фирма <span>*</span></label>
+                    <input type="text" id="first-name" name="firstName">
+                </article>
+                <article class="last-name-wrapper">
+                    <label for="last-name">ЕИК <span>*</span></label>
+                    <input type="text" id="last-name" name="lastName">
+                </article>
+            </article>
+            <article class="field-wrapper">
+                <label for="address">Адрес/Седалище <span>*</span></label>
+                <input type="text" id="address" name="address">
+            </article>
+            <article class="field-wrapper">
+                <input type="file" id="image" name="image" accept="image/*">
+                <label class="image-label" for="image"><i class="fa-solid fa-image fa-2xl"></i> Снимка
+                    <span>*</span></label>
+            </article>
+            <article class="field-wrapper">
+                <label for="url">Линк към сайт: </label>
+                <input type="text" id="url" name="url">
+            </article>
+            <article class="registration-wrapper">
+                <article class="postcode-wrapper">
+                    <label for="postcode">Пощенски код <span>*</span></label>
+                    <input type="text" id="postcode" name="postcode">
+                </article>
+                <article class="city-wrapper">
+                    <label for="city">Град <span>*</span></label>
+                    <input type="text" id="city" name="city">
+                </article>
+            </article>
+            <article class="registration-wrapper">
+                <article class="phone-wrapper">
+                    <label for="phone">Телефонен номер <span>*</span></label>
+                    <input type="text" id="phone" name="phone">
+                </article>
+                <article class="email-wrapper">
+                    <label for="email">Електронна поща <span>*</span></label>
+                    <input type="text" id="email" name="email">
+                </article>
+            </article>
+        </section>
+        <section class="registration-login-data">
+            <article class="field-wrapper">
+                <label for="username">Потребителско име/и-имейл <span>*</span></label>
+                <input type="text" id="username" name="username">
+                <p>Потребителското име трябва да е с дължина между 3 и 40 символа(само числа и букви)</p>
+            </article>
+            <article class="field-wrapper">
+                <label for="password">Парола <span>*</span></label>
+                <input type="password" id="password" name="password">
+                <p>Паролата трябва да е с минимална дължина от 6 символа</p>
+            </article>
+            <article class="field-wrapper">
+                <label for="repeatPassword">Повтори парола <span>*</span></label>
+                <input type="password" id="repeat-password" name="repeatPassword">
+            </article>
+            <p class="required-fields">Полетата, които имат * (звездичка), са задължителни.</p>
+            <button type="submit" class="submit-btn">Регистрация</button>
+        </section>
+    </form>
+</section>

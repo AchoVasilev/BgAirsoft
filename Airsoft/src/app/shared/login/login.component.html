@@ -6,11 +6,11 @@
             за доставка
         </p>
         <a class="register-btn" [routerLink]="['/client', 'register']" type="button">Регистрация</a>
-        <a class="register-company-btn" href="#" type="button">Станете наш партньор</a>
+        <a class="register-company-btn" [routerLink]="['/dealer', 'register']" type="button">Станете наш партньор</a>
     </article>
 
     <article class="login">
-        <form [formGroup]="loginFormGroup" (ngSubmit)="onSubmit()">
+        <form [formGroup]="loginFormGroup" (ngSubmit)="loginHandler()">
             <h1 class="login-header">
                 Вход за регистрирани потребители
             </h1>

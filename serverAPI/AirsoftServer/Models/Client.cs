@@ -21,7 +21,7 @@
 
         [Required]
         [MaxLength(DataConstants.DefaultMaxLength)]
-        public string LasttName { get; set; }
+        public string LastName { get; set; }
 
         [Required]
         [Phone]

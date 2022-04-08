@@ -1,6 +1,7 @@
 @import url("https://use.fontawesome.com/releases/v6.1.1/css/all.css");
 @import url("./reset.css");
 @import url("./typography.css");
+@import url('~@angular/material/prebuilt-themes/deeppurple-amber.css');
 
 a {
     color: #fff;
@@ -16,3 +17,5 @@ a {
 .invalid {
     border: 1px solid red;
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

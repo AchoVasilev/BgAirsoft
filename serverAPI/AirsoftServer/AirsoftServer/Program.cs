@@ -1,5 +1,7 @@
 using System.Text;
 
+using CloudinaryDotNet;
+
 using Data;
 using Data.Seeding;
 
@@ -12,10 +14,10 @@ using Models;
 using Services.CategoryService;
 using Services.CityService;
 using Services.ClientService;
+using Services.DealerService;
+using Services.FileService;
 
 using ViewModels.Jwt;
-
-using static GlobalConstants.Constants;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -65,6 +67,16 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 builder.Services.AddTransient<IClientService, ClientService>();
 builder.Services.AddTransient<ICategoryService, CategoryService>();
 builder.Services.AddTransient<ICityService, CityService>();
+builder.Services.AddTransient<IDealerService, DealerService>();
+builder.Services.AddTransient<IFileService, FileService>();
+
+//Configure Cloudinary
+var cloud = builder.Configuration["Cloudinary:CloudifyName"];
+var apiKey = builder.Configuration["Cloudinary:ApiKey"];
+var apiSecret = builder.Configuration["Cloudinary:ApiSecret"];
+var cloudinaryAccount = new CloudinaryDotNet.Account(cloud, apiKey, apiSecret);
+var cloudinary = new Cloudinary(cloudinaryAccount);
+builder.Services.AddSingleton(cloudinary);
 
 var app = builder.Build();
 
@@ -81,9 +93,10 @@ app.PrepareDatabase()
 
 app.UseCors(builder =>
 {
-    builder.WithOrigins(AppUri);
-    builder.AllowAnyHeader();
-    builder.AllowAnyMethod();
+    builder.AllowAnyMethod()
+            .AllowAnyHeader()
+            .SetIsOriginAllowed(origin => true) // allow any origin
+            .AllowCredentials();
 });
 
 app.UseHttpsRedirection();
