@@ -91,6 +91,8 @@ app.PrepareDatabase()
     .GetAwaiter()
     .GetResult();
 
+app.UseStaticFiles();
+
 app.UseCors(builder =>
 {
     builder.AllowAnyMethod()

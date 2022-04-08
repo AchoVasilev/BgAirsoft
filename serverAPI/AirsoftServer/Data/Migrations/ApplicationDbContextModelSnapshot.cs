@@ -410,7 +410,7 @@ namespace Data.Migrations
                     b.Property<bool?>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<string>("LasttName")
+                    b.Property<string>("LastName")
                         .IsRequired()
                         .HasMaxLength(40)
                         .HasColumnType("nvarchar(40)");
@@ -501,9 +501,6 @@ namespace Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ImageId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<bool?>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -531,8 +528,6 @@ namespace Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AddressId");
-
-                    b.HasIndex("ImageId");
 
                     b.HasIndex("OrderId");
 
@@ -1080,10 +1075,6 @@ namespace Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Models.Image", "Image")
-                        .WithMany()
-                        .HasForeignKey("ImageId");
-
                     b.HasOne("Models.Order", null)
                         .WithMany("Dealers")
                         .HasForeignKey("OrderId");
@@ -1093,8 +1084,6 @@ namespace Data.Migrations
                         .HasForeignKey("UserId");
 
                     b.Navigation("Address");
-
-                    b.Navigation("Image");
 
                     b.Navigation("User");
                 });

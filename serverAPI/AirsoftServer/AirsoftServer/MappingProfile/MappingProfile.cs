@@ -8,6 +8,7 @@
     using ViewModels.Categories;
     using ViewModels.City;
     using ViewModels.Client;
+    using ViewModels.Dealer;
     using ViewModels.Images;
     using ViewModels.User;
 
@@ -23,7 +24,10 @@
             this.CreateMap<City, CityViewModel>();
 
             this.CreateMap<ApplicationUser, UserClientViewModel>();
+            this.CreateMap<ApplicationUser, UserDealerViewModel>();
+
             this.CreateMap<Client, ClientViewModel>();
+            this.CreateMap<Dealer, DealerViewModel>();
             this.CreateMap<Address, AddressViewModel>();
         }
     }

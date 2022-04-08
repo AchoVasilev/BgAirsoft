@@ -24,6 +24,8 @@
         [Phone]
         public string Phone { get; set; }
 
+        public string SiteUrl { get; set; }
+
         [Required]
         [EmailAddress]
         public string Email { get; set; }
@@ -40,6 +42,6 @@
         [StringLength(DataConstants.DefaultMaxLength, MinimumLength = DataConstants.PasswordMinLength, ErrorMessage = MessageConstants.LengthErrorMsg)]
         public string Password { get; set; }
 
-        public IFormFile
+        public IFormFile Image { get; set; }
     }
 }

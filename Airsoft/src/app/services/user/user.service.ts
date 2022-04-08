@@ -25,7 +25,7 @@ export class UserService {
 
   isClient(): boolean{
     const isClient = localStorage.getItem('isClient');
-    if (isClient) {
+    if (isClient == "true") {
       return true;
     }
 

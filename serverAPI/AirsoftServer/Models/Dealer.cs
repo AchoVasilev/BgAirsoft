@@ -37,11 +37,6 @@
 
         public virtual Address Address { get; set; }
 
-        [ForeignKey(nameof(Image))]
-        public string ImageId { get; set; }
-
-        public virtual Image Image { get; set; }
-
         [ForeignKey(nameof(User))]
         public string UserId { get; set; }
 

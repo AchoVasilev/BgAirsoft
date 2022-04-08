@@ -1,1 +1,98 @@
-<p>profile works!</p>
+<section class="profile-wrapper">
+    <div class="container">
+        <nav>
+            <ul class="mcd-menu">
+                <li>
+                    <a href="" class="active">
+                        <i class="fa fa-edit"></i>
+                        <strong>Каталог</strong>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <i class="fa fa-gift"></i>
+                        <strong>Ваучери</strong>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <i class="fa fa-cart-shopping"></i>
+                        <strong>Количка</strong>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <i class="fa fa-receipt"></i>
+                        <strong>Моите поръчки</strong>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <i class="fa fa-gear"></i>
+                        <strong>Настройки</strong>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <article class="profile" *ngIf="dealer">
+        <section class="profile-card">
+            <article class="profile-img">
+                <img src="{{dealer.image.url}}" alt="">
+            </article>
+
+            <h3 class="profile-card-title">
+                {{dealer.dealer.name}}
+            </h3>
+        </section>
+
+        <section class="profile-data">
+            <table>
+                <tbody>
+                    <tr class="element">
+                        <td class="element-heading"><span>Име</span></td>
+                        <td>
+                            <p>{{dealer.dealer.name}}</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="element-heading"><span>Електронна поща</span></td>
+                        <td>
+                            <p>{{dealer.email}}</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="element-heading"><span>Телефон</span></td>
+                        <td>
+                            <p>{{dealer.dealer.phoneNumber}}</p>
+                        </td>
+                    </tr>
+                    <tr class="element">
+                        <td class="element-heading">
+                            <span>Град</span>
+                        </td>
+                        <td class="">
+                            <p class="">{{dealer.dealer.address.city.zipCode}}, {{dealer.dealer.address.city.name}}</p>
+                        </td>
+                    </tr>
+                    <tr class="element">
+                        <td class="element-heading">
+                            <span>Адрес</span></td>
+                        <td class="">
+                            <p class="">{{dealer.dealer.address.streetName}}</p>
+                        </td>
+                    </tr>
+                    <tr class="element">
+                        <td class="element-heading">
+                            <span>Сайт</span>
+                        </td>
+                        <td class="">
+                            <p class="">{{dealer.dealer.siteUrl}}</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </article>
+</section>

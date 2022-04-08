@@ -81,12 +81,11 @@ export class RegistrationComponent implements OnInit {
       .subscribe({
         next: () => this.router.navigate(['/login']),
         error: (err) => {
-          if (err.status) {
+          if (err.status == 400) {
             this.toastr.error(err.error.errorMessage)
           }
         }
       }
-
-      );
+    );
   }
 }

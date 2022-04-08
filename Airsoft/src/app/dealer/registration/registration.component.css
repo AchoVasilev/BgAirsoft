@@ -38,17 +38,17 @@
 
 .first-name-wrapper,
 .last-name-wrapper,
-.postcode-wrapper,
-.city-wrapper,
 .phone-wrapper,
 .email-wrapper {
     flex-basis: 49%;
 }
 
-#first-name,
-#last-name,
-#postcode,
-#city,
+.city-wrapper{
+    flex-basis: 100%;
+}
+
+#name,
+#dealerNumber,
 #phone,
 #email {
     padding: 0.7rem 2rem 0.7rem 1rem;
@@ -78,7 +78,8 @@
     width: 100%;
 }
 
-.field-wrapper input {
+.field-wrapper input,
+select {
     padding: 0.7rem 2rem 1rem 1em;
     border-radius: 2px;
     font-size: 16px;
@@ -115,7 +116,13 @@
     transition: 300ms ease-in-out;
 }
 
-.error {
+p.text {
+    font-size: 14px;
+    font-style: italic;
+    color: rgb(184, 184, 184);
+}
+
+.field-wrapper p.error {
     color: red;
     font-weight: bold;
     margin-top: 6px;

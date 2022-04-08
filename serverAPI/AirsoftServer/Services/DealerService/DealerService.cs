@@ -2,6 +2,9 @@
 {
     using System.Threading.Tasks;
 
+    using AutoMapper;
+    using AutoMapper.QueryableExtensions;
+
     using Data;
 
     using Microsoft.EntityFrameworkCore;
@@ -9,14 +12,17 @@
     using Models;
 
     using ViewModels.Dealer;
+    using ViewModels.User;
 
     public class DealerService : IDealerService
     {
         private readonly ApplicationDbContext data;
+        private readonly IMapper mapper;
 
-        public DealerService(ApplicationDbContext data)
+        public DealerService(ApplicationDbContext data, IMapper mapper)
         {
             this.data = data;
+            this.mapper = mapper;
         }
 
         public async Task<string> CreateDealerAsync(DealerInputModel model)
@@ -39,7 +45,8 @@
                 {
                     StreetName = model.StreetName,
                     CityId = city.Id
-                }
+                },
+                SiteUrl = model.SiteUrl
             };
 
             await this.data.Dealers.AddAsync(dealer);
@@ -47,5 +54,11 @@
 
             return dealer.Id;
         }
+
+        public async Task<UserDealerViewModel> GetDealerDataAsync(string id)
+            => await this.data.Users
+                        .Where(x => x.Id == id)
+                        .ProjectTo<UserDealerViewModel>(this.mapper.ConfigurationProvider)
+                        .FirstOrDefaultAsync();
     }
 }
