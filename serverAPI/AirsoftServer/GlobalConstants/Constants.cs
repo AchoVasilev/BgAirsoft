@@ -18,6 +18,8 @@
             public const int NumbersMaxLength = 9999;
 
             public const int PasswordMinLength = 6;
+
+            public const int PopularItemsCount = 8;
         }
 
         public static class NameConstants

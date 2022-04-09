@@ -68,6 +68,10 @@ export class CreateComponent implements OnInit {
     return sourceGroup.controls[controlName].touched && sourceGroup.controls[controlName].invalid;
   }
 
+  notReady() {
+    this.router.navigate(['/building']);
+  }
+
   createGunHandler() {
     const {
       name,
@@ -111,7 +115,12 @@ export class CreateComponent implements OnInit {
 
     this.productService.createGun(body)
       .subscribe({
-        next: (res: any) => this.router.navigate([`/products/${res.name}/${res.gunId}`]),
+        next: (res: any) => {
+          this.toastr.success("Успешно добавихте нов артикул");
+          setTimeout(() => {
+            this.router.navigate([`/products/${res.name}/${res.gunId}`])
+          }, 3000);
+        },
         error: (err) => {
           console.log(err);
           if (err.status == 400) {

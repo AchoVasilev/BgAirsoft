@@ -19,3 +19,15 @@ a {
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.offer-btn {
+    padding: 10px 30px;
+    background-color: red;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.btn-details:hover{
+    background-color: #FB5104;
+    transition: 300ms ease-in-out;
+}

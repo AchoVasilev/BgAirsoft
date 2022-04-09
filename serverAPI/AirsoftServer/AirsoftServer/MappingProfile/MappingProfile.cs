@@ -10,6 +10,7 @@
     using ViewModels.Client;
     using ViewModels.Dealer;
     using ViewModels.Images;
+    using ViewModels.Item.Guns;
     using ViewModels.User;
 
     public class MappingProfile : Profile
@@ -29,6 +30,8 @@
             this.CreateMap<Client, ClientViewModel>();
             this.CreateMap<Dealer, DealerViewModel>();
             this.CreateMap<Address, AddressViewModel>();
+
+            this.CreateMap<Gun, GunViewModel>();
         }
     }
 }

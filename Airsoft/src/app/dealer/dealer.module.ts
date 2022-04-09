@@ -5,6 +5,7 @@ import { RegistrationComponent } from './registration/registration.component';
 import { DealerRoutingModule } from './dealer-routing.module';
 import { ToastrModule } from 'ngx-toastr';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
     DealerRoutingModule,
     FormsModule,
-    ToastrModule
+    ToastrModule,
+    MatProgressSpinnerModule
   ]
 })
 export class DealerModule { }

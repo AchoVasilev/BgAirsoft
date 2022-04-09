@@ -62,5 +62,15 @@
 
             return Ok(new {gunId, model.Name});
         }
+
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("getNewestGuns")]
+        public async Task< IActionResult> GetNewestGuns()
+        {
+            var guns = await this.productService.GetNewestEightGunsAsync();
+
+            return Ok(guns);
+        }
     }
 }

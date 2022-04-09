@@ -1,22 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './home/home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { LoginComponent } from './shared/login/login.component';
+import { UnderConstructionComponent } from './shared/under-construction/under-construction.component';
 
 const routes: Routes = [
   {
-    path: '',
-    pathMatch: 'full',
-    redirectTo: '/home'
-  },
-  {
-    path: 'home',
-    component: HomeComponent
-  },
-  {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'building',
+    component: UnderConstructionComponent
   },
   {
     path: '**',

@@ -20,6 +20,7 @@ import { CityService } from './services/cityService/city.service';
 import { CategoryService } from './services/categoryService/category.service';
 import { DealerModule } from './dealer/dealer.module';
 import { ProductsModule } from './products/products.module';
+import { UnderConstructionComponent } from './shared/under-construction/under-construction.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ProductsModule } from './products/products.module';
     NavbarComponent,
     FooterComponent,
     NotFoundComponent,
-    LoginComponent
+    LoginComponent,
+    UnderConstructionComponent
   ],
   imports: [
     BrowserModule,

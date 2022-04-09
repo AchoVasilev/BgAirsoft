@@ -3,8 +3,10 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
     using System.Threading.Tasks;
+
+    using AutoMapper;
+    using AutoMapper.QueryableExtensions;
 
     using Data;
 
@@ -15,13 +17,17 @@
 
     using ViewModels.Item.Guns;
 
+    using static GlobalConstants.Constants;
+
     public class ProductService : IProductService
     {
         private readonly ApplicationDbContext data;
+        private readonly IMapper mapper;
 
-        public ProductService(ApplicationDbContext data)
+        public ProductService(ApplicationDbContext data, IMapper mapper)
         {
             this.data = data;
+            this.mapper = mapper;
         }
 
         public async Task<int> CreateGunAsync(GunInputModel model, string dealerId, string imageId)
@@ -60,5 +66,13 @@
 
             return gun.Id;
         }
+
+        public async Task<ICollection<GunViewModel>> GetNewestEightGunsAsync()
+            => await this.data.Guns
+                        .Where(x => x.IsDeleted == null)
+                        .OrderBy(x => x.CreatedOn)
+                        .Take(DataConstants.PopularItemsCount)
+                        .ProjectTo<GunViewModel>(this.mapper.ConfigurationProvider)
+                        .ToListAsync();
     }
 }
