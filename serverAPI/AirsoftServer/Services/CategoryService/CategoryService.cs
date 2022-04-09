@@ -23,10 +23,16 @@
             this.mapper = mapper;
         }
 
-        public async Task<ICollection<CategoryViewModel>> GetAllCategoriesAsync() 
+        public async Task<ICollection<CategoryViewModel>> GetAllCategoriesAsync()
             => await this.data.Categories
                 .Where(x => x.IsDeleted == null)
                 .ProjectTo<CategoryViewModel>(this.mapper.ConfigurationProvider)
                 .ToListAsync();
+
+        public async Task<ICollection<SubcategoryViewModel>> GetGunSubCategoriesAsync()
+            => await this.data.SubCategories
+                        .Where(x => x.Category.Name == "Еърсофт оръжия" && x.IsDeleted == null)
+                        .ProjectTo<SubcategoryViewModel>(this.mapper.ConfigurationProvider)
+                        .ToListAsync();
     }
 }

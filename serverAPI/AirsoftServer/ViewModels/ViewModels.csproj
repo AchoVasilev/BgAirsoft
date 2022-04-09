@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GlobalConstants\GlobalConstants.csproj" />
+    <ProjectReference Include="..\Models\Models.csproj" />
   </ItemGroup>
 
 </Project>

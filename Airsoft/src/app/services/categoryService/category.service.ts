@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CategoryViewModel } from 'src/app/models/category/categoryViewModel';
+import { GunSubcategoryViewModel } from 'src/app/models/category/gunSubcategoryViewModel';
 import { environment } from 'src/environments/environment';
 
 const apiUrl = environment.apiUrl;
@@ -14,5 +15,9 @@ export class CategoryService {
 
   loadCategories() {
     return this.httpClient.get<CategoryViewModel[]>(`${apiUrl}/Categories/All`);
+  }
+
+  loadGunSubcategories() {
+    return this.httpClient.get<GunSubcategoryViewModel[]>(`${apiUrl}/categories/gunSubcategories`);
   }
 }

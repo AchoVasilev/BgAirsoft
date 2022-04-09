@@ -19,6 +19,7 @@ import { ClientService } from './services/clientService/client.service';
 import { CityService } from './services/cityService/city.service';
 import { CategoryService } from './services/categoryService/category.service';
 import { DealerModule } from './dealer/dealer.module';
+import { ProductsModule } from './products/products.module';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { DealerModule } from './dealer/dealer.module';
     ClientModule,
     HomeModule,
     DealerModule,
+    ProductsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),

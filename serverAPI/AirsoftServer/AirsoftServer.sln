@@ -19,11 +19,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csp
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Models", "Models", "{CE992DE5-85A0-4A7A-86A2-2FB64D997C97}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewModels", "ViewModels\ViewModels.csproj", "{B6864F0C-334D-4D63-B328-F3794FD53F65}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViewModels", "ViewModels\ViewModels.csproj", "{B6864F0C-334D-4D63-B328-F3794FD53F65}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{B5FDCA63-3469-446A-9D2D-7F0928174DC3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{06754EED-D565-494D-B981-32E5845608C9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Services\Services.csproj", "{06754EED-D565-494D-B981-32E5845608C9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{678FB445-357E-4676-8F1A-D6F3E71020FC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,6 +61,10 @@ Global
 		{06754EED-D565-494D-B981-32E5845608C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{06754EED-D565-494D-B981-32E5845608C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{06754EED-D565-494D-B981-32E5845608C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{678FB445-357E-4676-8F1A-D6F3E71020FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{678FB445-357E-4676-8F1A-D6F3E71020FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{678FB445-357E-4676-8F1A-D6F3E71020FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{678FB445-357E-4676-8F1A-D6F3E71020FC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

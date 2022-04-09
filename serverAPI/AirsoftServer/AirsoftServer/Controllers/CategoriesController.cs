@@ -21,5 +21,14 @@
 
             return new JsonResult(categories);
         }
+
+        [HttpGet]
+        [Route("gunSubcategories")]
+        public async Task<IActionResult> GetGunSubCategories()
+        {
+            var subCategories = await this.categoryService.GetGunSubCategoriesAsync();
+
+            return Ok(subCategories);
+        }
     }
 }

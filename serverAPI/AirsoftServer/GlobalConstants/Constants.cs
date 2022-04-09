@@ -44,6 +44,8 @@
 
             public const string FailedUserLoginMsg = "Невалиден потребител или парола";
             public const string UsernameExistsMsg = "Потребител с това име вече съществува";
+
+            public const string InvalidUser = "Нямате права";
         }
     }
 }

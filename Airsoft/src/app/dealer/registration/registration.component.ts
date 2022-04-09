@@ -93,8 +93,6 @@ export class RegistrationComponent implements OnInit {
           if (err.status == 400) {
             this.toastr.error(err.error.errorMessage)
           }
-
-          console.log(err)
         }
       });
   }
