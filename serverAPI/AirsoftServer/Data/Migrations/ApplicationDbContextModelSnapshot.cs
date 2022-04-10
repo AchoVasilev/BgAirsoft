@@ -585,7 +585,7 @@ namespace Data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<int>("Barrel")
-                        .HasMaxLength(999)
+                        .HasMaxLength(9999)
                         .HasColumnType("int");
 
                     b.Property<string>("Blowback")
@@ -632,7 +632,7 @@ namespace Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<int>("Length")
-                        .HasMaxLength(999)
+                        .HasMaxLength(9999)
                         .HasColumnType("int");
 
                     b.Property<string>("Magazine")
@@ -658,9 +658,10 @@ namespace Data.Migrations
                         .HasMaxLength(40)
                         .HasColumnType("nvarchar(40)");
 
-                    b.Property<int>("Power")
+                    b.Property<double>("Power")
                         .HasMaxLength(999)
-                        .HasColumnType("int");
+                        .HasPrecision(14, 2)
+                        .HasColumnType("float(14)");
 
                     b.Property<decimal>("Price")
                         .HasPrecision(14, 2)
@@ -676,9 +677,10 @@ namespace Data.Migrations
                     b.Property<int>("SubCategoryId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Weight")
+                    b.Property<double>("Weight")
                         .HasMaxLength(9999)
-                        .HasColumnType("int");
+                        .HasPrecision(14, 2)
+                        .HasColumnType("float(14)");
 
                     b.HasKey("Id");
 

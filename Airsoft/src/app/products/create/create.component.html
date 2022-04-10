@@ -138,18 +138,18 @@
                 </article>
                 <article class="create-inline-wrapper">
                     <label for="capacity">Капацитет на пълнителя: <span
-                            [class.error]="shouldShowErrorForControl('weight')">*</span></label>
+                            [class.error]="shouldShowErrorForControl('capacity')">*</span></label>
                     <input type="text" id="capacity" name="capacity" formControlName="capacity"
-                        [class.invalid]="shouldShowErrorForControl('magazine')">
+                        [class.invalid]="shouldShowErrorForControl('capacity')">
 
-                    <ng-container *ngIf="shouldShowErrorForControl('weight')">
-                        <p class="error" *ngIf="gunCreateFormGroup.controls['weight'].errors?.['required']">
+                    <ng-container *ngIf="shouldShowErrorForControl('capacity')">
+                        <p class="error" *ngIf="gunCreateFormGroup.controls['capacity'].errors?.['required']">
                             Полето е задължително!
                         </p>
-                        <p class="error" *ngIf="gunCreateFormGroup.controls['weight'].errors?.['min']">
+                        <p class="error" *ngIf="gunCreateFormGroup.controls['capacity'].errors?.['min']">
                             Минималната стойност на полето е 1!
                         </p>
-                        <p class="error" *ngIf="gunCreateFormGroup.controls['weight'].errors?.['max']">
+                        <p class="error" *ngIf="gunCreateFormGroup.controls['capacity'].errors?.['max']">
                             Максималната стойност на полето е 999!
                         </p>
                     </ng-container>
@@ -208,7 +208,7 @@
                             Минималната стойност на полето е 1!
                         </p>
                         <p class="error" *ngIf="gunCreateFormGroup.controls['length'].errors?.['max']">
-                            Максималната стойност на полето е 999!
+                            Максималната стойност на полето е 9999!
                         </p>
                     </ng-container>
                 </article>

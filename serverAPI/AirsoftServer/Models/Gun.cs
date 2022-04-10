@@ -25,14 +25,14 @@
         public virtual Image Image { get; set; }
 
         [MaxLength(DataConstants.RangeMaxLength)]
-        public int Power { get; set; }
+        public double Power { get; set; }
 
         [Required]
         [MaxLength(DataConstants.DefaultMaxLength)]
         public string Color { get; set; }
 
         [MaxLength(DataConstants.NumbersMaxLength)]
-        public int Weight { get; set; }
+        public double Weight { get; set; }
 
         [Required]
         [MaxLength(DataConstants.DefaultMaxLength)]
@@ -51,11 +51,11 @@
         public string Firing { get; set; }
 
         [Required]
-        [MaxLength(DataConstants.RangeMaxLength)]
+        [MaxLength(DataConstants.NumbersMaxLength)]
         public int Length { get; set; }
 
         [Required]
-        [MaxLength(DataConstants.RangeMaxLength)]
+        [MaxLength(DataConstants.NumbersMaxLength)]
         public int Barrel { get; set; }
 
         public Propulsion Propulsion { get; set; }

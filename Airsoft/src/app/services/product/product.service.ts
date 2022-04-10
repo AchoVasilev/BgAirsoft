@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { AllGunsViewModel } from 'src/app/models/products/guns/AllGunsViewModel';
 import { InitialGunViewModel } from 'src/app/models/products/guns/InitialGunViewModel';
 import { environment } from 'src/environments/environment';
 
@@ -17,5 +18,9 @@ export class ProductService {
 
   getNewestEightGuns(): Observable<InitialGunViewModel[]> {
     return this.httpClient.get<InitialGunViewModel[]>(`${environment.apiUrl}/product/getNewestGuns`);
+  }
+
+  getAllGuns(): Observable<AllGunsViewModel> {
+    return this.httpClient.get<AllGunsViewModel>(`${environment.apiUrl}/product/getAllGuns`);
   }
 }

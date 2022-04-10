@@ -6,8 +6,10 @@
 
     public interface IProductService
     {
-         Task<int> CreateGunAsync(GunInputModel model, string dealerId, string imageId);
+        Task<int> CreateGunAsync(GunInputModel model, string dealerId, string imageId);
 
         Task<ICollection<GunViewModel>> GetNewestEightGunsAsync();
+
+        Task<ICollection<AllGunViewModel>> GetAllGuns();
     }
 }

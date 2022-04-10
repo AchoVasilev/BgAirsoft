@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { CategoryViewModel } from 'src/app/models/category/categoryViewModel';
-import { MatProgressSpinner } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-home',
@@ -10,11 +8,13 @@ import { MatProgressSpinner } from '@angular/material/progress-spinner';
 export class HomeComponent implements OnInit {
   private slideIndex: number = 1;
   private startIndex: number = 0;
-  private categories: CategoryViewModel[] | undefined;
-  
+  isLoaded: boolean = false;
+  isLoading: boolean = true;  
   constructor() { }
 
   ngOnInit(): void {
+    this.isLoaded = true;
+    this.isLoading = false;
     this.showSlides(this.slideIndex);
     this.autoShowSlides();
   }
@@ -33,39 +33,48 @@ export class HomeComponent implements OnInit {
     var i;
     var slides = document.getElementsByClassName('field-image') as HTMLCollectionOf<HTMLElement>;
 
-    if (n > slides.length) {
-      this.slideIndex = 1;
-    }
+    if (slides.length > 0) {
+      if (n > slides.length) {
+        this.slideIndex = 1;
+      }
 
-    if (n < 1) {
-      this.slideIndex = slides.length;
-    }
+      if (n < 1) {
+        this.slideIndex = slides.length;
+      }
 
-    for (i = 0; i < slides.length; i++) {
-      slides[i].style.display = 'none';
-    }
+      for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = 'none';
+      }
 
-    slides[this.slideIndex - 1].style.display = 'block';
+      if (this.slideIndex - 1 < 0) {
+        this.slideIndex = 0;
+      }
+
+      slides[this.slideIndex - 1].style.display = 'block';
+    }
   }
 
   autoShowSlides() {
     var i;
     var slides = document.getElementsByClassName('field-image') as HTMLCollectionOf<HTMLElement>;
-    for (i = 0; i < slides.length; i++) {
-      slides[i].style.display = 'none';
+
+    if (slides.length > 0) {
+      for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = 'none';
+      }
+
+      if (this.startIndex == undefined) {
+        this.startIndex = 0;
+      }
+
+      this.startIndex++;
+      if (this.startIndex > slides.length) {
+        this.startIndex = 1;
+      }
+
+      slides[this.startIndex - 1].style.display = 'block';
+
+      setTimeout(this.autoShowSlides, 4000); // Change image every 2 seconds
     }
-
-    if (this.startIndex == undefined) {
-      this.startIndex = 0;
-    }
-
-    this.startIndex++;
-    if (this.startIndex > slides.length) {
-      this.startIndex = 1;
-    }
-
-    slides[this.startIndex - 1].style.display = 'block';
-
-    setTimeout(this.autoShowSlides, 4000); // Change image every 2 seconds
   }
 }

@@ -2,8 +2,6 @@
 {
     using CloudinaryDotNet;
 
-    using Infrastructure;
-
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -14,6 +12,7 @@
     using Services.ProductService;
 
     using ViewModels.Item.Guns;
+
     using static GlobalConstants.Constants;
 
     [Authorize]
@@ -71,6 +70,29 @@
             var guns = await this.productService.GetNewestEightGunsAsync();
 
             return Ok(guns);
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("getAllGuns")]
+        public async Task<IActionResult> GetAllGuns()
+        {
+            var guns = await this.productService.GetAllGuns();
+            var colors = guns.Select(x => x.Color).Distinct().ToList();
+            var manufacturers = guns.Select(x => x.Manufacturer).Distinct().ToList();
+            var dealers = guns.Select(x => x.DealerName).Distinct().ToList();
+            var powers = guns.Select(x => x.Power).Distinct().ToList();
+
+            var allGunsViewModel = new AllGunsViewModel
+            {
+                AllGuns = guns,
+                Colors = colors,
+                Manufacturers = manufacturers,
+                Dealers = dealers,
+                Powers = powers
+            };
+
+            return Ok(allGunsViewModel);
         }
     }
 }

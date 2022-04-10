@@ -38,7 +38,6 @@ import { UnderConstructionComponent } from './shared/under-construction/under-co
     ClientModule,
     HomeModule,
     DealerModule,
-    ProductsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),

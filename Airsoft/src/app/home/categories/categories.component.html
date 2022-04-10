@@ -1,0 +1,17 @@
+<mat-spinner *ngIf="isLoading" style="margin: 0 auto;"></mat-spinner>
+<section class="categories" *ngIf="isLoaded">
+    <h2 class="items-heading">
+        Нашите топ категории
+        <a routerLink="/products/all" class="view-collection">
+            Разгледайте колекцията<i class="fas fa-angle-right"></i>
+        </a>
+    </h2>
+    <article class="category" *ngFor="let category of categories">
+        <article class="category-img">
+            <a routerLink="/categories/{{category.name}}">
+                <img src="{{category.image.url}}" alt="">
+                <h3 class="category-title pad">{{category.name}}</h3>
+            </a>
+        </article>
+    </article>
+</section>

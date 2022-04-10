@@ -46,6 +46,14 @@
                 .Property(x => x.Price)
                 .HasPrecision(14, 2);
 
+            builder.Entity<Gun>()
+                .Property(x => x.Weight)
+                .HasPrecision(14, 2);
+
+            builder.Entity<Gun>()
+                .Property(x => x.Power)
+                .HasPrecision(14, 2);
+
             builder.Entity<Courier>()
                 .Property(x => x.DeliveryPrice)
                 .HasPrecision(14, 2);

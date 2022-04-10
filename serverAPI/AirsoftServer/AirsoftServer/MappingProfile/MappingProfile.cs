@@ -18,6 +18,7 @@
         public MappingProfile()
         {
             this.CreateMap<Category, CategoryViewModel>();
+            this.CreateMap<Category, BasicCategoryViewModel>();
             this.CreateMap<SubCategory, SubcategoryViewModel>();
 
             this.CreateMap<Image, ImageViewModel>();
@@ -32,6 +33,7 @@
             this.CreateMap<Address, AddressViewModel>();
 
             this.CreateMap<Gun, GunViewModel>();
+            this.CreateMap<Gun, AllGunViewModel>();
         }
     }
 }

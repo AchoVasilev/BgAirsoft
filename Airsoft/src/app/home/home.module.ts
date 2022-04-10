@@ -5,13 +5,15 @@ import { HomeComponent } from './home/home.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ProductsComponent } from './products/products.component';
 import { HomeRoutingModule } from './home-routing.module';
+import { CategoriesComponent } from './categories/categories.component';
 
 
 
 @NgModule({
   declarations: [
     HomeComponent,
-    ProductsComponent
+    ProductsComponent,
+    CategoriesComponent
   ],
   imports: [
     CommonModule,

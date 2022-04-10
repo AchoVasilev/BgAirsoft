@@ -19,7 +19,16 @@
         {
             var categories = await this.categoryService.GetAllCategoriesAsync();
 
-            return new JsonResult(categories);
+            return Ok(categories);
+        }
+
+        [HttpGet]
+        [Route("newest")]
+        public async Task<IActionResult> GetNewest()
+        {
+            var categories = await this.categoryService.GetFourNewestCategoriesAsync();
+
+            return Ok(categories);
         }
 
         [HttpGet]

@@ -74,5 +74,12 @@
                         .Take(DataConstants.PopularItemsCount)
                         .ProjectTo<GunViewModel>(this.mapper.ConfigurationProvider)
                         .ToListAsync();
+
+        public async Task<ICollection<AllGunViewModel>> GetAllGuns()
+            => await this.data.Guns
+                        .Where(x => x.IsDeleted == null)
+                        .OrderBy(x => x.CreatedOn)
+                        .ProjectTo<AllGunViewModel>(this.mapper.ConfigurationProvider)
+                        .ToListAsync();
     }
 }

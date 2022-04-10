@@ -1,0 +1,165 @@
+<mat-spinner *ngIf="isLoading" style="margin: 0 auto;"></mat-spinner>
+<div class="page" *ngIf="isLoaded">
+    <section class="wrapper">
+        <section class="search">
+            <article class="search-categories">
+                <ul class="search-categories-list">
+                    <li class="search-categories-list-item" *ngFor="let subCategory of subCategories">
+                        <a routerLink="/products/{{subCategory.name}}">{{subCategory.name}} <i
+                            class="fa-solid fa-chevron-right"></i></a>
+                    </li>
+                </ul>
+            </article>
+            <div class="container-checkbox-div">
+                <article class="search-description">
+                    <h3 class="search-description-heading">Еърсофт реплики</h3>
+                    <p class="search-description-count">(Брой продукти: <strong>{{guns.allGuns.length}}</strong>)</p>
+                </article>
+                <article class="search-submenu">
+                    <form action="">
+                        <button class="search-submenu-dropdown"><span>Подреди по азбучен ред</span>
+                            <i class="arrow down"></i></button>
+                        <ul class="submenu-dropdown-list">
+                            <li><a href="/guns-electric">Подреди по цена - низх.</a></li>
+                            <li><a href="/guns-pistols">Подреди по цена - възх.</a></li>
+                            <li><a href="/guns-shotguns">Подреди по дата - възх.</a></li>
+                            <li><a href="/guns-springloaded">Подреди по дата - низх.</a></li>
+                        </ul>
+                    </form>
+                    <form action="">
+                        <button class="search-submenu-dropdown"><span>Покажи 30</span>
+                            <i class="arrow down"></i></button>
+                        <ul class="submenu-count-list">
+                            <li><a href="/guns-electric">Покажи 60</a></li>
+                            <li><a href="/guns-electric">Покажи 90</a></li>
+                            <li><a href="/guns-electric">Покажи 120</a></li>
+                        </ul>
+                    </form>
+                    <ul class="pagination">
+                        <li class="disabled"><a>
+                                &lt;&lt;
+                            </a></li>
+                        <li class="active"><a>1</a></li>
+                        <li><a href="/en/menu/airsoft-replicas-366.html?counter=1">2</a></li>
+                        <li><a href="/en/menu/airsoft-replicas-366.html?counter=2">3</a></li>
+                        <li><a href="/en/menu/airsoft-replicas-366.html?counter=3">4</a></li>
+                        <li><a href="/en/menu/airsoft-replicas-366.html?counter=4">5</a></li>
+                        <li><a href="/en/menu/airsoft-replicas-366.html?counter=5">6</a></li>
+                        <li><a href="/en/menu/airsoft-replicas-366.html?counter=6">7</a></li>
+                        <li class="disabled"><span>...</span></li>
+                        <li><a href="/en/menu/airsoft-replicas-366.html?counter=15">16</a></li>
+                        <li><a href="/en/menu/airsoft-replicas-366.html?counter=1">
+                                &gt;&gt;
+                            </a></li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+        <section class="guns">
+            <article class="gun" *ngFor="let gun of guns.allGuns">
+                <a routerLink="/products/{{gun.name}}/{{gun.id}}" class="gun-img">
+                    <img src="{{gun.image.url}}" alt="product {{gun.name}} image">
+                </a>
+                <section class="tooltip">
+                    <ul class="gun-listing">
+                        <li class="gun-listing-item">Производител: {{gun.manufacturer}}</li>
+                        <li class="gun-listing-item">Предлаган от: {{gun.dealerName}}</li>
+                        <li class="gun-listing-item">Тегло: {{gun.weight}} гр.</li>
+                        <li class="gun-listing-item">Вид: {{gun.propulsion}}</li>
+                        <li class="gun-listing-item">Мощност: {{gun.power}} j</li>
+                        <li class="gun-listing-item">Цвят: {{gun.color}}</li>
+                    </ul>
+                </section>
+                <div class="gun-buttons-wrapper">
+                    <a href="" title="Добави към любими" class="gun-wish">
+                        <i class="fa-regular fa-heart fa-lg"></i>
+                    </a>
+                    <a href="" title="Сравни продукт" class="gun-compare">
+                        <i class="fa-solid fa-scale-balanced fa-lg"></i>
+                    </a>
+                </div>
+                <h6 class="gun-price">{{gun.price}} лв.</h6>
+                <a href="#">
+                    <p class="gun-name">{{gun.name}}</p>
+                </a>
+                <p class="gun-manufacturer"><strong>Производител:</strong> {{gun.manufacturer}}</p>
+                <button href="" class="basket-btn">
+                    Добави в количката <i class="fa-solid fa-cart-shopping"></i>
+                </button>
+            </article>
+        </section>
+    </section>
+    <aside>
+        <section class="filters">
+            <form action="" [formGroup]="dealerFormGroup" (ngSubmit)="filterByDealers()">
+                <article class="filter">
+                    <h6 class="filter-header">
+                        Продавач:
+                    </h6>
+                    <ul>
+                        <li *ngFor="let dealer of guns.dealers">
+                            <label for="dealerCheckbox" class="container-checkbox">{{dealer}}
+                                <input type="checkbox" id="dealerCheckbox" (change)="onChange(dealer, $event.target)">
+                                <span class="checkmark"></span>
+                            </label>
+                        </li>
+                    </ul>
+                    <button class="submit-btn" type="submit">Приложи</button>
+                </article>
+            </form>
+
+            <form action="">
+                <article class="filter">
+                    <h6 class="filter-header">
+                        Производител:
+                    </h6>
+                    <ul>
+                        <li *ngFor="let manufacturer of guns.manufacturers">
+                            <label class="container-checkbox">{{manufacturer}}
+                                <input type="checkbox">
+                                <span class="checkmark"></span>
+                            </label>
+                        </li>
+                    </ul>
+                    <article class="filter-buttons">
+                        <button class="submit-btn" type="submit">Приложи</button>
+                    </article>
+                </article>
+            </form>
+
+            <form action="">
+                <article class="filter">
+                    <h6 class="filter-header">
+                        Цвят:
+                    </h6>
+                    <ul>
+                        <li *ngFor="let color of guns.colors">
+                            <label class="container-checkbox">{{color}}
+                                <input type="checkbox">
+                                <span class="checkmark"></span>
+                            </label>
+                        </li>
+                    </ul>
+                    <button class="submit-btn" type="submit">Приложи</button>
+                </article>
+            </form>
+
+            <form action="">
+                <article class="filter">
+                    <h6 class="filter-header">
+                        Мощност:
+                    </h6>
+                    <ul>
+                        <li *ngFor="let power of guns.powers">
+                            <label class="container-checkbox">{{power}} J
+                                <input type="checkbox">
+                                <span class="checkmark"></span>
+                            </label>
+                        </li>
+                    </ul>
+                    <button class="submit-btn" type="submit">Приложи</button>
+                </article>
+            </form>
+        </section>
+    </aside>
+</div>

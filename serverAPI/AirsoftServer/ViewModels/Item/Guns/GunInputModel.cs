@@ -19,14 +19,14 @@
         public IFormFile Image { get; set; }
 
         [Range(DataConstants.RangeMinLength, DataConstants.RangeMaxLength, ErrorMessage = MessageConstants.LengthErrorMsg)]
-        public int Power { get; set; }
+        public double Power { get; set; }
 
         [Required(ErrorMessage = MessageConstants.RequiredFieldErrorMsg)]
         [StringLength(DataConstants.DefaultMaxLength, MinimumLength = DataConstants.DefaultMinLength, ErrorMessage = MessageConstants.LengthErrorMsg)]
         public string Color { get; set; }
 
         [Range(DataConstants.RangeMinLength, maximum:DataConstants.NumbersMaxLength, ErrorMessage = MessageConstants.LengthErrorMsg)]
-        public int Weight { get; set; }
+        public double Weight { get; set; }
 
         [Required(ErrorMessage = MessageConstants.RequiredFieldErrorMsg)]
         [StringLength(DataConstants.DefaultMaxLength, MinimumLength = DataConstants.DefaultMinLength, ErrorMessage = MessageConstants.LengthErrorMsg)]
@@ -45,7 +45,7 @@
         public string Firing { get; set; }
 
         [Required(ErrorMessage = MessageConstants.RequiredFieldErrorMsg)]
-        [Range(DataConstants.RangeMinLength, DataConstants.RangeMaxLength, ErrorMessage = MessageConstants.LengthErrorMsg)]
+        [Range(DataConstants.RangeMinLength, DataConstants.NumbersMaxLength, ErrorMessage = MessageConstants.LengthErrorMsg)]
         public int Length { get; set; }
 
         [Required(ErrorMessage = MessageConstants.RequiredFieldErrorMsg)]

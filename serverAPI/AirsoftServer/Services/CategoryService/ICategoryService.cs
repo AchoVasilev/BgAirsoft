@@ -6,6 +6,8 @@
     {
         Task<ICollection<CategoryViewModel>> GetAllCategoriesAsync();
 
+        Task<ICollection<BasicCategoryViewModel>> GetFourNewestCategoriesAsync();
+
         Task<ICollection<SubcategoryViewModel>> GetGunSubCategoriesAsync();
     }
 }

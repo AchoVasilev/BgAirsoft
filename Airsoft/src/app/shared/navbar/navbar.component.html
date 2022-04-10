@@ -10,12 +10,12 @@
                 <ul (mouseleave)="mouseOut()" class="catalog-menu" *ngIf="categories">
                     <li *ngFor="let category of categories">
                         <img src={{category.image.url}} alt="guns logo">
-                        <a [routerLink]="[category.name]">
+                        <a routerLink="/products/guns/all">
                             {{category.name}}
                         </a>
                         <ul class="sub-menu">
                             <li *ngFor="let subCategory of category.subCategories">
-                                <a [routerLink]="[category.name, subCategory.name]">{{subCategory.name}}</a>
+                                <a [routerLink]="['/products/guns', subCategory.name]">{{subCategory.name}}</a>
                             </li>
                         </ul>
                     </li>

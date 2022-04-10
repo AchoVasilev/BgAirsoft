@@ -29,6 +29,14 @@
                 .ProjectTo<CategoryViewModel>(this.mapper.ConfigurationProvider)
                 .ToListAsync();
 
+        public async Task<ICollection<BasicCategoryViewModel>> GetFourNewestCategoriesAsync()
+            => await this.data.Categories
+                    .Where(x => x.IsDeleted == null)
+                    .OrderBy(x => x.CreatedOn)
+                    .Take(4)
+                    .ProjectTo<BasicCategoryViewModel>(this.mapper.ConfigurationProvider)
+                    .ToListAsync();
+
         public async Task<ICollection<SubcategoryViewModel>> GetGunSubCategoriesAsync()
             => await this.data.SubCategories
                         .Where(x => x.Category.Name == "Еърсофт оръжия" && x.IsDeleted == null)

@@ -1,15 +1,24 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
-import { AuthGuard } from "../guards/auth.guard";
-import { DealerGuard } from "../guards/dealer.guard";
 import { CreateComponent } from "./create/create.component";
 import { DetailsComponent } from "./details/details.component";
+import { GunListComponent } from "./gun-list/gun-list.component";
+import { ListComponent } from "./list/list.component";
 
-const routes: Routes = [
+export const routes: Routes = [
     {
-        path: 'products',
-        canActivate: [AuthGuard, DealerGuard],
+        path: '',
         children: [
+            {
+                path: 'all',
+                component: ListComponent,
+                pathMatch: 'full'
+            },
+            {
+                path: 'guns/all',
+                component: GunListComponent,
+                pathMatch: 'full'
+            },
             {
                 path: 'create',
                 component: CreateComponent,
@@ -25,7 +34,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes)],
+    imports: [RouterModule.forChild(routes)],
     exports: [RouterModule]
 })
 export class ProductsRoutingModule{}
