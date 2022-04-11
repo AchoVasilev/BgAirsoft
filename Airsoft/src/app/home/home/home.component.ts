@@ -1,22 +1,43 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, ViewChildren } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
-  private slideIndex: number = 1;
-  private startIndex: number = 0;
+export class HomeComponent implements OnInit, AfterViewInit {
+  slideIndex: number = 1;
+  scrollTop: number = 0;
   isLoaded: boolean = false;
   isLoading: boolean = true;  
+
+  @ViewChild('slides')
+  slides: ElementRef; 
+  
   constructor() { }
 
   ngOnInit(): void {
     this.isLoaded = true;
     this.isLoading = false;
+  }
+
+  ngAfterViewInit(): void {
+    this.scroll();
+    setInterval(() => this.autoShowSlides(), 10000);
     this.showSlides(this.slideIndex);
-    this.autoShowSlides();
+  }
+
+  scroll() {
+    document.addEventListener('scroll', (ev) => {
+      if (document.documentElement.scrollTop > 450 && document.documentElement.scrollTop <= 3500) {
+        this.scrollTop = document.documentElement.scrollTop;
+      }
+
+      // if (document.documentElement.scrollTop > 450) {
+      //   this.router.navigate([{ outlets: { first: ['/home/first'] } }]);
+      // }
+    })
   }
 
   // Next/previous controls
@@ -30,51 +51,36 @@ export class HomeComponent implements OnInit {
   }
 
   showSlides(n: any) {
-    var i;
-    var slides = document.getElementsByClassName('field-image') as HTMLCollectionOf<HTMLElement>;
+    let slidesElement: HTMLElement = this.slides.nativeElement;
 
-    if (slides.length > 0) {
-      if (n > slides.length) {
-        this.slideIndex = 1;
+    if (slidesElement.children.length > 0) {
+      if (n >= slidesElement.children.length) {
+        this.slideIndex = 0;
       }
 
       if (n < 1) {
-        this.slideIndex = slides.length;
-      }
-
-      for (i = 0; i < slides.length; i++) {
-        slides[i].style.display = 'none';
+        this.slideIndex = slidesElement.children.length;
       }
 
       if (this.slideIndex - 1 < 0) {
         this.slideIndex = 0;
       }
-
-      slides[this.slideIndex - 1].style.display = 'block';
     }
   }
 
   autoShowSlides() {
-    var i;
-    var slides = document.getElementsByClassName('field-image') as HTMLCollectionOf<HTMLElement>;
+    let slidesElement: HTMLElement = this.slides.nativeElement;
 
-    if (slides.length > 0) {
-      for (i = 0; i < slides.length; i++) {
-        slides[i].style.display = 'none';
+    if (slidesElement.children.length > 0) {
+
+      if (this.slideIndex == undefined) {
+        this.slideIndex = 0;
       }
 
-      if (this.startIndex == undefined) {
-        this.startIndex = 0;
+      this.slideIndex++;
+      if (this.slideIndex >= slidesElement.children.length) {
+        this.slideIndex = 0;
       }
-
-      this.startIndex++;
-      if (this.startIndex > slides.length) {
-        this.startIndex = 1;
-      }
-
-      slides[this.startIndex - 1].style.display = 'block';
-
-      setTimeout(this.autoShowSlides, 4000); // Change image every 2 seconds
     }
   }
 }

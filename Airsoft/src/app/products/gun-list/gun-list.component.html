@@ -3,37 +3,34 @@
     <section class="wrapper">
         <section class="search">
             <article class="search-categories">
-                <ul class="search-categories-list">
+                <ul class="search-categories-list" #buttons>
                     <li class="search-categories-list-item" *ngFor="let subCategory of subCategories">
-                        <a routerLink="/products/{{subCategory.name}}">{{subCategory.name}} <i
-                            class="fa-solid fa-chevron-right"></i></a>
+                        <a routerLink="/products/guns/{{subCategory.name}}">{{subCategory.name}}
+                        </a>
                     </li>
                 </ul>
             </article>
-            <div class="container-checkbox-div">
+            <div class="container-checkbox-div" *ngIf="guns.allGuns.length > 0">
                 <article class="search-description">
                     <h3 class="search-description-heading">Еърсофт реплики</h3>
                     <p class="search-description-count">(Брой продукти: <strong>{{guns.allGuns.length}}</strong>)</p>
                 </article>
-                <article class="search-submenu">
-                    <form action="">
-                        <button class="search-submenu-dropdown"><span>Подреди по азбучен ред</span>
-                            <i class="arrow down"></i></button>
-                        <ul class="submenu-dropdown-list">
-                            <li><a href="/guns-electric">Подреди по цена - низх.</a></li>
-                            <li><a href="/guns-pistols">Подреди по цена - възх.</a></li>
-                            <li><a href="/guns-shotguns">Подреди по дата - възх.</a></li>
-                            <li><a href="/guns-springloaded">Подреди по дата - низх.</a></li>
-                        </ul>
+                <article class="search-submenu" *ngIf="guns.allGuns.length > 0">
+                    <form [formGroup]="sortingFormGroup">
+                        <select name="select-dropdown" class="submenu-dropdown-list" #orderBy formGroupName="orderBy"
+                            (change)="sortingCheck()">
+                            <option class="search-submenu-dropdown" value="alphabetical">Подреди по азбучен ред</option>
+                            <option class="search-submenu-dropdown" value="priceDown">Подреди по цена - низх.</option>
+                            <option class="search-submenu-dropdown" value="priceUp">Подреди по цена - възх.</option>
+                        </select>
                     </form>
                     <form action="">
-                        <button class="search-submenu-dropdown"><span>Покажи 30</span>
-                            <i class="arrow down"></i></button>
-                        <ul class="submenu-count-list">
-                            <li><a href="/guns-electric">Покажи 60</a></li>
-                            <li><a href="/guns-electric">Покажи 90</a></li>
-                            <li><a href="/guns-electric">Покажи 120</a></li>
-                        </ul>
+                        <select name="select-dropdown" class="submenu-count-list" #count (change)="sortingCheck()">
+                            <option class="search-submenu-dropdown" value="9">Покажи 9</option>
+                            <option class="search-submenu-dropdown" value="18">Покажи 18</option>
+                            <option class="search-submenu-dropdown" value="30">Покажи 30</option>
+                            <option class="search-submenu-dropdown" value="60">Покажи 60</option>
+                        </select>
                     </form>
                     <ul class="pagination">
                         <li class="disabled"><a>
@@ -55,7 +52,10 @@
                 </article>
             </div>
         </section>
-        <section class="guns">
+        <section class="no-guns" *ngIf="guns.allGuns.length === 0">
+            <h2>Няма продукти от тази категория</h2>
+        </section>
+        <section class="guns" *ngIf="guns.allGuns.length > 0">
             <article class="gun" *ngFor="let gun of guns.allGuns">
                 <a routerLink="/products/{{gun.name}}/{{gun.id}}" class="gun-img">
                     <img src="{{gun.image.url}}" alt="product {{gun.name}} image">
@@ -89,17 +89,18 @@
             </article>
         </section>
     </section>
-    <aside>
+    <aside *ngIf="guns.allGuns.length > 0">
         <section class="filters">
-            <form action="" [formGroup]="dealerFormGroup" (ngSubmit)="filterByDealers()">
+            <form [formGroup]="dealerFormGroup" (ngSubmit)="filterByDealers()">
                 <article class="filter">
                     <h6 class="filter-header">
                         Продавач:
                     </h6>
                     <ul>
                         <li *ngFor="let dealer of guns.dealers">
-                            <label for="dealerCheckbox" class="container-checkbox">{{dealer}}
-                                <input type="checkbox" id="dealerCheckbox" (change)="onChange(dealer, $event.target)">
+                            <label class="container-checkbox">{{dealer}}
+                                <input type="checkbox"
+                                    (change)="onChange(dealer, dealerFormGroup, 'dealers', $event.target)">
                                 <span class="checkmark"></span>
                             </label>
                         </li>
@@ -108,7 +109,7 @@
                 </article>
             </form>
 
-            <form action="">
+            <form [formGroup]="manufacturersFormGroup" (ngSubmit)="filterByManufacturers()">
                 <article class="filter">
                     <h6 class="filter-header">
                         Производител:
@@ -116,7 +117,8 @@
                     <ul>
                         <li *ngFor="let manufacturer of guns.manufacturers">
                             <label class="container-checkbox">{{manufacturer}}
-                                <input type="checkbox">
+                                <input type="checkbox"
+                                    (change)="onChange(manufacturer, manufacturersFormGroup, 'manufacturers', $event.target)">
                                 <span class="checkmark"></span>
                             </label>
                         </li>
@@ -127,7 +129,7 @@
                 </article>
             </form>
 
-            <form action="">
+            <form [formGroup]="colorsFormGroup" (ngSubmit)="filterByColors()">
                 <article class="filter">
                     <h6 class="filter-header">
                         Цвят:
@@ -135,7 +137,8 @@
                     <ul>
                         <li *ngFor="let color of guns.colors">
                             <label class="container-checkbox">{{color}}
-                                <input type="checkbox">
+                                <input type="checkbox"
+                                    (change)="onChange(color, colorsFormGroup, 'colors', $event.target)">
                                 <span class="checkmark"></span>
                             </label>
                         </li>
@@ -144,7 +147,7 @@
                 </article>
             </form>
 
-            <form action="">
+            <form [formGroup]="powersFormGroup" (ngSubmit)="filterByPowers()">
                 <article class="filter">
                     <h6 class="filter-header">
                         Мощност:
@@ -152,7 +155,8 @@
                     <ul>
                         <li *ngFor="let power of guns.powers">
                             <label class="container-checkbox">{{power}} J
-                                <input type="checkbox">
+                                <input type="checkbox"
+                                    (change)="onChange(power, powersFormGroup, 'powers', $event.target)">
                                 <span class="checkmark"></span>
                             </label>
                         </li>

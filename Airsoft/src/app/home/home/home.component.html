@@ -10,22 +10,24 @@
         </p>
     </article>
 
-    <article class="field-images">
-        <article class="field-image fade">
+    <article class="field-images" #slides>
+        <article class="field-image fade" [style.display]="slideIndex == 0 ? 'block' : 'none'">
             <a href="https://www.airsoftimpact.com/teren/" target="_blank">
                 <img src="https://www.airsoftimpact.com/wp-content/uploads/2021/09/_7-scaled-e1632903224768.jpg" alt="">
             </a>
         </article>
 
-        <article class="field-image fade none">
+        <article class="field-image fade none" [style.display]="slideIndex == 1 ? 'block' : 'none'">
             <a href="https://airsoftsofiafield.com/%D0%B3%D0%B0%D0%BB%D0%B5%D1%80%D0%B8%D1%8F/" target="_blank">
                 <img src="https://airsoftsofiafield.com/img/airsoft-sofia-field.jpg" alt="">
             </a>
         </article>
+    </article>
 
+    <div>
         <a class="prev" (click)="plusSlides(-1)">&#10094;</a>
         <a class="next" (click)="plusSlides(1)">&#10095;</a>
-    </article>
+    </div>
 
     <article class="intro-content intro-second">
         <h2 class="intro-content-heading">Какво е Еърсофт?</h2>
@@ -77,9 +79,13 @@
     </article>
 </section>
 
-<app-products></app-products>
+<!-- <ng-container *ngIf="scrollTop > 0">
+    <router-outlet name="first"></router-outlet>
+</ng-container> -->
 
-<app-categories></app-categories>
+<app-products *ngIf="scrollTop > 0"></app-products>
+
+<app-categories *ngIf="scrollTop > 550"></app-categories>
 
 <section class="partners">
     <h2 class="partners-heading">

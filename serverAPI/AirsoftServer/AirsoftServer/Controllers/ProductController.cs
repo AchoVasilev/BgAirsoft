@@ -24,9 +24,9 @@
         private readonly Cloudinary cloudinary;
 
         public ProductController(
-            UserManager<ApplicationUser> userManager, 
-            IProductService productService, 
-            IFileService fileService, 
+            UserManager<ApplicationUser> userManager,
+            IProductService productService,
+            IFileService fileService,
             Cloudinary cloudinary)
         {
             this.userManager = userManager;
@@ -37,7 +37,7 @@
 
         [Route("createGun")]
         [HttpPost]
-        public async Task<IActionResult> CreateGun([FromForm]GunInputModel model)
+        public async Task<IActionResult> CreateGun([FromForm] GunInputModel model)
         {
             var userId = this.User.Claims.First(x => x.Type == "UserId").Value;
             var user = await this.userManager.FindByIdAsync(userId);
@@ -59,13 +59,13 @@
 
             var gunId = await this.productService.CreateGunAsync(model, user.DealerId, imageId);
 
-            return Ok(new {gunId, model.Name});
+            return Ok(new { gunId, model.Name });
         }
 
         [AllowAnonymous]
         [HttpGet]
         [Route("getNewestGuns")]
-        public async Task< IActionResult> GetNewestGuns()
+        public async Task<IActionResult> GetNewestGuns()
         {
             var guns = await this.productService.GetNewestEightGunsAsync();
 
@@ -77,7 +77,7 @@
         [Route("getAllGuns")]
         public async Task<IActionResult> GetAllGuns()
         {
-            var guns = await this.productService.GetAllGuns();
+            var guns = await this.productService.GetAllGunsAsync();
             var colors = guns.Select(x => x.Color).Distinct().ToList();
             var manufacturers = guns.Select(x => x.Manufacturer).Distinct().ToList();
             var dealers = guns.Select(x => x.DealerName).Distinct().ToList();
@@ -93,6 +93,79 @@
             };
 
             return Ok(allGunsViewModel);
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("gunsByManufacturer")]
+        public async Task<IActionResult> GetGunsByManufacturer([FromQuery] List<string> manufacturers)
+        {
+            var guns = await this.productService.FilterGunsByManufacturerAsync(manufacturers);
+
+            return Ok(guns);
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("gunsByDealer")]
+        public async Task<IActionResult> GetGunsByDealers([FromQuery] List<string> dealers)
+        {
+            var guns = await this.productService.FilterGunsByDealerAsync(dealers);
+
+            return Ok(guns);
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("gunsByColor")]
+        public async Task<IActionResult> GetGunsByColors([FromQuery] List<string> colors)
+        {
+            var guns = await this.productService.FilterGunsByColorAsync(colors);
+
+            return Ok(guns);
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("gunsByPower")]
+        public async Task<IActionResult> GetGunsByPowers([FromQuery] GunQueryModel query)
+        {
+            var guns = await this.productService.FilterGunsByPowerAsync(query);
+
+            return Ok(guns);
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("gunsByCategory")]
+        public async Task<IActionResult> GetGunsByCategory([FromQuery] GunQueryModel query)
+        {
+            var guns = await this.productService.FilterGunsByCategoryAsync(query);
+            var colors = guns.Select(x => x.Color).Distinct().ToList();
+            var manufacturers = guns.Select(x => x.Manufacturer).Distinct().ToList();
+            var dealers = guns.Select(x => x.DealerName).Distinct().ToList();
+            var powers = guns.Select(x => x.Power).Distinct().ToList();
+
+            var allGunsViewModel = new AllGunsViewModel
+            {
+                AllGuns = guns,
+                Colors = colors,
+                Manufacturers = manufacturers,
+                Dealers = dealers,
+                Powers = powers
+            };
+
+            return Ok(allGunsViewModel);
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("sortGuns")]
+        public async Task<IActionResult> GetOrderedGuns([FromQuery] GunSortModel query)
+        {
+            var guns = await this.productService.OrderGuns(query);
+
+            return Ok(guns);
         }
     }
 }

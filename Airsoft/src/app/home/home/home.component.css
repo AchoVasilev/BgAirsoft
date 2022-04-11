@@ -19,7 +19,7 @@
 .next {
     cursor: pointer;
     position: absolute;
-    top: 50%;
+    bottom: 20%;
     width: auto;
     margin-top: -22px;
     padding: 16px;
@@ -67,6 +67,10 @@
     to {
         opacity: 1
     }
+}
+
+.intro{
+    overflow: auto;
 }
 
 .intro-content {

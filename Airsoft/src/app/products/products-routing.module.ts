@@ -1,5 +1,7 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
+import { AuthGuard } from "../guards/auth.guard";
+import { DealerGuard } from "../guards/dealer.guard";
 import { CreateComponent } from "./create/create.component";
 import { DetailsComponent } from "./details/details.component";
 import { GunListComponent } from "./gun-list/gun-list.component";
@@ -20,9 +22,15 @@ export const routes: Routes = [
                 pathMatch: 'full'
             },
             {
+                path: 'guns/:name',
+                component: GunListComponent,
+                pathMatch: 'full'
+            },
+            {
                 path: 'create',
                 component: CreateComponent,
-                pathMatch: 'full'
+                pathMatch: 'full',
+                canActivate: [AuthGuard, DealerGuard]
             },
             {
                 path: ':name/:id',

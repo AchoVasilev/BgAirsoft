@@ -14,7 +14,7 @@ export class DealerGuard implements CanActivate {
     if (this.userService.isAuthenticated() && !this.userService.isClient()) {
       return true;
     } else {
-      this.router.navigate(['/user/login']);
+      this.router.navigate(['/login']);
       return false;
     }
   }

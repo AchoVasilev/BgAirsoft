@@ -16,7 +16,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     CreateComponent,
     DetailsComponent,
     ListComponent,
-    GunListComponent
+    GunListComponent,
   ],
   imports: [
     CommonModule,
