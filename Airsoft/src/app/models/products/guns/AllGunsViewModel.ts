@@ -5,5 +5,5 @@ export interface AllGunsViewModel{
     colors: string[],
     manufacturers: string[],
     dealers: string[],
-    powers: string[]
+    powers: number[]
 };

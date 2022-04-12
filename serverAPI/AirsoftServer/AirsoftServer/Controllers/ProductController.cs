@@ -43,7 +43,7 @@
             var user = await this.userManager.FindByIdAsync(userId);
             if (user.DealerId == null)
             {
-                return BadRequest(new { ErrorMessage = MessageConstants.InvalidUser });
+                return BadRequest(new { ErrorMessage = MessageConstants.InvalidUserMsg });
             }
 
             var imageResult = await this.fileService.UploadImage(cloudinary, model.Image, NameConstants.CloudinaryFolderName);

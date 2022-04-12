@@ -5,6 +5,7 @@
     using Models;
 
     using ViewModels.Address;
+    using ViewModels.Cart;
     using ViewModels.Categories;
     using ViewModels.City;
     using ViewModels.Client;
@@ -34,6 +35,7 @@
 
             this.CreateMap<Gun, GunViewModel>();
             this.CreateMap<Gun, AllGunViewModel>();
+            this.CreateMap<Gun, CartViewModel>();
         }
     }
 }

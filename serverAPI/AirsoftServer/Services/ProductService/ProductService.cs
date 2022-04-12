@@ -129,6 +129,9 @@
             {
                 switch (query.OrderBy)
                 {
+                    case "newest":
+                        gunsQuery = gunsQuery.OrderByDescending(x => x.CreatedOn);
+                        break;
                     case "alphabetical":
                         gunsQuery = gunsQuery.OrderBy(x => x.Name);
                         break;
@@ -183,7 +186,7 @@
                 gunsQuery = gunsQuery.Where(x => x.SubCategory.Name == query.CategoryName);
             }
 
-            return gunsQuery;
+            return gunsQuery.OrderByDescending(x => x.CreatedOn);
         }
     }
 }

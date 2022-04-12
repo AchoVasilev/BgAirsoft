@@ -8,5 +8,7 @@
         Task<string> CreateClientAsync(ClientInputModel model);
 
         Task<UserClientViewModel> GetClientDataAsync(string userId);
+
+        Task<bool> UserIsClient(string userId);
     }
 }

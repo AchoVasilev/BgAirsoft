@@ -1,10 +1,13 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { map, switchMap } from 'rxjs';
 import { AllGunsViewModel } from 'src/app/models/products/guns/AllGunsViewModel';
 import { SubCategoryViewModel } from 'src/app/models/subCategory/subCategoryViewModel';
+import { CartService } from 'src/app/services/cart/cart.service';
 import { CategoryService } from 'src/app/services/categoryService/category.service';
+import { DataService } from 'src/app/services/data/data.service';
 import { ProductService } from 'src/app/services/product/product.service';
 
 @Component({
@@ -31,9 +34,19 @@ export class GunListComponent implements OnInit {
   @ViewChild('count')
   countElement: ElementRef;
 
+  get cartItemsCount():number {
+    return this.dataService.cartItemsCount
+  }
+  set cartItemsCount(value: number) {
+    this.dataService.cartItemsCount = value;
+  }
+
   constructor(
     private productService: ProductService,
     private categoryService: CategoryService,
+    private cartService: CartService,
+    private toastr: ToastrService,
+    private dataService: DataService,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute
   ) { }
@@ -50,7 +63,7 @@ export class GunListComponent implements OnInit {
     // )
 
     this.route.params.pipe(
-      map(val => val['name'] ? this.categoryName = val['name'] : this.categoryName = null),
+      map(params => params['name'] ? this.categoryName = params['name'] : this.categoryName = null),
       switchMap(() => this.productService.getGunsByCategory(this.categoryName))
     ).subscribe(res => {
       this.guns = res;
@@ -108,7 +121,7 @@ export class GunListComponent implements OnInit {
       .subscribe(g => this.guns.allGuns = g);
   }
 
-  onChange(itemName: string, formGroup: FormGroup, groupName: string, isChecked: any) {
+  onChange(itemName: any, formGroup: FormGroup, groupName: string, isChecked: any) {
     const itemsArr = (formGroup.controls[groupName] as FormArray);
 
     if (isChecked.checked) {
@@ -145,5 +158,20 @@ export class GunListComponent implements OnInit {
 
     this.productService.getGunsByPowers(data)
       .subscribe(res => this.guns.allGuns = res);
+  }
+
+  addToBasket(gunId: number) {
+    this.cartService.AddItem(gunId)
+      .subscribe({
+        next: (result) => {
+          this.toastr.success("Успешно добавяне!");
+          this.cartItemsCount = result.itemsCount;
+        },
+        error: (err) => {
+          if (err.status == 400) {
+            this.toastr.error(err.error.ErrorMessage);
+          }
+        }
+    })
   }
 }

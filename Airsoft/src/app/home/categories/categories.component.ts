@@ -26,7 +26,7 @@ export class CategoriesComponent implements OnInit {
           setTimeout(() => {
             this.isLoaded = true;
             this.isLoading = false;
-          }, 700);
+          }, 500);
         },
         error: (err) => {
           this.isLoaded = true;

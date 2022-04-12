@@ -54,6 +54,18 @@
             return client.Id;
         }
 
+        public async Task<bool> UserIsClient(string userId)
+        {
+            var result = await this.data.Users.FirstOrDefaultAsync(x => x.Id == userId && x.ClientId != null);
+
+            if (result == null)
+            {
+                return false;
+            }
+
+            return true;
+}
+
         public async Task<UserClientViewModel> GetClientDataAsync(string userId) 
             => await this.data.Users
                 .Where(x => x.Id == userId)

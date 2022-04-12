@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { DataService } from 'src/app/services/data/data.service';
 import { UserService } from 'src/app/services/user/user.service';
 import { CategoryViewModel } from '../../models/category/categoryViewModel';
 import { CategoryService } from '../../services/categoryService/category.service';
@@ -20,7 +21,16 @@ export class NavbarComponent {
     return this.userService.isClient();
   }
 
-  constructor(private categoryService: CategoryService, private userService: UserService, private router: Router) {
+  get cartItemsCount(): number{
+    return this.dataService.cartItemsCount;
+  }
+
+  constructor(
+    private categoryService: CategoryService,
+    private userService: UserService,
+    private dataService: DataService,
+    private router: Router
+  ) {
     this.getCategories();
   }
 

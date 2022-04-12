@@ -11,6 +11,7 @@ using Microsoft.IdentityModel.Tokens;
 
 using Models;
 
+using Services.CartService;
 using Services.CategoryService;
 using Services.CityService;
 using Services.ClientService;
@@ -71,6 +72,7 @@ builder.Services.AddTransient<ICityService, CityService>();
 builder.Services.AddTransient<IDealerService, DealerService>();
 builder.Services.AddTransient<IFileService, FileService>();
 builder.Services.AddTransient<IProductService, ProductService>();
+builder.Services.AddTransient<ICartService, CartService>();
 
 //Configure Cloudinary
 var cloud = builder.Configuration["Cloudinary:CloudifyName"];

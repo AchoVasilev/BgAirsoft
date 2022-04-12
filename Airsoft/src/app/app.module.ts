@@ -4,7 +4,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ClientModule } from './client/client.module';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { HomeModule } from './home/home.module';
@@ -18,8 +17,6 @@ import { AuthInterceptor } from './guards/interceptors/auth.interceptor';
 import { ClientService } from './services/clientService/client.service';
 import { CityService } from './services/cityService/city.service';
 import { CategoryService } from './services/categoryService/category.service';
-import { DealerModule } from './dealer/dealer.module';
-import { ProductsModule } from './products/products.module';
 import { UnderConstructionComponent } from './shared/under-construction/under-construction.component';
 
 @NgModule({
@@ -35,9 +32,7 @@ import { UnderConstructionComponent } from './shared/under-construction/under-co
     BrowserModule,
     ReactiveFormsModule,
     HttpClientModule,
-    ClientModule,
     HomeModule,
-    DealerModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),

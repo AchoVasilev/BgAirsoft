@@ -16,6 +16,8 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getNewestGuns();
+    this.isLoaded = true;
+    this.isLoading = false;
   }
 
   getNewestGuns(): void{
@@ -26,7 +28,7 @@ export class ProductsComponent implements OnInit {
           setTimeout(() => {
             this.isLoaded = true;
             this.isLoading = false;
-          }, 700);
+          }, 500);
         },
         error: (err) => { 
           this.isLoaded = true;

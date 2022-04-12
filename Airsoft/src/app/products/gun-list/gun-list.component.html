@@ -8,6 +8,9 @@
                         <a routerLink="/products/guns/{{subCategory.name}}">{{subCategory.name}}
                         </a>
                     </li>
+                    <li class="search-categories-list-item">
+                        <a routerLink="/products/guns/all">Всички</a>
+                    </li>
                 </ul>
             </article>
             <div class="container-checkbox-div" *ngIf="guns.allGuns.length > 0">
@@ -19,6 +22,7 @@
                     <form [formGroup]="sortingFormGroup">
                         <select name="select-dropdown" class="submenu-dropdown-list" #orderBy formGroupName="orderBy"
                             (change)="sortingCheck()">
+                            <option class="search-submenu-dropdown" value="newest">Подреди по най-нови</option>
                             <option class="search-submenu-dropdown" value="alphabetical">Подреди по азбучен ред</option>
                             <option class="search-submenu-dropdown" value="priceDown">Подреди по цена - низх.</option>
                             <option class="search-submenu-dropdown" value="priceUp">Подреди по цена - възх.</option>
@@ -66,7 +70,7 @@
                         <li class="gun-listing-item">Предлаган от: {{gun.dealerName}}</li>
                         <li class="gun-listing-item">Тегло: {{gun.weight}} гр.</li>
                         <li class="gun-listing-item">Вид: {{gun.propulsion}}</li>
-                        <li class="gun-listing-item">Мощност: {{gun.power}} j</li>
+                        <li class="gun-listing-item">Мощност: {{gun.power.toFixed(1)}} j</li>
                         <li class="gun-listing-item">Цвят: {{gun.color}}</li>
                     </ul>
                 </section>
@@ -83,7 +87,7 @@
                     <p class="gun-name">{{gun.name}}</p>
                 </a>
                 <p class="gun-manufacturer"><strong>Производител:</strong> {{gun.manufacturer}}</p>
-                <button href="" class="basket-btn">
+                <button class="basket-btn" (click)="addToBasket(gun.id)">
                     Добави в количката <i class="fa-solid fa-cart-shopping"></i>
                 </button>
             </article>
@@ -154,7 +158,7 @@
                     </h6>
                     <ul>
                         <li *ngFor="let power of guns.powers">
-                            <label class="container-checkbox">{{power}} J
+                            <label class="container-checkbox">{{power.toFixed(1)}} J
                                 <input type="checkbox"
                                     (change)="onChange(power, powersFormGroup, 'powers', $event.target)">
                                 <span class="checkmark"></span>
