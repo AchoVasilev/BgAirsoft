@@ -1,4 +1,4 @@
-This is my final project for SoftUni Angular.
+This is my final project for SoftUni Angular. The project is about buying, creating and selling airsoft guns.
 
 ### The project uses:
 - MS SQL database
