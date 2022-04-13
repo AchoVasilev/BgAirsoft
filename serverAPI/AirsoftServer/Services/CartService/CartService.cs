@@ -1,10 +1,10 @@
 ﻿namespace Services.CartService
 {
     using System.Linq;
+    using System.Reflection.Metadata.Ecma335;
     using System.Threading.Tasks;
 
     using AutoMapper;
-    using AutoMapper.QueryableExtensions;
 
     using Data;
 
@@ -99,6 +99,36 @@
             }
 
             return false;
+        }
+
+        public async Task<NavCartModel> GetCartData(string userId)
+        {
+            var guns = await this.data.Users
+                        .Where(x => x.Id == userId)
+                        .Include(x => x.Client)
+                        .ThenInclude(x => x.Cart)
+                        .ThenInclude(x => x.Guns)
+                        .Select(x => x.Client.Cart.Guns)
+                        .FirstOrDefaultAsync();
+
+            var count = guns != null ? guns.Count : 0;
+            var price = 0m;
+
+            if (guns != null)
+            {
+                foreach (var gun in guns)
+                {
+                    price += gun.Price;
+                }
+            }
+
+            var model = new NavCartModel()
+            {
+                ItemsCount = count,
+                TotalPrice = price
+            };
+
+            return model;
         }
     }
 }

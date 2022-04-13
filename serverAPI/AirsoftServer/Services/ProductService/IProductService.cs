@@ -23,5 +23,7 @@
         Task<ICollection<AllGunViewModel>> FilterGunsByCategoryAsync(GunQueryModel query);
 
         Task<ICollection<AllGunViewModel>> OrderGuns(GunSortModel model);
+
+        Task<ICollection<AllGunViewModel>> GetAllGunsAsync(AllGunsQueryModel query);
     }
 }

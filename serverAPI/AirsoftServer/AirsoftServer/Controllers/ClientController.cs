@@ -1,5 +1,7 @@
 ﻿namespace AirsoftServer.Controllers
 {
+    using Infrastructure;
+
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -60,6 +62,20 @@
             }
 
             return BadRequest(new { ErrorMessage = MessageConstants.UnsuccessfulActionMsg, result.Errors });
+        }
+
+        [HttpPut]
+        [Authorize]
+        [Route("edit")]
+        public async Task<IActionResult> Edit(EditClientModel model)
+        {
+            var result = await this.clientService.EditClient(this.User.GetId(), model);
+            if (result)
+            {
+                return Ok(new { Message = MessageConstants.SuccessfulEditMsg });
+            }
+
+            return BadRequest(new { ErrorMessage = MessageConstants.UnsuccessfulActionMsg });
         }
 
         [HttpGet]

@@ -54,6 +54,37 @@
             return client.Id;
         }
 
+        public async Task<bool> EditClient(string userId, EditClientModel model)
+        {
+            var user = await this.data.Users
+                .Where(x => x.Id == userId)
+                .Include(x => x.Client)
+                .ThenInclude(x => x.Address)
+                .FirstOrDefaultAsync();
+
+            var city = await this.data.Cities
+                .FirstOrDefaultAsync(x => x.Name == model.CityName);
+
+            if (user == null || city == null)
+            {
+                return false;
+            }
+
+            user.Client.Address.StreetName = model.StreetName;
+            user.Client.Address.CityId = city.Id;
+            user.Client.FirstName = model.FirstName;
+            user.Client.LastName = model.LastName;
+            user.Email = model.Email;
+            user.Client.Email = model.Email;
+            user.Client.PhoneNumber = model.Phone;
+
+            user.Client.ModifiedOn = DateTime.UtcNow;
+
+            await this.data.SaveChangesAsync();
+
+            return true;
+        }
+
         public async Task<bool> UserIsClient(string userId)
         {
             var result = await this.data.Users.FirstOrDefaultAsync(x => x.Id == userId && x.ClientId != null);

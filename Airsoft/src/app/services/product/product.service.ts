@@ -74,4 +74,21 @@ export class ProductService {
       }
     })
   }
+
+  getAllGunsQuery(categoryName: string,
+    itemsPerPage: number,
+    orderBy: string, dealers: string[], manufacturers: string[], colors: string[], powers: number[], page: number): Observable<Object[]>{
+    return this.httpClient.get<Object[]>(`${environment.apiUrl}/product/all`, {
+      params: {
+        categoryName,
+        itemsPerPage,
+        orderBy,
+        dealers,
+        manufacturers,
+        colors,
+        powers,
+        page
+      }
+    })
+  }
 }

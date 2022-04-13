@@ -167,5 +167,15 @@
 
             return Ok(guns);
         }
+
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("all")]
+        public async Task<IActionResult> GetAll([FromQuery] AllGunsQueryModel query)
+        {
+            var res = await this.productService.GetAllGunsAsync(query);
+
+            return Ok(res);
+        }
     }
 }

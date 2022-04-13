@@ -10,5 +10,7 @@
         Task<UserClientViewModel> GetClientDataAsync(string userId);
 
         Task<bool> UserIsClient(string userId);
+
+        Task<bool> EditClient(string userId, EditClientModel model);
     }
 }

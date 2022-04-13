@@ -11,5 +11,7 @@
         Task<ICollection<CartViewModel>> GetItemsInCartAsync(string userId);
 
         Task<bool> DeleteItemByIdAsync(string userId, int itemId);
+
+        Task<NavCartModel> GetCartData(string userId);
     }
 }

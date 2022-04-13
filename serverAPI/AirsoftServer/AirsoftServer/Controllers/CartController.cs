@@ -1,5 +1,7 @@
 ﻿namespace AirsoftServer.Controllers
 {
+    using System.Linq;
+
     using Infrastructure;
 
     using Microsoft.AspNetCore.Authorization;
@@ -7,6 +9,8 @@
 
     using Services.CartService;
     using Services.ClientService;
+
+    using ViewModels.Cart;
 
     using static GlobalConstants.Constants;
 
@@ -64,6 +68,27 @@
             }
 
             return Ok(new {Message = MessageConstants.SuccessfulDeleteMsg});
+        }
+
+        [HttpGet]
+        [Route("getProductCountAndPrice")]
+        public async Task<IActionResult> GetProductCountAndPrice()
+        {
+            var claims = this.User.Claims.Any();
+            if (claims == false)
+            {
+                var cartModel = new NavCartModel
+                {
+                    ItemsCount = 0,
+                    TotalPrice = 0
+                };
+
+                return Ok(cartModel); 
+            }
+
+            var result = await this.cartService.GetCartData(this.User.GetId()); ;
+
+            return Ok(result);
         }
     }
 }

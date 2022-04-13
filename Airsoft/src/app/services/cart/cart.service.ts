@@ -20,6 +20,10 @@ export class CartService {
     return this.httpClient.get<CartViewModel[]>(`${environment.apiUrl}/cart/get`);
   }
 
+  GetItemsCountAndPrice(): Observable<any> {
+    return this.httpClient.get<any>(`${environment.apiUrl}/cart/getProductCountAndPrice`);
+  }
+
   RemoveItem(itemId: number) : Observable<Object> {
     return this.httpClient.delete(`${environment.apiUrl}/cart/delete`, {
       params: { itemId }
