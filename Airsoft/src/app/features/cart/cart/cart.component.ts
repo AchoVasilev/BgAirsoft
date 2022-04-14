@@ -12,14 +12,27 @@ import { DataService } from 'src/app/services/data/data.service';
 export class CartComponent implements OnInit {
   isLoaded: boolean = false;
   isLoading: boolean = true;
-  items: CartViewModel[];
-  private price: number = this.totalPrice;
+  private price: number = 0;
 
   get totalPrice(): number{
     return this.dataService.cartItemsPrice;
   }
   set totalPrice(value) {
     this.dataService.cartItemsPrice = value;
+  }
+
+  get items(): CartViewModel[] {
+    return this.dataService.cartItems;
+  }
+  set items(value) {
+    this.dataService.cartItems = value;
+  }
+
+  get itemsCount(): number {
+    return this.dataService.cartItemsCount;
+  }
+  set itemsCount(value) {
+    this.dataService.cartItemsCount = value;
   }
 
   constructor(private cartService: CartService, private toastr: ToastrService, private dataService: DataService) { 
@@ -32,7 +45,7 @@ export class CartComponent implements OnInit {
   loadCartItems(): void{
     this.cartService.GetItems()
       .subscribe(res => {
-        this.items = res
+        this.items = res;
         this.isLoaded = true;
         this.isLoading = false;
       });
@@ -52,7 +65,9 @@ export class CartComponent implements OnInit {
             }
           });
 
-          this.totalPrice = this.price - itemPrice;
+          this.price = (+this.totalPrice) - (+itemPrice);
+          this.totalPrice = this.price;
+          this.itemsCount = this.items.length;
           this.isLoaded = true;
           this.isLoading = false;
           this.toastr.success(res.message);

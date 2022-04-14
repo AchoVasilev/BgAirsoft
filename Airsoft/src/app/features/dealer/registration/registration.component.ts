@@ -3,7 +3,6 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CityViewModel } from 'src/app/models/city/cityViewModel';
-import { DealerInputModel } from 'src/app/models/dealer/DealerInputModel';
 import { CityService } from 'src/app/services/cityService/city.service';
 import { DealerService } from 'src/app/services/dealer/dealer.service';
 import { UserService } from 'src/app/services/user/user.service';

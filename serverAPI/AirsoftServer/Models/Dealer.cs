@@ -1,9 +1,11 @@
 ﻿namespace Models
 {
-    using static GlobalConstants.Constants;
-    using System.ComponentModel.DataAnnotations.Schema;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
     using Models.Base;
+
+    using static GlobalConstants.Constants;
 
     public class Dealer : BaseModel<string>
     {
@@ -12,6 +14,7 @@
             this.Id = Guid.NewGuid().ToString();
             this.Guns = new HashSet<Gun>();
             this.Fields = new HashSet<Field>();
+            this.Orders = new HashSet<Order>();
         }
 
         [Required]
@@ -41,6 +44,8 @@
         public string UserId { get; set; }
 
         public virtual ApplicationUser User { get; set; }
+
+        public virtual ICollection<Order> Orders { get; set; }
 
         public virtual ICollection<Gun> Guns { get; set; }
 

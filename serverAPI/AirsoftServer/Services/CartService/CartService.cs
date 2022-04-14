@@ -5,14 +5,17 @@
     using System.Threading.Tasks;
 
     using AutoMapper;
+    using AutoMapper.QueryableExtensions;
 
     using Data;
 
     using Microsoft.EntityFrameworkCore;
 
     using Models;
+    using Models.Enums;
 
     using ViewModels.Cart;
+    using ViewModels.Courier;
 
     public class CartService : ICartService
     {
@@ -42,10 +45,7 @@
 
             if (client.Client.CartId == null)
             {
-                client.Client.Cart = new Cart
-                {
-                    ClientId = client.Id
-                };
+                client.Client.Cart = new Cart();
             }
 
             client.Client.Cart.Guns.Add(gun);
@@ -129,6 +129,26 @@
             };
 
             return model;
+        }
+
+        public async Task<CartDeliveryDataViewModel> GetCartDeliveryDataAsync()
+        {
+            var couriers = await this.data.Couriers
+                .Where(x => x.IsDeleted == null)
+                .ProjectTo<CourierViewModel>(this.mapper.ConfigurationProvider)
+                .ToListAsync();
+
+            var deliveryData = new CartDeliveryDataViewModel();
+
+            foreach (var courier in couriers)
+            {
+                deliveryData.Couriers.Add(courier);
+            }
+
+            deliveryData.CashPayment = PaymentType.Cash.ToString();
+            deliveryData.CardPayment = PaymentType.Card.ToString();
+
+            return deliveryData;
         }
     }
 }

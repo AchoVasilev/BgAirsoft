@@ -15,6 +15,8 @@
     using Models;
     using Models.Enums;
 
+    using ViewModels.Cart;
+    using ViewModels.Courier;
     using ViewModels.Item.Guns;
 
     using static GlobalConstants.Constants;

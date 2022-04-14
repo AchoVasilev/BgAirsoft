@@ -27,8 +27,60 @@
 
             await SeedCategories(data);
             await SeedCitiesAsync(data);
+            await SeedCouriers(data);
 
             return app;
+        }
+
+        private static async Task SeedCouriers(ApplicationDbContext data)
+        {
+            if (data.Couriers.Any())
+            {
+                return;
+            }
+
+            var couriers = new List<Courier>
+            {
+                new Courier()
+                {
+                    Name = "Speedy",
+                    DeliveryDays = 2,
+                    DeliveryPrice = 23.00m,
+                    Image = new Image
+                    {
+                        Url = "https://res.cloudinary.com/dpo3vbxnl/image/upload/v1649915945/BgAirsoft/speedy_q4gl0r.png",
+                        Name = "Speedy",
+                        Extension = "png"
+                    }
+                },
+                new Courier()
+                {
+                    Name = "Еконт",
+                    DeliveryDays = 5,
+                    DeliveryPrice = 16.00m,
+                    Image = new Image
+                    {
+                        Url = "https://res.cloudinary.com/dpo3vbxnl/image/upload/v1649915945/BgAirsoft/econt_bg_hdnull.png",
+                        Name = "Econt",
+                        Extension = "png"
+                    }
+                },
+                new Courier()
+                {
+                    Name = "Европът",
+                    DeliveryDays = 10,
+                    DeliveryPrice = 13.00m,
+                    Image = new Image
+                    {
+                        Url = "https://res.cloudinary.com/dpo3vbxnl/image/upload/v1649915945/BgAirsoft/%D0%B5vropat_q4ut3h.png",
+                        Name = "Evropat",
+                        Extension = "png"
+                    }
+                },
+            };
+
+            await data.Couriers.AddRangeAsync(couriers);
+            await data.SaveChangesAsync();
         }
 
         private static async Task SeedCategories(ApplicationDbContext data)

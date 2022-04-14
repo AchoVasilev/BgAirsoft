@@ -5,6 +5,9 @@ import { CartRoutingModule } from './cart-routing.module';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { EmptyComponent } from './empty/empty.component';
 import { UserDataComponent } from './user-data/user-data.component';
+import { DeliveryComponent } from './delivery/delivery.component';
+import { SummaryComponent } from './summary/summary.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -12,10 +15,13 @@ import { UserDataComponent } from './user-data/user-data.component';
   declarations: [
     CartComponent,
     EmptyComponent,
-    UserDataComponent
+    UserDataComponent,
+    DeliveryComponent,
+    SummaryComponent
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     CartRoutingModule,
     MatProgressSpinnerModule
   ]

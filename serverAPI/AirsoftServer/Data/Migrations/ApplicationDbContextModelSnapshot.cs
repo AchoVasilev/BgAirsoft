@@ -22,6 +22,21 @@ namespace Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("DealerOrder", b =>
+                {
+                    b.Property<string>("DealersId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("OrdersId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("DealersId", "OrdersId");
+
+                    b.HasIndex("OrdersId");
+
+                    b.ToTable("DealerOrder");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -462,6 +477,9 @@ namespace Data.Migrations
                         .HasPrecision(14, 2)
                         .HasColumnType("decimal(14,2)");
 
+                    b.Property<string>("ImageId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<bool?>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -474,6 +492,8 @@ namespace Data.Migrations
                         .HasColumnType("nvarchar(40)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ImageId");
 
                     b.ToTable("Couriers");
                 });
@@ -512,9 +532,6 @@ namespace Data.Migrations
                         .HasMaxLength(40)
                         .HasColumnType("nvarchar(40)");
 
-                    b.Property<string>("OrderId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -528,8 +545,6 @@ namespace Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AddressId");
-
-                    b.HasIndex("OrderId");
 
                     b.HasIndex("UserId");
 
@@ -703,6 +718,9 @@ namespace Data.Migrations
                     b.Property<int?>("CategoryId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("CourierId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
@@ -733,6 +751,8 @@ namespace Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("CourierId");
 
                     b.HasIndex("UserId");
 
@@ -925,6 +945,21 @@ namespace Data.Migrations
                     b.ToTable("WishLists");
                 });
 
+            modelBuilder.Entity("DealerOrder", b =>
+                {
+                    b.HasOne("Models.Dealer", null)
+                        .WithMany()
+                        .HasForeignKey("DealersId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Models.Order", null)
+                        .WithMany()
+                        .HasForeignKey("OrdersId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -1069,6 +1104,15 @@ namespace Data.Migrations
                     b.Navigation("WishList");
                 });
 
+            modelBuilder.Entity("Models.Courier", b =>
+                {
+                    b.HasOne("Models.Image", "Image")
+                        .WithMany()
+                        .HasForeignKey("ImageId");
+
+                    b.Navigation("Image");
+                });
+
             modelBuilder.Entity("Models.Dealer", b =>
                 {
                     b.HasOne("Models.Address", "Address")
@@ -1076,10 +1120,6 @@ namespace Data.Migrations
                         .HasForeignKey("AddressId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
-
-                    b.HasOne("Models.Order", null)
-                        .WithMany("Dealers")
-                        .HasForeignKey("OrderId");
 
                     b.HasOne("Models.ApplicationUser", "User")
                         .WithMany()
@@ -1148,11 +1188,17 @@ namespace Data.Migrations
                         .WithMany()
                         .HasForeignKey("CategoryId");
 
+                    b.HasOne("Models.Courier", "Courier")
+                        .WithMany()
+                        .HasForeignKey("CourierId");
+
                     b.HasOne("Models.ApplicationUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
 
                     b.Navigation("Category");
+
+                    b.Navigation("Courier");
 
                     b.Navigation("User");
                 });
@@ -1243,11 +1289,6 @@ namespace Data.Migrations
                     b.Navigation("Fields");
 
                     b.Navigation("Guns");
-                });
-
-            modelBuilder.Entity("Models.Order", b =>
-                {
-                    b.Navigation("Dealers");
                 });
 
             modelBuilder.Entity("Models.SubCategory", b =>

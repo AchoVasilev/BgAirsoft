@@ -9,6 +9,7 @@
     using ViewModels.Categories;
     using ViewModels.City;
     using ViewModels.Client;
+    using ViewModels.Courier;
     using ViewModels.Dealer;
     using ViewModels.Images;
     using ViewModels.Item.Guns;
@@ -36,6 +37,8 @@
             this.CreateMap<Gun, GunViewModel>();
             this.CreateMap<Gun, AllGunViewModel>();
             this.CreateMap<Gun, CartViewModel>();
+
+            this.CreateMap<Courier, CourierViewModel>();
         }
     }
 }

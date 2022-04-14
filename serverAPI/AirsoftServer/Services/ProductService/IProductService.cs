@@ -1,7 +1,7 @@
 ﻿namespace Services.ProductService
 {
     using System.Threading.Tasks;
-
+using ViewModels.Cart;
     using ViewModels.Item.Guns;
 
     public interface IProductService

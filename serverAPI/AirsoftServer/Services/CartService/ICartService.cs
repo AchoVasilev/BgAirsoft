@@ -13,5 +13,7 @@
         Task<bool> DeleteItemByIdAsync(string userId, int itemId);
 
         Task<NavCartModel> GetCartData(string userId);
+
+        Task<CartDeliveryDataViewModel> GetCartDeliveryDataAsync();
     }
 }

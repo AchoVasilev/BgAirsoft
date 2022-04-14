@@ -2,6 +2,10 @@
     padding: 40px 100px;
 }
 
+.marked {
+    background-color: #FB5104;
+}
+
 .basket-steps {
     padding-bottom: 2em;
     border-bottom: 2px solid #000;
@@ -23,10 +27,6 @@
 
 .basket-step span {
     padding-right: 10em;
-}
-
-.marked {
-    background-color: #FB5104;
 }
 
 .basket-step h5 {
@@ -72,80 +72,7 @@
     white-space: nowrap;
 }
 
-.basket-item-img {
-    width: 80px;
-}
 
-.basket-item-img-wrapper {
-    display: flex;
-    width: 80px;
-    height: 80px;
-    align-items: center;
-    border: 2px solid #C2C2C2;
-    padding: 6px;
-}
-
-.basket-item-img-wrapper img {
-    width: 100%;
-}
-
-.basket-form table {
-    width: 100%;
-}
-
-.basket-form table td {
-    padding: 10px 5px;
-}
-
-.basket-item-desc,
-.basket-item-price {
-    vertical-align: middle;
-}
-
-.basket-item-title {
-    font-size: 14px;
-    display: block;
-}
-
-.basket-item-title a {
-    color: #333;
-    font-weight: bold;
-}
-
-.basket-item-title a:hover {
-    color: #FB5104;
-    transition: 300ms ease-in-out;
-}
-
-.basket-item-manufacturer {
-    margin-top: 4px;
-    font-size: 13px;
-    color: gray;
-}
-
-.basket-item-price,
-.basket-quantity,
-.basket-remove {
-    text-align: center;
-    vertical-align: middle;
-}
-
-.basket-quantity {
-    width: 150px;
-}
-
-.basket-remove {
-    width: 160px;
-}
-
-.basket-item-price {
-    width: 90px;
-}
-
-.basket-item-price p {
-    color: #333;
-    font-weight: bold;
-}
 
 .basket-quantity input {
     text-align: center;

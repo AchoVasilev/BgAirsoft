@@ -29,5 +29,10 @@
         public int? CategoryId { get; set; }
 
         public virtual Category Category { get; set; }
+
+        [ForeignKey(nameof(Courier))]
+        public int? CourierId { get; set; }
+
+        public virtual Courier Courier { get; set; }
     }
 }

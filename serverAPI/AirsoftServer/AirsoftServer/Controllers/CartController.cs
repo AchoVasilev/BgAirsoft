@@ -90,5 +90,14 @@
 
             return Ok(result);
         }
+
+        [HttpGet]
+        [Route("deliveryData")]
+        public async Task<IActionResult> GetDeliveryData()
+        {
+            var data = await this.cartService.GetCartDeliveryDataAsync();
+
+            return Ok(data);
+        }
     }
 }

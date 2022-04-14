@@ -35,7 +35,8 @@ export class GunListComponent implements OnInit {
   private manufacturers: string[] = [];
   private colors: string[] = [];
   private powers: number[] = [];
-  private price: number = this.cartItemsPrice;
+  private price: number = 0;
+  private itemsCount: number = 0;
 
   @ViewChild('orderBy')
   orderByElement: ElementRef;
@@ -187,8 +188,12 @@ export class GunListComponent implements OnInit {
       .subscribe({
         next: (result) => {
           this.toastr.success("Успешно добавяне!");
-          this.cartItemsCount = result.itemsCount;
-          this.cartItemsPrice = this.price + price;
+          this.itemsCount = this.cartItemsCount + 1;
+          this.cartItemsCount = this.itemsCount;
+
+          this.price = +price;
+          this.price = (+this.cartItemsPrice) + (+this.price);
+          this.cartItemsPrice = this.price;
         },
         error: (err) => {
           if (err.status == 400) {
