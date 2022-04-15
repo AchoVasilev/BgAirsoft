@@ -49,6 +49,8 @@
 
             public const string InvalidUserMsg = "Нямате права";
             public const string UserNotClientMsg = "Трябва да се регистрирате като клиент!";
+
+            public const string SuccessfulOrderMsg = "Успешна поръчка!";
         }
     }
 }

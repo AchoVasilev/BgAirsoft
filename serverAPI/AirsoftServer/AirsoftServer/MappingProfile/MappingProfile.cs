@@ -13,6 +13,7 @@
     using ViewModels.Dealer;
     using ViewModels.Images;
     using ViewModels.Item.Guns;
+    using ViewModels.Order;
     using ViewModels.User;
 
     public class MappingProfile : Profile
@@ -32,13 +33,21 @@
 
             this.CreateMap<Client, ClientViewModel>();
             this.CreateMap<Dealer, DealerViewModel>();
+            this.CreateMap<Dealer, OrderDealerViewModel>();
+
             this.CreateMap<Address, AddressViewModel>();
 
             this.CreateMap<Gun, GunViewModel>();
             this.CreateMap<Gun, AllGunViewModel>();
             this.CreateMap<Gun, CartViewModel>();
+            this.CreateMap<Gun, OrderGunViewModel>();
+            this.CreateMap<Gun, OrderGunsViewModel>();
+            this.CreateMap<Gun, GunDetailsModel>();
 
             this.CreateMap<Courier, CourierViewModel>();
+            this.CreateMap<Courier, CourierOrderViewModel>();
+
+            this.CreateMap<Order, OrderDetailsModel>();
         }
     }
 }

@@ -35,30 +35,10 @@
                 return BadRequest(new { ErrorMessage = MessageConstants.UsernameExistsMsg });
             }
 
-            var clientId = await this.clientService.CreateClientAsync(model);
-            if (clientId == "0")
-            {
-                return BadRequest(new { ErrorMessage = MessageConstants.InvalidCityMsg });
-            }
-
-            var applicationUser = new ApplicationUser
-            {
-                ClientId = clientId,
-                Email = model.Email,
-                UserName = model.Username,
-                Image = new Image
-                {
-                    Url = "https://res.cloudinary.com/dpo3vbxnl/image/upload/v1649172192/BgAirsoft/NoAvatarProfileImage_uj0zyg.png",
-                    Extension = "png",
-                    Name = "NoAvatarProfileImage"
-                }
-            };
-
-            var result = await this.userManager.CreateAsync(applicationUser, model.Password);
-     
+            var result = await this.clientService.CreateClientAsync(model);
             if (result.Succeeded)
             {
-                return Ok(result);
+                return Ok();
             }
 
             return BadRequest(new { ErrorMessage = MessageConstants.UnsuccessfulActionMsg, result.Errors });

@@ -95,85 +95,156 @@
             return Ok(allGunsViewModel);
         }
 
-        [AllowAnonymous]
-        [HttpGet]
-        [Route("gunsByManufacturer")]
-        public async Task<IActionResult> GetGunsByManufacturer([FromQuery] List<string> manufacturers)
-        {
-            var guns = await this.productService.FilterGunsByManufacturerAsync(manufacturers);
+        //[AllowAnonymous]
+        //[HttpGet]
+        //[Route("gunsByManufacturer")]
+        //public async Task<IActionResult> GetGunsByManufacturer([FromQuery] List<string> manufacturers)
+        //{
+        //    var guns = await this.productService.FilterGunsByManufacturerAsync(manufacturers);
 
-            return Ok(guns);
-        }
+        //    return Ok(guns);
+        //}
 
-        [AllowAnonymous]
-        [HttpGet]
-        [Route("gunsByDealer")]
-        public async Task<IActionResult> GetGunsByDealers([FromQuery] List<string> dealers)
-        {
-            var guns = await this.productService.FilterGunsByDealerAsync(dealers);
+        //[AllowAnonymous]
+        //[HttpGet]
+        //[Route("gunsByDealer")]
+        //public async Task<IActionResult> GetGunsByDealers([FromQuery] List<string> dealers)
+        //{
+        //    var guns = await this.productService.FilterGunsByDealerAsync(dealers);
 
-            return Ok(guns);
-        }
+        //    return Ok(guns);
+        //}
 
-        [AllowAnonymous]
-        [HttpGet]
-        [Route("gunsByColor")]
-        public async Task<IActionResult> GetGunsByColors([FromQuery] List<string> colors)
-        {
-            var guns = await this.productService.FilterGunsByColorAsync(colors);
+        //[AllowAnonymous]
+        //[HttpGet]
+        //[Route("gunsByColor")]
+        //public async Task<IActionResult> GetGunsByColors([FromQuery] List<string> colors)
+        //{
+        //    var guns = await this.productService.FilterGunsByColorAsync(colors);
 
-            return Ok(guns);
-        }
+        //    return Ok(guns);
+        //}
 
-        [AllowAnonymous]
-        [HttpGet]
-        [Route("gunsByPower")]
-        public async Task<IActionResult> GetGunsByPowers([FromQuery] GunQueryModel query)
-        {
-            var guns = await this.productService.FilterGunsByPowerAsync(query);
+        //[AllowAnonymous]
+        //[HttpGet]
+        //[Route("gunsByPower")]
+        //public async Task<IActionResult> GetGunsByPowers([FromQuery] GunQueryModel query)
+        //{
+        //    var guns = await this.productService.FilterGunsByPowerAsync(query);
 
-            return Ok(guns);
-        }
+        //    return Ok(guns);
+        //}
 
-        [AllowAnonymous]
-        [HttpGet]
-        [Route("gunsByCategory")]
-        public async Task<IActionResult> GetGunsByCategory([FromQuery] GunQueryModel query)
-        {
-            var guns = await this.productService.FilterGunsByCategoryAsync(query);
-            var colors = guns.Select(x => x.Color).Distinct().ToList();
-            var manufacturers = guns.Select(x => x.Manufacturer).Distinct().ToList();
-            var dealers = guns.Select(x => x.DealerName).Distinct().ToList();
-            var powers = guns.Select(x => x.Power).Distinct().ToList();
+        //[AllowAnonymous]
+        //[HttpGet]
+        //[Route("gunsByCategory")]
+        //public async Task<IActionResult> GetGunsByCategory([FromQuery] GunQueryModel query)
+        //{
+        //    var guns = await this.productService.FilterGunsByCategoryAsync(query);
+        //    var colors = guns.Select(x => x.Color).Distinct().ToList();
+        //    var manufacturers = guns.Select(x => x.Manufacturer).Distinct().ToList();
+        //    var dealers = guns.Select(x => x.DealerName).Distinct().ToList();
+        //    var powers = guns.Select(x => x.Power).Distinct().ToList();
 
-            var allGunsViewModel = new AllGunsViewModel
-            {
-                AllGuns = guns,
-                Colors = colors,
-                Manufacturers = manufacturers,
-                Dealers = dealers,
-                Powers = powers
-            };
+        //    var allGunsViewModel = new AllGunsViewModel
+        //    {
+        //        AllGuns = guns,
+        //        Colors = colors,
+        //        Manufacturers = manufacturers,
+        //        Dealers = dealers,
+        //        Powers = powers
+        //    };
 
-            return Ok(allGunsViewModel);
-        }
+        //    return Ok(allGunsViewModel);
+        //}
 
-        [AllowAnonymous]
-        [HttpGet]
-        [Route("sortGuns")]
-        public async Task<IActionResult> GetOrderedGuns([FromQuery] GunSortModel query)
-        {
-            var guns = await this.productService.OrderGuns(query);
+        //[AllowAnonymous]
+        //[HttpGet]
+        //[Route("queryGuns")]
+        //public async Task<IActionResult> GetOrderedGuns([FromQuery] AllGunsQueryModel query)
+        //{
+        //    var guns = await this.productService.GetAllGunsAsync(query);
+        //    var gunColors = new HashSet<string>();
+        //    var gunManufacturers = new HashSet<string>();
+        //    var gunDealers = new HashSet<string>();
+        //    var gunPowers = new HashSet<double>();
 
-            return Ok(guns);
-        }
+        //    foreach (var gun in guns)
+        //    {
+        //        gunColors.Add(gun.Color);
+        //        gunManufacturers.Add(gun.Manufacturer);
+        //        gunDealers.Add(gun.DealerName);
+        //        gunPowers.Add(gun.Power);
+        //    }
+
+        //    var allGunsViewModel = new GunsViewModel
+        //    {
+        //        AllGuns = guns,
+        //        Colors = gunColors,
+        //        Manufacturers = gunManufacturers,
+        //        Dealers = gunDealers,
+        //        Powers = gunPowers,
+        //        PageNumber = query.Page,
+        //        ItemsPerPage = query.ItemsPerPage,
+        //        ItemCount = guns.Count,
+        //    };
+
+        //    return Ok(allGunsViewModel);
+        //}
 
         [AllowAnonymous]
         [HttpGet]
         [Route("all")]
         public async Task<IActionResult> GetAll([FromQuery] AllGunsQueryModel query)
         {
-            var res = await this.productService.GetAllGunsAsync(query);
+            var guns = await this.productService.GetAllGunsAsync(query);
+            var allGunsViewModel = new GunsViewModel
+            {
+                AllGuns = guns,
+                ItemsPerPage = query.ItemsPerPage,
+                PageNumber = query.Page
+            };
+
+            if (string.IsNullOrEmpty(query.CategoryName) || query.CategoryName.ToLower() == "all" || query.CategoryName == "null")
+            {
+                allGunsViewModel.Colors = await this.productService.GetAllColors();
+                allGunsViewModel.Manufacturers = await this.productService.GetAllManufacturers();
+                allGunsViewModel.Dealers = await this.productService.GetAllDealers();
+                allGunsViewModel.Powers = await this.productService.GetAllPowers();
+                allGunsViewModel.ItemCount = await this.productService.GetAllGunsCount();
+            }
+            else
+            {
+                var gunColors = new HashSet<string>();
+                var gunManufacturers = new HashSet<string>();
+                var gunDealers = new HashSet<string>();
+                var gunPowers = new HashSet<double>();
+
+                foreach (var gun in guns)
+                {
+                    gunColors.Add(gun.Color);
+                    gunManufacturers.Add(gun.Manufacturer);
+                    gunDealers.Add(gun.DealerName);
+                    gunPowers.Add(gun.Power);
+                }
+
+                allGunsViewModel.Colors = gunColors;
+                allGunsViewModel.Manufacturers = gunManufacturers;
+                allGunsViewModel.Dealers = gunDealers;
+                allGunsViewModel.Powers = gunPowers;
+                allGunsViewModel.ItemCount = guns.Count;
+            }
+            
+
+            return Ok(allGunsViewModel);
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("details")]
+        public async Task<IActionResult> GetDetails([FromQuery] int gunId)
+        {
+            var res = await this.productService.GetGunDetailsAsync(gunId);
 
             return Ok(res);
         }

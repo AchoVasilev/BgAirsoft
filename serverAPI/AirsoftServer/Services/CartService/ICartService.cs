@@ -15,5 +15,7 @@
         Task<NavCartModel> GetCartData(string userId);
 
         Task<CartDeliveryDataViewModel> GetCartDeliveryDataAsync();
+
+        Task<bool> ClearCartAsync(string userId);
     }
 }

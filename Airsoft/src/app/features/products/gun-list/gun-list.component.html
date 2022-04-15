@@ -13,12 +13,12 @@
                     </li>
                 </ul>
             </article>
-            <div class="container-checkbox-div" *ngIf="guns.allGuns.length > 0">
+            <div class="container-checkbox-div" *ngIf="allGuns.allGuns.length > 0">
                 <article class="search-description">
                     <h3 class="search-description-heading">Еърсофт реплики</h3>
-                    <p class="search-description-count">(Брой продукти: <strong>{{guns.allGuns.length}}</strong>)</p>
+                    <p class="search-description-count">(Брой продукти: <strong>{{allGuns.itemCount}}</strong>)</p>
                 </article>
-                <article class="search-submenu" *ngIf="guns.allGuns.length > 0">
+                <article class="search-submenu" *ngIf="allGuns.allGuns.length > 0">
                     <form [formGroup]="sortingFormGroup">
                         <select name="select-dropdown" class="submenu-dropdown-list" #orderBy formGroupName="orderBy"
                             (change)="sortingCheck()">
@@ -37,30 +37,25 @@
                         </select>
                     </form>
                     <ul class="pagination">
-                        <li class="disabled"><a>
-                                &lt;&lt;
-                            </a></li>
-                        <li class="active"><a>1</a></li>
-                        <li><a href="/en/menu/airsoft-replicas-366.html?counter=1">2</a></li>
-                        <li><a href="/en/menu/airsoft-replicas-366.html?counter=2">3</a></li>
-                        <li><a href="/en/menu/airsoft-replicas-366.html?counter=3">4</a></li>
-                        <li><a href="/en/menu/airsoft-replicas-366.html?counter=4">5</a></li>
-                        <li><a href="/en/menu/airsoft-replicas-366.html?counter=5">6</a></li>
-                        <li><a href="/en/menu/airsoft-replicas-366.html?counter=6">7</a></li>
-                        <li class="disabled"><span>...</span></li>
-                        <li><a href="/en/menu/airsoft-replicas-366.html?counter=15">16</a></li>
-                        <li><a href="/en/menu/airsoft-replicas-366.html?counter=1">
-                                &gt;&gt;
-                            </a></li>
+                        <li><button [disabled]="!allGuns.hasPreviousPage" (click)="goOnePageBack()">
+                                &lt;&lt;Назад
+                            </button>
+                        </li>
+                        <span>Показвам {{(page * itemsPerPage) > allGuns.itemCount ? allGuns.itemCount: (page* itemsPerPage)}} от {{allGuns.itemCount}} резултати</span>
+
+                        <li><button [disabled]="!allGuns.hasNextPage" (click)="goOnePageForward()">
+                                Напред&gt;&gt;
+                            </button>
+                        </li>
                     </ul>
                 </article>
             </div>
         </section>
-        <section class="no-guns" *ngIf="guns.allGuns.length === 0">
+        <section class="no-guns" *ngIf="allGuns.allGuns.length === 0">
             <h2>Няма продукти от тази категория</h2>
         </section>
-        <section class="guns" *ngIf="guns.allGuns.length > 0">
-            <article class="gun" *ngFor="let gun of guns.allGuns">
+        <section class="guns" *ngIf="allGuns.allGuns.length > 0">
+            <article class="gun" *ngFor="let gun of allGuns.allGuns">
                 <a routerLink="/products/{{gun.name}}/{{gun.id}}" class="gun-img">
                     <img src="{{gun.image.url}}" alt="product {{gun.name}} image">
                 </a>
@@ -75,10 +70,10 @@
                     </ul>
                 </section>
                 <div class="gun-buttons-wrapper">
-                    <a href="" title="Добави към любими" class="gun-wish">
+                    <a routerLink="/building" title="Добави към любими" class="gun-wish">
                         <i class="fa-regular fa-heart fa-lg"></i>
                     </a>
-                    <a href="" title="Сравни продукт" class="gun-compare">
+                    <a routerLink="/building" title="Сравни продукт" class="gun-compare">
                         <i class="fa-solid fa-scale-balanced fa-lg"></i>
                     </a>
                 </div>
@@ -87,13 +82,13 @@
                     <p class="gun-name">{{gun.name}}</p>
                 </a>
                 <p class="gun-manufacturer"><strong>Производител:</strong> {{gun.manufacturer}}</p>
-                <button class="basket-btn" (click)="addToBasket(gun.id, gun.price)">
+                <button class="basket-btn" *ngIf="canAdd" (click)="addToBasket(gun.id, gun.price)">
                     Добави в количката <i class="fa-solid fa-cart-shopping"></i>
                 </button>
             </article>
         </section>
     </section>
-    <aside *ngIf="guns.allGuns.length > 0">
+    <aside *ngIf="allGuns.allGuns.length > 0">
         <section class="filters">
             <form [formGroup]="dealerFormGroup" (ngSubmit)="filterByDealers()">
                 <article class="filter">
@@ -101,7 +96,7 @@
                         Продавач:
                     </h6>
                     <ul>
-                        <li *ngFor="let dealer of guns.dealers">
+                        <li *ngFor="let dealer of allGuns.dealers">
                             <label class="container-checkbox">{{dealer}}
                                 <input type="checkbox"
                                     (change)="onChange(dealer, dealerFormGroup, 'dealers', $event.target)">
@@ -119,7 +114,7 @@
                         Производител:
                     </h6>
                     <ul>
-                        <li *ngFor="let manufacturer of guns.manufacturers">
+                        <li *ngFor="let manufacturer of allGuns.manufacturers">
                             <label class="container-checkbox">{{manufacturer}}
                                 <input type="checkbox"
                                     (change)="onChange(manufacturer, manufacturersFormGroup, 'manufacturers', $event.target)">
@@ -139,7 +134,7 @@
                         Цвят:
                     </h6>
                     <ul>
-                        <li *ngFor="let color of guns.colors">
+                        <li *ngFor="let color of allGuns.colors">
                             <label class="container-checkbox">{{color}}
                                 <input type="checkbox"
                                     (change)="onChange(color, colorsFormGroup, 'colors', $event.target)">
@@ -157,7 +152,7 @@
                         Мощност:
                     </h6>
                     <ul>
-                        <li *ngFor="let power of guns.powers">
+                        <li *ngFor="let power of allGuns.powers">
                             <label class="container-checkbox">{{power.toFixed(1)}} J
                                 <input type="checkbox"
                                     (change)="onChange(power, powersFormGroup, 'powers', $event.target)">

@@ -1,7 +1,6 @@
 ﻿namespace Services.CartService
 {
     using System.Linq;
-    using System.Reflection.Metadata.Ecma335;
     using System.Threading.Tasks;
 
     using AutoMapper;
@@ -149,6 +148,26 @@
             deliveryData.CardPayment = PaymentType.Card.ToString();
 
             return deliveryData;
+        }
+
+        public async Task<bool> ClearCartAsync(string userId)
+        {
+            var client = await data.Users
+                .Where(x => x.Id == userId)
+                .Include(x => x.Client)
+                .ThenInclude(x => x.Cart)
+                .ThenInclude(x => x.Guns)
+                .FirstOrDefaultAsync();
+
+            client.Client.Cart.Guns.Clear();
+
+            if (client.Client.Cart.Guns.Count == 0)
+            {
+                await this.data.SaveChangesAsync();
+                return true;
+            }
+
+            return false;
         }
     }
 }

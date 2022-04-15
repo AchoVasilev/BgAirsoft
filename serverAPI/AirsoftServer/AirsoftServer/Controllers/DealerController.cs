@@ -1,7 +1,8 @@
 ﻿namespace AirsoftServer.Controllers
 {
     using CloudinaryDotNet;
-using Microsoft.AspNetCore.Authorization;
+
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
@@ -31,7 +32,7 @@ using Microsoft.AspNetCore.Authorization;
 
         [HttpPost]
         [Route("Register")]
-        public async Task<IActionResult> Register([FromForm]DealerInputModel model)
+        public async Task<IActionResult> Register([FromForm] DealerInputModel model)
         {
             var user = await this.userManager.FindByNameAsync(model.Username);
             if (user != null)
@@ -50,25 +51,10 @@ using Microsoft.AspNetCore.Authorization;
                 return BadRequest(new { ErrorMessage = MessageConstants.UnsuccessfulActionMsg });
             }
 
-            var dealerId = await this.dealerService.CreateDealerAsync(model);
-            if (dealerId == "0")
-            {
-                return BadRequest(new { ErrorMessage = MessageConstants.InvalidCityMsg });
-            }
-
-            var applicationUser = new ApplicationUser
-            {
-                DealerId = dealerId,
-                Email = model.Email,
-                UserName = model.Username,
-                ImageId = imageId
-            };
-
-            var result = await this.userManager.CreateAsync(applicationUser, model.Password);
-
+            var result = await this.dealerService.CreateDealerAsync(model, imageId);
             if (result.Succeeded)
             {
-                return Ok(result);
+                return Ok();
             }
 
             return BadRequest(new { ErrorMessage = MessageConstants.UnsuccessfulActionMsg, result.Errors });

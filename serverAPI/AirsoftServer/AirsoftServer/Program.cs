@@ -17,6 +17,7 @@ using Services.CityService;
 using Services.ClientService;
 using Services.DealerService;
 using Services.FileService;
+using Services.OrderService;
 using Services.ProductService;
 
 using ViewModels.Jwt;
@@ -73,6 +74,7 @@ builder.Services.AddTransient<IDealerService, DealerService>();
 builder.Services.AddTransient<IFileService, FileService>();
 builder.Services.AddTransient<IProductService, ProductService>();
 builder.Services.AddTransient<ICartService, CartService>();
+builder.Services.AddTransient<IOrderService, OrderService>();
 
 //Configure Cloudinary
 var cloud = builder.Configuration["Cloudinary:CloudifyName"];

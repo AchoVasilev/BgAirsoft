@@ -1,4 +1,5 @@
-<section class="controls">
+<mat-spinner *ngIf="isLoading" style="margin: 0 auto;"></mat-spinner>
+<section class="controls" *ngIf="isLoaded">
     <button class="control-btn" disabled>Оръжия</button>
     <button class="control-btn" (click)="notReady()">Тактическа екипировка</button>
     <button class="control-btn" (click)="notReady()">Поддръжка</button>
@@ -6,7 +7,7 @@
     <button class="control-btn" (click)="notReady()">Аксесоари</button>
     <button class="control-btn" (click)="notReady()">Облекло</button>
 </section>
-<section class="create">
+<section class="create" *ngIf="isLoaded">
     <h1 class="create-title">Добавяне на ново оръжие</h1>
     <form action="" class="create-form" [formGroup]="gunCreateFormGroup" (ngSubmit)="createGunHandler()">
         <section class="create-data">

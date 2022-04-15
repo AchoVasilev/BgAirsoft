@@ -2,13 +2,15 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { map, switchMap } from 'rxjs';
+import { BehaviorSubject, map, switchMap } from 'rxjs';
 import { AllGunsViewModel } from 'src/app/models/products/guns/AllGunsViewModel';
+import { GunsViewModel } from 'src/app/models/products/guns/gunsViewModel';
 import { SubCategoryViewModel } from 'src/app/models/subCategory/subCategoryViewModel';
 import { CartService } from 'src/app/services/cart/cart.service';
 import { CategoryService } from 'src/app/services/categoryService/category.service';
 import { DataService } from 'src/app/services/data/data.service';
 import { ProductService } from 'src/app/services/product/product.service';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-gun-list',
@@ -17,10 +19,12 @@ import { ProductService } from 'src/app/services/product/product.service';
 })
 export class GunListComponent implements OnInit {
   subCategories: SubCategoryViewModel[];
-  guns: AllGunsViewModel;
+  // guns: AllGunsViewModel;
   isLoading: boolean = true;
   isLoaded: boolean = false;
   categoryName: string = null;
+
+  canAdd: boolean;
 
   dealerFormGroup: FormGroup;
   manufacturersFormGroup: FormGroup;
@@ -28,15 +32,15 @@ export class GunListComponent implements OnInit {
   powersFormGroup: FormGroup;
   sortingFormGroup: FormGroup;
 
-  private itemsPerPage: number = 9;
-  private page: number = 1;
+  page: number = 1;
+  itemsPerPage: number = 9;
   private orderBy: string = 'alphabetical';
   private dealers: string[] = [];
   private manufacturers: string[] = [];
   private colors: string[] = [];
   private powers: number[] = [];
   private price: number = 0;
-  private itemsCount: number = 0;
+  itemsCount: number = 0;
 
   @ViewChild('orderBy')
   orderByElement: ElementRef;
@@ -58,10 +62,14 @@ export class GunListComponent implements OnInit {
     this.dataService.cartItemsPrice = value;
   }
 
+  private pageChanges = new BehaviorSubject(undefined);
+  allGuns: GunsViewModel;
+
   constructor(
     private productService: ProductService,
     private categoryService: CategoryService,
     private cartService: CartService,
+    private userService: UserService,
     private toastr: ToastrService,
     private dataService: DataService,
     private formBuilder: FormBuilder,
@@ -81,18 +89,15 @@ export class GunListComponent implements OnInit {
     //   }
     // )
 
-    this.route.params.pipe(
-      map(params => params['name'] ? this.categoryName = params['name'] : this.categoryName = null),
-      switchMap(() => this.productService.getGunsByCategory(this.categoryName))
-    ).subscribe(res => {
-      this.guns = res;
-      this.isLoaded = true;
-      this.isLoading = false;
-    });
+    this.canAdd = this.userService.isAuthenticated() && this.userService.isClient();
+    this.getAllGuns();
 
-    this.productService
-      .getAllGunsQuery(this.categoryName, this.itemsPerPage, this.orderBy, this.dealers, this.manufacturers, this.colors, this.powers, this.page)
-      .subscribe(res => console.log(res));
+    // this.productService
+    //   .getAllGunsQuery(this.categoryName, this.itemsPerPage, this.orderBy, this.dealers, this.manufacturers, this.colors, this.powers, this.page)
+    //   .subscribe(res => {
+    //     this.allGuns = res;
+    //     console.log(this.allGuns)
+    //   });
     
     this.getGunSubCategories();
 
@@ -115,7 +120,20 @@ export class GunListComponent implements OnInit {
     this.sortingFormGroup = this.formBuilder.group({
       'orderBy': new FormControl('alphabetical')
     });
+  }
 
+  getAllGuns() {
+    this.pageChanges;
+    this.route.params.pipe(
+      map(params => params['name'] ? this.categoryName = params['name'] : this.categoryName = null),
+      switchMap(() =>
+        this.productService
+          .getAllGunsQuery(this.categoryName, this.itemsPerPage, this.orderBy, this.dealers, this.manufacturers, this.colors, this.powers, this.page))
+    ).subscribe(res => {
+      this.allGuns = res;
+      this.isLoaded = true;
+      this.isLoading = false;
+    });
   }
 
   getGunSubCategories(): void {
@@ -136,12 +154,19 @@ export class GunListComponent implements OnInit {
   //   )
   // }
 
+  // queryGuns() {
+  //   this.productService
+  //     .queryGuns(this.categoryName, this.itemsPerPage, this.orderBy, this.dealers, this.manufacturers, this.colors, this.powers, this.page)
+  //     .subscribe(g => this.allGuns = g);
+  // }
+
   sortingCheck() {
     const count = this.countElement.nativeElement.value;
     const orderBy = this.orderByElement.nativeElement.value;
+    this.itemsPerPage = count;
+    this.orderBy = orderBy;
 
-    this.productService.getSortedGuns(this.categoryName, count, orderBy)
-      .subscribe(g => this.guns.allGuns = g);
+    this.getAllGuns();
   }
 
   onChange(itemName: any, formGroup: FormGroup, groupName: string, isChecked: any) {
@@ -156,34 +181,36 @@ export class GunListComponent implements OnInit {
   }
 
   filterByDealers() {
-    const data = this.dealerFormGroup.value['dealers'];
+    const data: string[] = this.dealerFormGroup.value['dealers'];
+    this.dealers = data;
 
-    this.productService.getGunsByDealers(data)
-      .subscribe(res => this.guns.allGuns = res);
+    this.getAllGuns();
   }
 
   filterByManufacturers() {
     const data: string[] = this.manufacturersFormGroup.value['manufacturers'];
+    this.manufacturers = data;
 
-    this.productService.getGunsByManufacturers(data)
-      .subscribe(res => this.guns.allGuns = res);
+    this.getAllGuns();
   }
 
   filterByColors() {
     const data: string[] = this.colorsFormGroup.value['colors'];
+    this.colors = data;
 
-    this.productService.getGunsByColors(data)
-      .subscribe(res => this.guns.allGuns = res);
+    this.getAllGuns();
   }
 
   filterByPowers() {
     const data: number[] = this.powersFormGroup.value['powers'];
+    this.powers = data;
 
-    this.productService.getGunsByPowers(data)
-      .subscribe(res => this.guns.allGuns = res);
+    this.getAllGuns();
   }
 
   addToBasket(gunId: number, price: number) {
+    this.isLoaded = false;
+    this.isLoading = true;
     this.cartService.AddItem(gunId)
       .subscribe({
         next: (result) => {
@@ -199,7 +226,21 @@ export class GunListComponent implements OnInit {
           if (err.status == 400) {
             this.toastr.error(err.error.ErrorMessage);
           }
+        },
+        complete: () => {
+          this.isLoaded = true;
+          this.isLoading = false;
         }
     })
+  }
+
+  goOnePageBack() {
+    this.page--;
+    this.getAllGuns();
+  }
+
+  goOnePageForward() {
+    this.page++;
+    this.getAllGuns();
   }
 }

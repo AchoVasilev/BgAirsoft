@@ -7,6 +7,7 @@
 
     using Data;
 
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
 
     using Models;
@@ -17,41 +18,65 @@
     public class ClientService : IClientService
     {
         private readonly ApplicationDbContext data;
+        private readonly UserManager<ApplicationUser> userManager;
         private readonly IMapper mapper;
 
-        public ClientService(ApplicationDbContext data, IMapper mapper)
+        public ClientService(ApplicationDbContext data, IMapper mapper, UserManager<ApplicationUser> userManager)
         {
             this.data = data;
             this.mapper = mapper;
+            this.userManager = userManager;
         }
 
-        public async Task<string> CreateClientAsync(ClientInputModel model)
+        public async Task<IdentityResult> CreateClientAsync(ClientInputModel model)
         {
             var city = await this.data.Cities
                 .FirstOrDefaultAsync(x => x.Name == model.CityName);
 
             if (city is null)
             {
-                return "0";
+                var error = new IdentityError()
+                {
+                    Description = "Няма такъв град",
+                    Code = "400"
+                };
+
+                return IdentityResult.Failed(new IdentityError[1] { error });
             }
 
-            var client = new Client
+            var applicationUser = new ApplicationUser
             {
-                FirstName = model.FirstName,
-                LastName = model.LastName,
                 Email = model.Email,
-                PhoneNumber = model.Phone,
-                Address = new Address
+                UserName = model.Username,
+                Image = new Image
                 {
-                    StreetName = model.StreetName,
-                    CityId = city.Id
+                    Url = "https://res.cloudinary.com/dpo3vbxnl/image/upload/v1649172192/BgAirsoft/NoAvatarProfileImage_uj0zyg.png",
+                    Extension = "png",
+                    Name = "NoAvatarProfileImage"
+                },
+                Client = new Client
+                {
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    Email = model.Email,
+                    PhoneNumber = model.Phone,
+                    Address = new Address
+                    {
+                        StreetName = model.StreetName,
+                        CityId = city.Id
+                    }
                 }
             };
 
-            await this.data.Clients.AddAsync(client);
-            await this.data.SaveChangesAsync();
+            var result = await this.userManager.CreateAsync(applicationUser, model.Password);
 
-            return client.Id;
+            if (result.Succeeded)
+            {
+                await this.data.SaveChangesAsync();
+                return result;
+            }
+
+            return result;
         }
 
         public async Task<bool> EditClient(string userId, EditClientModel model)
@@ -95,9 +120,9 @@
             }
 
             return true;
-}
+        }
 
-        public async Task<UserClientViewModel> GetClientDataAsync(string userId) 
+        public async Task<UserClientViewModel> GetClientDataAsync(string userId)
             => await this.data.Users
                 .Where(x => x.Id == userId)
                 .ProjectTo<UserClientViewModel>(this.mapper.ConfigurationProvider)

@@ -15,8 +15,6 @@
     using Models;
     using Models.Enums;
 
-    using ViewModels.Cart;
-    using ViewModels.Courier;
     using ViewModels.Item.Guns;
 
     using static GlobalConstants.Constants;
@@ -68,6 +66,12 @@
 
             return gun.Id;
         }
+
+        public async Task<GunDetailsModel> GetGunDetailsAsync(int gunId)
+            => await this.data.Guns
+                .Where(x => x.Id == gunId)
+                .ProjectTo<GunDetailsModel>(this.mapper.ConfigurationProvider)
+                .FirstOrDefaultAsync();
 
         public async Task<ICollection<GunViewModel>> GetNewestEightGunsAsync()
             => await this.data.Guns
@@ -121,6 +125,33 @@
             => await this.QueryAll(query)
                         .ProjectTo<AllGunViewModel>(this.mapper.ConfigurationProvider)
                         .ToListAsync();
+
+        public async Task<int> GetAllGunsCount()
+            => await this.data.Guns.CountAsync();
+
+        public async Task<ICollection<string>> GetAllColors()
+            => await this.data.Guns
+                        .Select(x => x.Color)
+                        .Distinct()
+                        .ToListAsync();
+
+        public async Task<ICollection<string>> GetAllDealers()
+            => await this.data.Guns
+                        .Select(x => x.Dealer.Name)
+                        .Distinct()
+                        .ToListAsync();
+
+        public async Task<ICollection<string>> GetAllManufacturers()
+            => await this.data.Guns
+                        .Select(x => x.Manufacturer)
+                        .Distinct()
+                        .ToListAsync();
+
+        public async Task<ICollection<double>> GetAllPowers()
+          => await this.data.Guns
+                      .Select(x => x.Power)
+                      .Distinct()
+                      .ToListAsync();
 
         private IQueryable<Gun> QuerySortGuns(GunSortModel query)
         {

@@ -26,6 +26,10 @@ const routes: Routes = [
     loadChildren: () => import('./features/cart/cart.module').then(x => x.CartModule)
   },
   {
+    path: 'orders',
+    loadChildren: () => import('./features/order/order.module').then(x => x.OrderModule)
+  },
+  {
     path: 'building',
     component: UnderConstructionComponent
   },

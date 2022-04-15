@@ -673,6 +673,9 @@ namespace Data.Migrations
                         .HasMaxLength(40)
                         .HasColumnType("nvarchar(40)");
 
+                    b.Property<string>("OrderId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<double>("Power")
                         .HasMaxLength(999)
                         .HasPrecision(14, 2)
@@ -704,6 +707,8 @@ namespace Data.Migrations
                     b.HasIndex("DealerId");
 
                     b.HasIndex("ImageId");
+
+                    b.HasIndex("OrderId");
 
                     b.HasIndex("SubCategoryId");
 
@@ -799,7 +804,7 @@ namespace Data.Migrations
                     b.Property<string>("ClientId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("CourierId")
+                    b.Property<int?>("CourierId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedOn")
@@ -824,16 +829,11 @@ namespace Data.Migrations
                         .HasPrecision(14, 2)
                         .HasColumnType("decimal(14,2)");
 
-                    b.Property<string>("UnregisteredClientId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ClientId");
 
                     b.HasIndex("CourierId");
-
-                    b.HasIndex("UnregisteredClientId");
 
                     b.ToTable("Orders");
                 });
@@ -871,51 +871,6 @@ namespace Data.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("SubCategories");
-                });
-
-            modelBuilder.Entity("Models.UnregisteredClient", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("AddressId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)");
-
-                    b.Property<bool?>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("LasttName")
-                        .IsRequired()
-                        .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AddressId");
-
-                    b.ToTable("UnregisteredClients");
                 });
 
             modelBuilder.Entity("Models.WishList", b =>
@@ -1169,6 +1124,10 @@ namespace Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("Models.Order", null)
+                        .WithMany("Guns")
+                        .HasForeignKey("OrderId");
+
                     b.HasOne("Models.SubCategory", "SubCategory")
                         .WithMany("Guns")
                         .HasForeignKey("SubCategoryId")
@@ -1223,24 +1182,16 @@ namespace Data.Migrations
             modelBuilder.Entity("Models.Order", b =>
                 {
                     b.HasOne("Models.Client", "Client")
-                        .WithMany()
+                        .WithMany("Orders")
                         .HasForeignKey("ClientId");
 
                     b.HasOne("Models.Courier", "Courier")
-                        .WithMany()
-                        .HasForeignKey("CourierId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Models.UnregisteredClient", "UnregisteredClient")
-                        .WithMany()
-                        .HasForeignKey("UnregisteredClientId");
+                        .WithMany("Orders")
+                        .HasForeignKey("CourierId");
 
                     b.Navigation("Client");
 
                     b.Navigation("Courier");
-
-                    b.Navigation("UnregisteredClient");
                 });
 
             modelBuilder.Entity("Models.SubCategory", b =>
@@ -1252,17 +1203,6 @@ namespace Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Category");
-                });
-
-            modelBuilder.Entity("Models.UnregisteredClient", b =>
-                {
-                    b.HasOne("Models.Address", "Address")
-                        .WithMany()
-                        .HasForeignKey("AddressId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Address");
                 });
 
             modelBuilder.Entity("Models.WishList", b =>
@@ -1284,10 +1224,25 @@ namespace Data.Migrations
                     b.Navigation("SubCategories");
                 });
 
+            modelBuilder.Entity("Models.Client", b =>
+                {
+                    b.Navigation("Orders");
+                });
+
+            modelBuilder.Entity("Models.Courier", b =>
+                {
+                    b.Navigation("Orders");
+                });
+
             modelBuilder.Entity("Models.Dealer", b =>
                 {
                     b.Navigation("Fields");
 
+                    b.Navigation("Guns");
+                });
+
+            modelBuilder.Entity("Models.Order", b =>
+                {
                     b.Navigation("Guns");
                 });
 

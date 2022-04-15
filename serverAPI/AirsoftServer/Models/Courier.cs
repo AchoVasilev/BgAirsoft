@@ -8,6 +8,11 @@
     using static GlobalConstants.Constants;
     public class Courier : BaseModel<int>
     {
+        public Courier()
+        {
+            this.Orders = new HashSet<Order>();
+        }
+
         [Required]
         [MaxLength(DataConstants.DefaultMaxLength)]
         public string Name { get; set; }
@@ -20,5 +25,7 @@
         public string ImageId { get; set; }
 
         public virtual Image Image { get; set; }
+
+        public ICollection<Order> Orders { get; set; }
     }
 }

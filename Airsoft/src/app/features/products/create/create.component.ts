@@ -19,6 +19,9 @@ export class CreateComponent implements OnInit {
   isAddingAccessories: boolean;
   isAddingCloting: boolean;
 
+  isLoaded: boolean = false;
+  isLoading: boolean = true;
+
   file: File;
   gunSubCategories: GunSubcategoryViewModel[];
 
@@ -53,6 +56,8 @@ export class CreateComponent implements OnInit {
 
   ngOnInit(): void {
     this.getGunSubCategories();
+    this.isLoaded = true;
+    this.isLoading = false;
   }
 
   getGunSubCategories() {
@@ -73,6 +78,9 @@ export class CreateComponent implements OnInit {
   }
 
   createGunHandler() {
+    this.isLoaded = false;
+    this.isLoading = true;
+
     const {
       name,
       manufacturer,
@@ -117,15 +125,23 @@ export class CreateComponent implements OnInit {
       .subscribe({
         next: (res: any) => {
           this.toastr.success("Успешно добавихте нов артикул");
-          setTimeout(() => {
-            this.router.navigate([`/products/${res.name}/${res.gunId}`])
-          }, 3000);
+          this.isLoaded = true;
+          this.isLoading = false;
+
+          this.router.navigate([`/products/${res.name}/${res.gunId}`])
         },
         error: (err) => {
           console.log(err);
           if (err.status == 400) {
             this.toastr.error(err.error.errorMessage)
           }
+
+          if (err.status == 500) {
+            this.toastr.error("Снимката е в невалиден формат!");
+          }
+
+          this.isLoaded = true;
+          this.isLoading = false;
         }
       });
   }

@@ -1,7 +1,7 @@
 ﻿namespace Services.ProductService
 {
     using System.Threading.Tasks;
-using ViewModels.Cart;
+
     using ViewModels.Item.Guns;
 
     public interface IProductService
@@ -9,6 +9,8 @@ using ViewModels.Cart;
         Task<int> CreateGunAsync(GunInputModel model, string dealerId, string imageId);
 
         Task<ICollection<GunViewModel>> GetNewestEightGunsAsync();
+
+        Task<GunDetailsModel> GetGunDetailsAsync(int gunId);
 
         Task<ICollection<AllGunViewModel>> GetAllGunsAsync();
 
@@ -25,5 +27,15 @@ using ViewModels.Cart;
         Task<ICollection<AllGunViewModel>> OrderGuns(GunSortModel model);
 
         Task<ICollection<AllGunViewModel>> GetAllGunsAsync(AllGunsQueryModel query);
+
+        Task<int> GetAllGunsCount();
+
+        Task<ICollection<string>> GetAllColors();
+
+        Task<ICollection<string>> GetAllDealers();
+
+        Task<ICollection<string>> GetAllManufacturers();
+
+        Task<ICollection<double>> GetAllPowers();
     }
 }

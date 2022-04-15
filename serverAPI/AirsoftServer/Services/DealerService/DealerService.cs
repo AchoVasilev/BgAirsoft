@@ -7,6 +7,7 @@
 
     using Data;
 
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
 
     using Models;
@@ -17,42 +18,61 @@
     public class DealerService : IDealerService
     {
         private readonly ApplicationDbContext data;
+        private readonly UserManager<ApplicationUser> userManager;
         private readonly IMapper mapper;
 
-        public DealerService(ApplicationDbContext data, IMapper mapper)
+        public DealerService(ApplicationDbContext data, IMapper mapper, UserManager<ApplicationUser> userManager)
         {
             this.data = data;
             this.mapper = mapper;
+            this.userManager = userManager;
         }
 
-        public async Task<string> CreateDealerAsync(DealerInputModel model)
+        public async Task<IdentityResult> CreateDealerAsync(DealerInputModel model, string imageId)
         {
             var city = await this.data.Cities
                 .FirstOrDefaultAsync(x => x.Name == model.CityName);
 
             if (city is null)
             {
-                return "0";
+                var error = new IdentityError()
+                {
+                    Description = "Няма такъв град",
+                    Code = "400"
+                };
+
+                return IdentityResult.Failed(new IdentityError[1] { error });
             }
 
-            var dealer = new Dealer
+            var applicationUser = new ApplicationUser
             {
-                Name = model.Name,
-                DealerNumber = model.DealerNumber,
                 Email = model.Email,
-                PhoneNumber = model.Phone,
-                Address = new Address
+                UserName = model.Username,
+                ImageId = imageId,
+                Dealer = new Dealer
                 {
-                    StreetName = model.StreetName,
-                    CityId = city.Id
-                },
-                SiteUrl = model.SiteUrl
+                    Name = model.Name,
+                    DealerNumber = model.DealerNumber,
+                    Email = model.Email,
+                    PhoneNumber = model.Phone,
+                    Address = new Address
+                    {
+                        StreetName = model.StreetName,
+                        CityId = city.Id
+                    },
+                    SiteUrl = model.SiteUrl
+                }
             };
 
-            await this.data.Dealers.AddAsync(dealer);
-            await this.data.SaveChangesAsync();
+            var result = await this.userManager.CreateAsync(applicationUser, model.Password);
 
-            return dealer.Id;
+            if (result.Succeeded)
+            {
+                await this.data.SaveChangesAsync();
+                return result;
+            }
+
+            return result;
         }
 
         public async Task<UserDealerViewModel> GetDealerDataAsync(string id)

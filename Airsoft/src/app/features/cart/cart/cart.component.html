@@ -35,9 +35,9 @@
                     <th class="basket-product-price">
                         Цена
                     </th>
-                    <th class="basket-product-quantity">
+                    <!-- <th class="basket-product-quantity">
                         Количество
-                    </th>
+                    </th> -->
                     <th class="basket-product-action">
                         Премахване от количката
                     </th>
@@ -57,13 +57,13 @@
                     <td class="basket-item-price">
                         <p>{{item.price.toFixed(2)}} лв.</p>
                     </td>
-                    <td class="basket-quantity">
+                    <!-- <td class="basket-quantity">
                         <span>
                             <button class="basket-quantity-btn"><i class="fa-solid fa-minus fa-lg"></i></button>
                             <input type="text" value="1">
                             <button class="basket-quantity-btn"><i class="fa-solid fa-plus fa-lg"></i></button>
                         </span>
-                    </td>
+                    </td> -->
                     <td class="basket-remove">
                         <button class="basket-remove-btn" (click)="onItemRemove(item.id, item.price, $event)"><i class="fa-solid fa-xmark fa-2xl"></i></button>
                     </td>

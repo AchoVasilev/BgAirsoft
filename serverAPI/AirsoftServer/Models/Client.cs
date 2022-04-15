@@ -13,6 +13,7 @@
         public Client()
         {
             this.Id = Guid.NewGuid().ToString();
+            this.Orders = new HashSet<Order>();
         }
 
         [Required]
@@ -50,5 +51,7 @@
         public string WishListId { get; set; }
 
         public virtual WishList WishList { get; set; }
+
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

@@ -36,8 +36,6 @@
 
         public DbSet<SubCategory> SubCategories { get; init; }
 
-        public DbSet<UnregisteredClient> UnregisteredClients { get; init; }
-
         public DbSet<WishList> WishLists { get; init; }
 
         protected override void OnModelCreating(ModelBuilder builder)

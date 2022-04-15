@@ -12,6 +12,7 @@
         {
             this.Id = Guid.NewGuid().ToString();
             this.Dealers = new HashSet<Dealer>();
+            this.Guns = new HashSet<Gun>();
         }
 
         public PaymentType PaymentType { get; set; }
@@ -21,7 +22,7 @@
         public decimal TotalPrice { get; set; }
 
         [ForeignKey(nameof(Courier))]
-        public int CourierId { get; set; }
+        public int? CourierId { get; set; }
 
         public virtual Courier Courier { get; set; }
 
@@ -30,10 +31,7 @@
 
         public virtual Client Client { get; set; }
 
-        [ForeignKey(nameof(UnregisteredClient))]
-        public string UnregisteredClientId { get; set; }
-
-        public virtual UnregisteredClient UnregisteredClient { get; set; }
+        public virtual ICollection<Gun> Guns { get; set; }
 
         public virtual ICollection<Dealer> Dealers { get; set; }
     }
