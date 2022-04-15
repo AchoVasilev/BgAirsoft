@@ -2,6 +2,8 @@
 {
     using CloudinaryDotNet;
 
+    using Infrastructure;
+
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -247,6 +249,41 @@
             var res = await this.productService.GetGunDetailsAsync(gunId);
 
             return Ok(res);
+        }
+
+        [HttpPut]
+        [Route("editGun")]
+        public async Task<IActionResult> EditGun([FromBody] GunEditModel model)
+        {
+            var result = await this.productService.EditAsync(this.User.GetId(), model);
+            if (result == false)
+            {
+                return BadRequest(new { ErrorMessage = MessageConstants.UnsuccessfulActionMsg });
+            }
+
+            return Ok(result);
+        }
+
+        [HttpDelete]
+        [Route("deleteGun")]
+        public async Task<IActionResult> DeleteGun([FromBody] int gunId)
+        {
+            var result = await this.productService.DeleteGunAsync(gunId);
+            if (result == false)
+            {
+                return BadRequest(new { ErrorMessage = MessageConstants.UnsuccessfulActionMsg });
+            }
+
+            return Ok(result);
+        }
+
+        [HttpGet]
+        [Route("myProducts")]
+        public async Task<IActionResult> MyProducts()
+        {
+            var result = await this.productService.GetMyProducts(this.User.GetId());
+
+            return Ok(result);
         }
     }
 }

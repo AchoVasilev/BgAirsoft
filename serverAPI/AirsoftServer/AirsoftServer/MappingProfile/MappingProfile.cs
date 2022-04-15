@@ -43,6 +43,7 @@
             this.CreateMap<Gun, OrderGunViewModel>();
             this.CreateMap<Gun, OrderGunsViewModel>();
             this.CreateMap<Gun, GunDetailsModel>();
+            this.CreateMap<Gun, DealerGunListModel>();
 
             this.CreateMap<Courier, CourierViewModel>();
             this.CreateMap<Courier, CourierOrderViewModel>();

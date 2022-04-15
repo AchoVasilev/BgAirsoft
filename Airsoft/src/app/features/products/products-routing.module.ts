@@ -6,6 +6,8 @@ import { CreateComponent } from "./create/create.component";
 import { DetailsComponent } from "../products/details/details.component";
 import { GunListComponent } from "../products/gun-list/gun-list.component";
 import { ListComponent } from "./list/list.component";
+import { EditComponent } from "./edit/edit.component";
+import { MineComponent } from "./mine/mine.component";
 
 export const routes: Routes = [
     {
@@ -36,6 +38,16 @@ export const routes: Routes = [
                 path: ':name/:id',
                 component: DetailsComponent,
                 pathMatch: 'full'
+            },
+            {
+                path: 'guns/edit/:id',
+                component: EditComponent,
+                pathMatch: 'full'
+            },
+            {
+                path: 'mine',
+                component: MineComponent,
+                pathMatch: 'full'
             }
         ]
     }
@@ -45,4 +57,4 @@ export const routes: Routes = [
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule]
 })
-export class ProductsRoutingModule{}
+export class ProductsRoutingModule { }

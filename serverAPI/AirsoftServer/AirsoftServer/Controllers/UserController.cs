@@ -4,6 +4,8 @@
     using System.Security.Claims;
     using System.Text;
 
+    using Infrastructure;
+
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Options;
@@ -52,10 +54,28 @@
                 var token = tokenHandler.WriteToken(securityToken);
                 var isClient = user.ClientId != null;
 
-                return Ok( new { token, isClient  });
+                return Ok(new { token, isClient });
             }
 
             return BadRequest(new { ErrorMessage = MessageConstants.FailedUserLoginMsg });
+        }
+
+        [HttpGet]
+        [Route("getDealerId")]
+        public async Task<IActionResult> GetDealerId()
+        {
+            ApplicationUser user;
+
+            try
+            {
+                user = await this.userManager.FindByIdAsync(this.User.GetId());
+            }
+            catch (Exception)
+            {
+                return Ok(null);
+            }
+
+            return Ok(new {user.DealerId});
         }
     }
 }

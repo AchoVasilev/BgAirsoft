@@ -90,7 +90,8 @@
 }
 
 .add-btn:hover,
-.action-btn:hover {
+.action-btn:hover,
+.dealer-action-btn:hover {
     background-color: #FB5104;
     transition: 300ms ease-in-out;
 }
@@ -169,4 +170,21 @@ td span {
 td p {
     color: #333;
     padding: 12px 0;
+}
+
+.dealer-controls {
+    display: flex;
+    justify-content: space-between;
+}
+
+.dealer-action-btn {
+    background-color: #333;
+    color: #fff;
+    font-weight: bold;
+    padding: 1rem 7rem;
+    margin-bottom: 1rem;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
 }

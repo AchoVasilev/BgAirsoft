@@ -42,6 +42,8 @@
 
         public string DealerName { get; init; }
 
+        public string DealerId { get; init; }
+
         public string DealerUrl { get; init; }
     }
 }

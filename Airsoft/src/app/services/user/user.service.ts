@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { DealerIdObj } from 'src/app/models/dealer/dealerIdObj';
 import { LoginInputModel } from 'src/app/shared/login/loginModel';
 import { environment } from 'src/environments/environment';
 
@@ -21,6 +23,10 @@ export class UserService {
     }
 
     return false;
+  }
+
+  getDealerId(): Observable<DealerIdObj>{
+    return this.httpClient.get<DealerIdObj>(`${environment.apiUrl}/user/getDealerId`)
   }
 
   isClient(): boolean{

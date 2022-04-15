@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserClientViewModel } from 'src/app/models/clientModels/userClientViewModel';
 import { ClientService } from 'src/app/services/clientService/client.service';
+import { DataService } from 'src/app/services/data/data.service';
 
 @Component({
   selector: 'app-profile',
@@ -12,7 +13,15 @@ export class ProfileComponent implements OnInit {
   isLoaded: boolean = false;
   isLoading: boolean = true;
 
-  constructor(private clientService: ClientService) { }
+
+  get userData(): UserClientViewModel {
+    return this.dataService.userData;
+  }
+  set userData(value) {
+    this.dataService.userData = value;
+  }
+
+  constructor(private clientService: ClientService, private dataService: DataService) { }
 
   ngOnInit(): void {
     this.getClientData();
@@ -20,9 +29,12 @@ export class ProfileComponent implements OnInit {
     this.isLoading = false;
   }
 
-  getClientData(): void{
+  getClientData(): void {
     this.clientService.getClientData()
-      .subscribe(clientData => this.client = clientData);
+      .subscribe(clientData => {
+        this.client = clientData;
+        this.userData = clientData;
+      });
   }
 
 }

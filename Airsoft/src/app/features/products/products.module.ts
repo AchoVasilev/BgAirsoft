@@ -8,6 +8,8 @@ import { ListComponent } from './list/list.component';
 import { DetailsComponent } from './details/details.component';
 import { CreateComponent } from './create/create.component';
 import { GunListComponent } from './gun-list/gun-list.component';
+import { EditComponent } from './edit/edit.component';
+import { MineComponent } from './mine/mine.component';
 
 
 
@@ -17,6 +19,8 @@ import { GunListComponent } from './gun-list/gun-list.component';
     DetailsComponent,
     ListComponent,
     GunListComponent,
+    EditComponent,
+    MineComponent,
   ],
   imports: [
     CommonModule,

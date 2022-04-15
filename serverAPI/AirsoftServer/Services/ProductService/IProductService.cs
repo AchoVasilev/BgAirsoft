@@ -2,6 +2,7 @@
 {
     using System.Threading.Tasks;
 
+    using ViewModels.Dealer;
     using ViewModels.Item.Guns;
 
     public interface IProductService
@@ -37,5 +38,11 @@
         Task<ICollection<string>> GetAllManufacturers();
 
         Task<ICollection<double>> GetAllPowers();
+
+        Task<bool> EditAsync(string userId, GunEditModel model);
+
+        Task<bool> DeleteGunAsync(int gunId);
+
+        Task<ICollection<DealerGunListModel>> GetMyProducts(string userId);
     }
 }

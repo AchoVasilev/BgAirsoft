@@ -1,8 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { DealerGunsList } from 'src/app/models/dealer/dealerGunsList';
 import { AllGunsViewModel } from 'src/app/models/products/guns/AllGunsViewModel';
 import { GunDetailsViewModel } from 'src/app/models/products/guns/gunDetailsViewModel';
+import { GunEditModel } from 'src/app/models/products/guns/gunEditModel';
 import { GunsViewModel } from 'src/app/models/products/guns/gunsViewModel';
 import { InitialGunViewModel } from 'src/app/models/products/guns/InitialGunViewModel';
 import { environment } from 'src/environments/environment';
@@ -106,5 +108,21 @@ export class ProductService {
         gunId
       }
     })
+  }
+
+  editGun(model: GunEditModel) : Observable<object> {
+    return this.httpClient.put(`${environment.apiUrl}/product/editGun`, model);
+  }
+
+  deleteGun(gunId: number): Observable<object> {
+    return this.httpClient.delete(`${environment.apiUrl}/product/deleteGun`, {
+      params: {
+        gunId
+      }
+    });
+  }
+
+  getDealerProducts(): Observable<DealerGunsList[]>{
+    return this.httpClient.get<DealerGunsList[]>(`${environment.apiUrl}/product/myProducts`);
   }
 }

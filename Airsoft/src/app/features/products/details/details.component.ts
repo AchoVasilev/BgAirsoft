@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { DealerIdObj } from 'src/app/models/dealer/dealerIdObj';
 import { GunDetailsViewModel } from 'src/app/models/products/guns/gunDetailsViewModel';
 import { CartService } from 'src/app/services/cart/cart.service';
 import { DataService } from 'src/app/services/data/data.service';
@@ -13,13 +14,22 @@ import { UserService } from 'src/app/services/user/user.service';
   styleUrls: ['./details.component.css']
 })
 export class DetailsComponent implements OnInit {
-  gun: GunDetailsViewModel;
   isLoading: boolean = true;
   isLoaded: boolean = false;
   isLoggedIn: boolean;
   isClient: boolean;
+  isOwner: boolean;
+  dealerObj: DealerIdObj;
   private itemsCount: number = 0;
   private price: number = 0;
+  private gunId = this.route.snapshot.params['id'];
+
+  get gun(): GunDetailsViewModel {
+    return this.dataService.gun;
+  }
+  set gun(value) {
+    this.dataService.gun = value;
+  }
 
   get cartItemsCount(): number {
     return this.dataService.cartItemsCount
@@ -41,21 +51,31 @@ export class DetailsComponent implements OnInit {
     private userService: UserService,
     private cartService: CartService,
     private toastr: ToastrService,
-    private dataService: DataService
+    private dataService: DataService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
     this.getGunDetails();
+    this.getDealerId();
     this.isLoggedIn = this.userService.isAuthenticated();
+    this.isClient = this.userService.isClient();
 
+    this.isOwner = this.isLoggedIn && this.dealerObj?.dealerId == this.gun?.dealerId
     this.isLoading = false;
     this.isLoaded = true;
   }
 
   getGunDetails() {
-    const gunId = this.route.snapshot.params['id'];
-    this.productService.getGunDetails(gunId)
+    this.productService.getGunDetails(this.gunId)
       .subscribe(res => this.gun = res);
+  }
+
+  getDealerId(): void {
+    this.userService.getDealerId()
+      .subscribe(res => {
+        this.dealerObj = res;
+      });
   }
 
   addToBasket(gunId: number, price: number) {
@@ -83,5 +103,25 @@ export class DetailsComponent implements OnInit {
           this.isLoaded = true;
         }
       })
+  }
+
+  onDelete(gunId: number) {
+    this.isLoading = true;
+    this.isLoaded = false;
+    this.productService.deleteGun(gunId)
+      .subscribe({
+        next: () => {
+          this.toastr.success("Успешно изтриване");
+          this.isLoading = false;
+          this.isLoaded = true;
+
+          this.router.navigate(['/products/mine']);
+        },
+        error: () => {
+          this.toastr.error("Нещо се обърка");
+          this.isLoading = false;
+          this.isLoaded = true;
+        }
+    })
   }
 }

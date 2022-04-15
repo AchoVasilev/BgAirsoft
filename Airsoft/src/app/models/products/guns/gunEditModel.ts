@@ -1,10 +1,6 @@
-import { ImageViewModel } from "../../image/imageViewModel";
-
-export interface GunDetailsViewModel{
-    id: number,
-    name: string,
+export interface GunEditModel{
+    name:string,
     manufacturer: string,
-    image: ImageViewModel,
     power: number,
     color: string,
     weight: number,
@@ -18,8 +14,6 @@ export interface GunDetailsViewModel{
     material: string,
     blowback: string,
     hopup: string,
-    price: number,
-    dealerName: string,
-    dealerUrl: string,
-    dealerId: string
+    subCategoryName: string,
+    price: number
 }

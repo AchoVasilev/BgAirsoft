@@ -21,13 +21,18 @@
                 <p class="item-subtitle">Блоубек: <span>{{gun.blowback}}</span></p>
                 <h2 class="item-price">{{gun.price}} лв.</h2>
             </section>
-            <section class="item-data-controls-wrapper">
-                <button class="add-btn" *ngIf="isLoggedIn" (click)="addToBasket(gun.id, gun.price)"><i
+            <section class="item-data-controls-wrapper" *ngIf="isLoggedIn && isClient">
+                <button class="add-btn" (click)="addToBasket(gun.id, gun.price)"><i
                         class="fa-solid fa-cart-arrow-down"></i> Добави в количката</button>
-                <article class="buttons-wrapper" *ngIf="isLoggedIn">
+                <article class="buttons-wrapper">
                     <button class="action-btn"><i class="fa-solid fa-scale-balanced"></i> Добави в любими</button>
                     <button class="action-btn"><i class="fa-solid fa-heart"></i> Сравни</button>
                 </article>
+            </section>
+
+            <section class="dealer-controls" *ngIf="isOwner">
+                    <a routerLink="/products/guns/edit/{{gun.id}}" class="action-btn"><i class="fa-solid fa-scale-balanced"></i> Промени</a>
+                    <button class="dealer-action-btn"><i class="fa-solid fa-trash-can"></i> Изтрий</button>
             </section>
         </article>
     </article>

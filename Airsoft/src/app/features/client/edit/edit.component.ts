@@ -7,6 +7,7 @@ import { EditClientModel } from 'src/app/models/clientModels/editClientModel';
 import { UserClientViewModel } from 'src/app/models/clientModels/userClientViewModel';
 import { CityService } from 'src/app/services/cityService/city.service';
 import { ClientService } from 'src/app/services/clientService/client.service';
+import { DataService } from 'src/app/services/data/data.service';
 
 @Component({
   selector: 'app-edit',
@@ -18,6 +19,10 @@ export class EditComponent implements OnInit {
   cities: CityViewModel[];
   isLoading: boolean = true;
   isLoaded: boolean = false;
+
+  get userData(): UserClientViewModel {
+    return this.dataService.userData;
+  }
 
   editFormGroup: FormGroup = this.formBuilder.group({
     'firstName': new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(40)]),
@@ -33,6 +38,7 @@ export class EditComponent implements OnInit {
     private cityService: CityService,
     private formBuilder: FormBuilder,
     private toastr: ToastrService,
+    private dataService: DataService,
     private router: Router
   ) { }
 
@@ -41,6 +47,15 @@ export class EditComponent implements OnInit {
     this.loadCities();
     this.isLoaded = true;
     this.isLoading = false;
+
+    this.editFormGroup.patchValue({
+      firstName: this.userData.client.firstName,
+      lastName: this.userData.client.lastName,
+      streetName: this.userData.client.address.streetName,
+      cityName: this.userData.client.address.city.name,
+      phone: this.userData.client.phoneNumber,
+      email: this.userData.email
+    });
   }
 
   getClientData(): void {
