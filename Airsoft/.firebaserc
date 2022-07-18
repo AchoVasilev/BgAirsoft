@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "airsoftbg-fef02": {
+      "hosting": {
+        "Airsoft": [
+          "airsoftbg-fef02"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "airsoftbg-fef02"
+  }
+}
